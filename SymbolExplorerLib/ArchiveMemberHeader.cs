@@ -10,12 +10,12 @@ namespace SymbolExplorerLib
 {
     public class ArchiveMemberHeader
     {
-        public string Name;
-        public DateTime Date;
-        public int? UserID;
-        public int? GroupID;
-        public ST_MODE Mode;
-        public int Size;
+        public string Name {get; set;}
+        public DateTime Date { get; set; }
+        public int? UserID { get; set; }
+        public int? GroupID { get; set; }
+        public ST_MODE Mode { get; set; }
+        public int Size { get; set; }
 
         public const string LinkerMemberName = @"/";
         public const string LongNamesMemberName = @"//";

@@ -15,7 +15,7 @@ namespace SymbolExplorerLib
             public uint Offset;
         }
 
-        public SymbolOffset[] SymbolsOffsets;
+        public SymbolOffset[] SymbolsOffsets { get; set; }
 
         public override void FromStream(Stream stream)
         {

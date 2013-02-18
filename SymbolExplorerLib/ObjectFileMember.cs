@@ -14,12 +14,12 @@ namespace SymbolExplorerLib
             public IMAGE_SECTION_HEADER Header;
             public byte[] RawData;
         }
-        
-        public IMAGE_FILE_HEADER objHeader;
 
-        public byte[] OptionalHeader;
+        public IMAGE_FILE_HEADER objHeader { get; set; }
 
-        public ImageSection[] Sections;
+        public byte[] OptionalHeader { get; set; }
+
+        public ImageSection[] Sections { get; set; }
 
         public override void FromStream(Stream stream)
         {

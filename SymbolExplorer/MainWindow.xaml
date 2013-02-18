@@ -1,11 +1,16 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:SymbolExplorerLib="clr-namespace:SymbolExplorerLib;assembly=SymbolExplorerLib" x:Class="SymbolExplorer.MainWindow"
-        Title="Symbol Exporer" Height="350" Width="525" WindowStartupLocation="CenterScreen">
-    <Window.DataContext>
-        <SymbolExplorerLib:ArchiveFile />
-    </Window.DataContext>
+        xmlns:SymbolExplorer="clr-namespace:SymbolExplorer;assembly=SymbolExplorer"
+        xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
+        xmlns:SymbolExplorerLib="clr-namespace:SymbolExplorerLib;assembly=SymbolExplorerLib"
+        x:Class="SymbolExplorer.MainWindow"
+        Title="Symbol Exporer" Height="350" Width="525" WindowStartupLocation="CenterScreen"
+       >
+    <!--<Window.Resources>
+        <ViewModels:ArchiveFileViewModel x:Key="Model"></ViewModels:ArchiveFileViewModel>
+    </Window.Resources>-->
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -21,7 +26,7 @@
             </MenuItem>
             <MenuItem x:Name="MenuItemAbout" Header="About"/>
         </Menu>
-        <TreeView x:Name="MemberTree" Grid.Row="1" SelectedItemChanged="MemberTree_SelectedItemChanged"/>
+        <TreeView x:Name="MemberTree" Grid.Row="1" ItemsSource="{Binding}" DisplayMemberPath="Header.Name" SelectedItemChanged="MemberTree_SelectedItemChanged"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" Width="10"/>
     </Grid>
 </Window>

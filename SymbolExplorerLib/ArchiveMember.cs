@@ -9,7 +9,7 @@ namespace SymbolExplorerLib
 {
     public class ArchiveMember
     {
-        public ArchiveMemberHeader Header;
+        public ArchiveMemberHeader Header { get; set; }
         
         public virtual void FromStream(Stream stream)
         {

@@ -10,7 +10,7 @@ namespace SymbolExplorerLib
 {
     public class LongNamesMember : ArchiveMember
     {
-        public string[] Names;
+        public string[] Names { get; set; }
 
         public override void FromStream(Stream stream)
         {

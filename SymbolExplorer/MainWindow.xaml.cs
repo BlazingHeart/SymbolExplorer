@@ -23,7 +23,7 @@ namespace SymbolExplorer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ArchiveFileViewModel Archive;
+        public ArchiveFileViewModel Archive = new ArchiveFileViewModel();
 
         public MainWindow()
         {
@@ -44,7 +44,10 @@ namespace SymbolExplorer
 
                 FileStream s = new FileStream(filename, FileMode.Open);
                 var file = ArchiveFile.FromStream(s);
-                Archive = new ArchiveFileViewModel(file);
+                Archive.File = file;
+                Archive.Name = System.IO.Path.GetFileName(filename);
+
+                this.DataContext = Archive;
 
                 //var items = MemberTree.Items;
                 //var root = new TreeViewItem();
@@ -67,7 +70,8 @@ namespace SymbolExplorer
                 //root.Items.Add(second);
                 //root.Items.Add(longnames);
 
-                MemberTree.DataContext = Archive;
+                //MemberTree.DataContext = Archive;
+                MemberTree.ItemsSource = Archive.Members;
             }
         }
 

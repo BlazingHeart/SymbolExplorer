@@ -15,8 +15,8 @@ namespace SymbolExplorerLib
             public ushort Index;
         }
 
-        public uint[] MemberOffsets;
-        public SymbolIndex[] SymbolIndices;
+        public uint[] MemberOffsets { get; set; }
+        public SymbolIndex[] SymbolIndices { get; set; }
 
         public long MemberCount { get { return MemberOffsets.Length; } }
         public long SymbolCount { get { return SymbolIndices.Length; } }

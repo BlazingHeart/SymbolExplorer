@@ -26,7 +26,7 @@
             </MenuItem>
             <MenuItem x:Name="MenuItemAbout" Header="About"/>
         </Menu>
-        <TreeView x:Name="MemberTree" Grid.Row="1" ItemsSource="{Binding}" DisplayMemberPath="Header.Name" SelectedItemChanged="MemberTree_SelectedItemChanged"/>
+        <TreeView x:Name="MemberTree" Grid.Row="1" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedItemChanged="MemberTree_SelectedItemChanged"/>
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" Width="10"/>
     </Grid>
 </Window>

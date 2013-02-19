@@ -12,7 +12,7 @@ namespace SymbolExplorer.ViewModels
     public class ArchiveFileViewModel
     {
         ArchiveFile _file;
-        ObservableCollection<SymbolExplorerLib.ArchiveMember> _members = new ObservableCollection<SymbolExplorerLib.ArchiveMember>();
+        ObservableCollection<ArchiveMemberViewModel> _members = new ObservableCollection<ArchiveMemberViewModel>();
 
         public string Name { get; set; }
         public ArchiveFile File
@@ -24,18 +24,20 @@ namespace SymbolExplorer.ViewModels
 
                 _file = value;
 
-                Members.Add(File.first);
-                Members.Add(File.second);
-                Members.Add(File.longnames);
+                Members.Add(new ArchiveMemberViewModel(File.first));
+                Members.Add(new ArchiveMemberViewModel(File.second));
+                Members.Add(new ArchiveMemberViewModel(File.longnames));
 
                 foreach (var v in File.objects)
                 {
-                    Members.Add(v);
+                    var model = new ArchiveMemberViewModel(v);
+                    model.ResolveName(File.longnames);
+                    Members.Add(model);
                 }
             }
         }
 
-        public ObservableCollection<SymbolExplorerLib.ArchiveMember> Members { get { return _members; } }
+        public ObservableCollection<ArchiveMemberViewModel> Members { get { return _members; } }
 
         public ArchiveFileViewModel()
         {

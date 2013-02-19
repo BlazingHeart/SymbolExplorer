@@ -54,6 +54,10 @@ namespace SymbolExplorerLib
                 Sections[i].RawData = new byte[size];
                 stream.Read(Sections[i].RawData, 0, (int)size);
             }
+
+            long offset = (streamPostHeader + Header.Size + 1) & ~0x1;
+
+            stream.Seek(offset, SeekOrigin.Begin);
         }
     }
 }

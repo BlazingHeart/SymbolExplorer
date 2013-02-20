@@ -7,9 +7,49 @@
         x:Class="SymbolExplorer.MainWindow"
         Title="Symbol Exporer" Height="350" Width="525" WindowStartupLocation="CenterScreen"
        >
-    <!--<Window.Resources>
-        <ViewModels:ArchiveFileViewModel x:Key="Model"></ViewModels:ArchiveFileViewModel>
-    </Window.Resources>-->
+    <Window.Resources>
+        <!--<ViewModels:ArchiveFileViewModel x:Key="Model"></ViewModels:ArchiveFileViewModel>-->
+        
+        <HierarchicalDataTemplate x:Key="ArchiveMemberViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
+            <TextBlock Text="{Binding Name}" />
+        </HierarchicalDataTemplate>
+
+        <ControlTemplate x:Key="ArchiveMemberHeaderTemplate">
+            <!-- DataType="SymbolExplorerLib:ArchiveMemberHeader" -->
+            <Grid Grid.Column="2" Grid.Row="1" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" MinWidth="40" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" MinWidth="40" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Name" />
+                    <TextBlock Text="Date" />
+                    <TextBlock Text="Size" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                    <TextBlock Text="{Binding ArchiveMember.Header.Name}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.Date, StringFormat='yyyy-MM-dd'}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.Size}" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="User" />
+                    <TextBlock Text="Group" />
+                    <TextBlock Text="Mode" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="3" Margin="4,0,0,0">
+                    <TextBlock Text="{Binding ArchiveMember.Header.UserID}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.GroupID}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.Mode, StringFormat=' {0} (0x{0:X})'}" />
+                </StackPanel>
+            </Grid>
+        </ControlTemplate>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,15 +58,23 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="147*"/>
+            <ColumnDefinition Width="10"/>
             <ColumnDefinition Width="370*"/>
         </Grid.ColumnDefinitions>
-        <Menu x:Name="Menu" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="2" Height="18">
+        <Menu x:Name="Menu" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="99" Height="18">
             <MenuItem x:Name="MenuItemFile" Header="File">
                 <MenuItem  x:Name="MenuItemOpen" Header="Open..." Click="MenuItemOpen_Click"/>
             </MenuItem>
-            <MenuItem x:Name="MenuItemAbout" Header="About"/>
+            <MenuItem x:Name="MenuItemAbout" Header="About" Click="MenuItemAbout_Click"/>
         </Menu>
-        <TreeView x:Name="MemberTree" Grid.Row="1" ItemsSource="{Binding}" DisplayMemberPath="Name" SelectedItemChanged="MemberTree_SelectedItemChanged"/>
-        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Grid.Row="1" Width="10"/>
+        
+        <TreeView x:Name="MemberTree" Grid.Row="1" SelectedItemChanged="MemberTree_SelectedItemChanged" ItemTemplate="{StaticResource ArchiveMemberViewTemplate}" />
+        
+        <GridSplitter Grid.Column="0" HorizontalAlignment="Right" Grid.Row="1" Width="10"/>
+
+        <ContentControl Grid.Row="1" Grid.Column="2" Margin="4" HorizontalAlignment="Stretch" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Template="{StaticResource ArchiveMemberHeaderTemplate}" />
+            
+        <!--<ContentPresenter Grid.Row="1" Grid.Column="2" ContentSource="{Binding ElementName=MemberTree, Path=SelectedItem}" />-->
+
     </Grid>
 </Window>

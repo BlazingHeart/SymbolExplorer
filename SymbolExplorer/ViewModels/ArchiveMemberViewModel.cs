@@ -14,6 +14,7 @@ namespace SymbolExplorer.ViewModels
         string _name;
 
         public string Name { get { return _name; } }
+        public ArchiveMember ArchiveMember { get { return _member; } }
 
         public ArchiveMemberViewModel(ArchiveMember member)
         {
@@ -21,13 +22,12 @@ namespace SymbolExplorer.ViewModels
             _name = _member.Header.Name;
         }
 
-
-        static Regex usesLongName = new Regex("/([0-9]+)");
+        static readonly Regex _usesLongName = new Regex("/([0-9]+)");
 
         public bool ResolveName(LongNamesMember longNames)
         {
             string name = _member.Header.Name;
-            Match match = usesLongName.Match(name);
+            Match match = _usesLongName.Match(name);
             if (match.Success)
             {
                 int offset = int.Parse(match.Groups[1].Captures[0].Value);

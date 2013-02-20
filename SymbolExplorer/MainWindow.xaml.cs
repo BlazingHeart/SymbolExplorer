@@ -42,7 +42,7 @@ namespace SymbolExplorer
             {
                 string filename = dlg.FileName;
 
-                FileStream s = new FileStream(filename, FileMode.Open);
+                FileStream s = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
                 var file = ArchiveFile.FromStream(s);
                 Archive.File = file;
                 Archive.Name = System.IO.Path.GetFileName(filename);
@@ -70,14 +70,19 @@ namespace SymbolExplorer
                 //root.Items.Add(second);
                 //root.Items.Add(longnames);
 
-                //MemberTree.DataContext = Archive;
                 MemberTree.ItemsSource = Archive.Members;
+                //MemberTree.ItemsSource = Archive.Members;
             }
         }
 
         private void MemberTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
 
+        }
+
+        private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("SymbolExplorer (c) 2013 Simon Stevenon", "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

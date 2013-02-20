@@ -11,19 +11,18 @@ namespace SymbolExplorerLib
     {
         ObjectFile _objectFile = new ObjectFile();
 
+        public ObjectFile ObjectFile { get { return _objectFile; } }
+
+
         public override void FromStream(Stream stream)
         {
-            long streamBaseOffset = stream.Position;
-
             base.FromStream(stream);
 
-            long streamPostHeader = stream.Position;
+            long endOffset = (stream.Position + Header.Size + 1) & ~0x1;
 
             _objectFile.FromStream(stream);
-
-            long offset = (streamPostHeader + Header.Size + 1) & ~0x1;
-
-            stream.Seek(offset, SeekOrigin.Begin);
+            
+            stream.Seek(endOffset, SeekOrigin.Begin);
         }
     }
 }

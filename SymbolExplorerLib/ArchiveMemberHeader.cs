@@ -37,7 +37,7 @@ namespace SymbolExplorerLib
             string endHeader = Encoding.ASCII.GetString(old.EndHeader);
 
             int dateSeconds = int.Parse(date);
-            DateTime dateTime = new DateTime(1970, 1, 1).AddSeconds(dateSeconds);
+            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(dateSeconds);
             int? UserID = string.IsNullOrEmpty(user) ? null : (int?)int.Parse(user);
             int? GroupID = string.IsNullOrEmpty(group) ? null : (int?)int.Parse(group);
 

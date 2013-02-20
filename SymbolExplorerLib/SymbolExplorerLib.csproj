@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SymbolExplorerLib</RootNamespace>
     <AssemblyName>SymbolExplorerLib</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -49,6 +49,7 @@
     <Compile Include="Native\IMAGE_FILE_HEADER.cs" />
     <Compile Include="Native\IMAGE_SECTION_HEADER.cs" />
     <Compile Include="Native\Utils.cs" />
+    <Compile Include="ObjectFile.cs" />
     <Compile Include="ObjectFileMember.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondLinkerMember.cs" />

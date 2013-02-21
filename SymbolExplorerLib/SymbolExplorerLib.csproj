@@ -41,13 +41,16 @@
   <ItemGroup>
     <Compile Include="ArchiveFile.cs" />
     <Compile Include="ArchiveMember.cs" />
+    <Compile Include="KnownSectionName.cs" />
     <Compile Include="LongNamesMember.cs" />
     <Compile Include="Native\Constants.cs" />
     <Compile Include="FirstLinkerMember.cs" />
     <Compile Include="ArchiveMemberHeader.cs" />
     <Compile Include="Native\IMAGE_ARCHIVE_MEMBER_HEADER.cs" />
     <Compile Include="Native\IMAGE_FILE_HEADER.cs" />
+    <Compile Include="Native\IMAGE_RELOCATION.cs" />
     <Compile Include="Native\IMAGE_SECTION_HEADER.cs" />
+    <Compile Include="Native\IMAGE_SYMBOL.cs" />
     <Compile Include="Native\Utils.cs" />
     <Compile Include="ObjectFile.cs" />
     <Compile Include="ObjectFileMember.cs" />

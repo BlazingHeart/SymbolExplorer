@@ -33,7 +33,7 @@ namespace SymbolExplorerLib
 
             List<ObjectFileMember> objects = new List<ObjectFileMember>();
             
-            while (stream.CanRead)
+            while (stream.CanRead && (stream.Position < stream.Length))
             {
                 try
                 {

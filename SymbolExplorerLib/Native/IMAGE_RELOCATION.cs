@@ -7,7 +7,7 @@ using System.Text;
 namespace SymbolExplorerLib.Native
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
-    public class IMAGE_RELOCATION
+    public struct IMAGE_RELOCATION
     {
         public uint VirtualAddress;
         public uint SymbolTableIndex;

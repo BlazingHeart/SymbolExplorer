@@ -15,7 +15,7 @@ namespace SymbolExplorerLib.Tests
         [TestMethod]
         public void TestMethod1()
         {
-            using (Stream fileStream = new FileStream(@"..\..\freeimaged.lib", FileMode.Open))
+            using (Stream fileStream = new FileStream(@"..\..\..\..\freeimaged.lib", FileMode.Open))
             {
                 ArchiveFile file = ArchiveFile.FromStream(fileStream);
                 Assert.AreEqual(ArchiveMemberHeader.LinkerMemberName, file.first.Header.Name);

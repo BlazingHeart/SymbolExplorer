@@ -14,7 +14,7 @@ namespace SymbolExplorer.ViewModels
 
         public string Name { get { return _name; } set { _name = value; } }
 
-        public uint Value { get { return _symbol.Value; } }
+        public string Value { get { return string.Format("0x{0:X8}", _symbol.Value); } }
         public string Section
         {
             get

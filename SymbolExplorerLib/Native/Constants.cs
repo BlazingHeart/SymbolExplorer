@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,8 @@ namespace SymbolExplorerLib.Native
         public const int N_TMASK = 0x0030;
         public const int N_TMASK1 = 0x00C0;
         public const int N_TMASK2 = 0x00F0;
+        public const int N_BTSHFT = 4;
+        public const int N_TSHIFT = 2;
     }
 
     [Flags]
@@ -87,11 +90,15 @@ namespace SymbolExplorerLib.Native
         IMAGE_SYM_TYPE_UINT = 0x000E,
         IMAGE_SYM_TYPE_DWORD = 0x000F,
         IMAGE_SYM_TYPE_PCODE = 0x8000,
+    }
 
-        IMAGE_SYM_DTYPE_NULL = 0x0000, // no derived type.
-        IMAGE_SYM_DTYPE_POINTER = 0x0100, // pointer.
-        IMAGE_SYM_DTYPE_FUNCTION = 0x0200, // function.
-        IMAGE_SYM_DTYPE_ARRAY = 0x0300, // array.
+    [Flags]
+    public enum IMAGE_SYM_DTYPE : ushort
+    {
+        IMAGE_SYM_DTYPE_NULL = 0x00, // no derived type.
+        IMAGE_SYM_DTYPE_POINTER = 0x01, // pointer.
+        IMAGE_SYM_DTYPE_FUNCTION = 0x02, // function.
+        IMAGE_SYM_DTYPE_ARRAY = 0x03, // array.
     }
 
     public enum IMAGE_SYM_CLASS : byte

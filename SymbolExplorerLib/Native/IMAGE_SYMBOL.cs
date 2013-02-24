@@ -14,10 +14,13 @@ namespace SymbolExplorerLib.Native
 
         public uint Value;
         public short SectionNumber;
-        public IMAGE_SYM_TYPE Type;
+        public ushort Type;
         public IMAGE_SYM_CLASS StorageClass;
         public byte NumberOfAuxSymbols;
 
+
+        public IMAGE_SYM_TYPE BasicType { get { return (IMAGE_SYM_TYPE)((int)Type & Constants.N_BTMASK); } }
+        public IMAGE_SYM_DTYPE DataType { get { return (IMAGE_SYM_DTYPE)(((int)Type & Constants.N_TMASK) >> Constants.N_BTSHFT); } }
 
         public bool UsesStringTable { get { return ((ShortName[0] == 0) && (ShortName[1] == 0) && (ShortName[2] == 0) && (ShortName[3] == 0)); } }
 

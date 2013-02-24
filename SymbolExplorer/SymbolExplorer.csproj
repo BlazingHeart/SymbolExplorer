@@ -53,6 +53,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FriendlyEnums.cs" />
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
     <Compile Include="ViewModels\ArchiveMemberViewModel.cs" />
     <Compile Include="ViewModels\ObjectFileViewModel.cs" />

@@ -34,6 +34,11 @@ namespace SymbolExplorer.ViewModels
                 _name = longNames.GetNameForOffset(offset);
                 return true;
             }
+            else if (name.EndsWith("/"))
+            {
+                _name = name.Substring(0, name.Length - 1);
+                return true;
+            }
             return false;
         }
     }

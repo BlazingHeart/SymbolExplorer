@@ -91,6 +91,9 @@ ipch/
 *.vsp
 *.vspx
 
+# Used in symbols download
+pingme.txt
+
 # Guidance Automation Toolkit
 *.gpState
 

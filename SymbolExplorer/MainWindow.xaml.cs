@@ -40,38 +40,7 @@ namespace SymbolExplorer
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                string filename = dlg.FileName;
-
-                FileStream s = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var file = ArchiveFile.FromStream(s);
-                Archive.File = file;
-                Archive.Name = System.IO.Path.GetFileName(filename);
-
-                this.DataContext = Archive;
-
-                //var items = MemberTree.Items;
-                //var root = new TreeViewItem();
-                //root.Header = System.IO.Path.GetFileName(filename);
-                //items.Add(root);
-
-                //var first = new TreeViewItem();
-                //first.Header = "First";
-                //first.DataContext = Archive.First;
-
-                //var second = new TreeViewItem();
-                //second.Header = "Second";
-                //second.DataContext = Archive.second;
-
-                //var longnames = new TreeViewItem();
-                //longnames.Header = "Longnames";
-                //longnames.DataContext = Archive.longnames;
-
-                //root.Items.Add(first);
-                //root.Items.Add(second);
-                //root.Items.Add(longnames);
-
-                MemberTree.ItemsSource = Archive.Members;
-                //MemberTree.ItemsSource = Archive.Members;
+                LoadFile(dlg.FileName);
             }
         }
 
@@ -83,6 +52,27 @@ namespace SymbolExplorer
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show("SymbolExplorer (c) 2013 Simon Stevenon", "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        public void LoadFile(string filePath)
+        {
+            FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            var file = ArchiveFile.FromStream(s);
+            Archive.File = file;
+            Archive.Name = System.IO.Path.GetFileName(filePath);
+
+            this.DataContext = Archive;
+
+            MemberTree.ItemsSource = Archive.Members;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            App app = App.Current as App;
+            if (!string.IsNullOrEmpty(app.FileToOpen))
+            {
+                LoadFile(app.FileToOpen);
+            }
         }
     }
 }

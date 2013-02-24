@@ -68,7 +68,7 @@ namespace SymbolExplorerLib.Native
     };
 
     [Flags]
-    enum IMAGE_SYM_TYPE : ushort
+    public enum IMAGE_SYM_TYPE : ushort
     {
         IMAGE_SYM_TYPE_NULL = 0x0000,  // no type.
         IMAGE_SYM_TYPE_VOID = 0x0001,
@@ -94,7 +94,7 @@ namespace SymbolExplorerLib.Native
         IMAGE_SYM_DTYPE_ARRAY = 0x0300, // array.
     }
 
-    enum IMAGE_SYM_CLASS : byte
+    public enum IMAGE_SYM_CLASS : byte
     {
         IMAGE_SYM_CLASS_END_OF_FUNCTION = 0xFF,
         IMAGE_SYM_CLASS_NULL = 0x00,

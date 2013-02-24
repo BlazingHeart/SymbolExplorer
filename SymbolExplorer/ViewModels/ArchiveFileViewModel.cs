@@ -30,7 +30,7 @@ namespace SymbolExplorer.ViewModels
 
                 foreach (var v in File.objects)
                 {
-                    var model = new ArchiveMemberViewModel(v);
+                    var model = new ObjectFileViewModel(v);
                     model.ResolveName(File.longnames);
                     Members.Add(model);
                 }

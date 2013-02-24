@@ -10,25 +10,32 @@ namespace SymbolExplorerLib.Native
     public struct IMAGE_SYMBOL
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]
-        byte[] ShortName;
+        public byte[] ShortName;
 
-        uint Value;
-        short SectionNumber;
-        IMAGE_SYM_TYPE Type;
-        IMAGE_SYM_CLASS StorageClass;
-        byte NumberOfAuxSymbols;
+        public uint Value;
+        public short SectionNumber;
+        public IMAGE_SYM_TYPE Type;
+        public IMAGE_SYM_CLASS StorageClass;
+        public byte NumberOfAuxSymbols;
 
 
-        bool UsesStringTable { get { return ((ShortName[0] == 0) && (ShortName[1] == 0) && (ShortName[2] == 0) && (ShortName[3] == 0)); } }
+        public bool UsesStringTable { get { return ((ShortName[0] == 0) && (ShortName[1] == 0) && (ShortName[2] == 0) && (ShortName[3] == 0)); } }
 
-        uint StringTableOffset { get { return (uint)((ShortName[4] << 24) | (ShortName[5] << 16) | (ShortName[6] << 8) | ShortName[7]); } }
+        public uint StringTableOffset { get { return (uint)((ShortName[7] << 24) | (ShortName[6] << 16) | (ShortName[5] << 8) | ShortName[4]); } }
 
-        string Name
+        public string Name
         {
             get
             {
                 if (UsesStringTable) throw new InvalidOperationException();
-                return Encoding.UTF8.GetString(ShortName);
+                // need to trim off any nulls
+                int length = 0;
+                for (int i = 0; i < ShortName.Length; ++i)
+                {
+                    if (ShortName[i] == '\0') break;
+                    length = i;
+                }
+                return Encoding.UTF8.GetString(ShortName, 0, length);
             }
         }
     }

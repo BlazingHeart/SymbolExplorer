@@ -1,6 +1,7 @@
 ﻿using SymbolExplorerLib.Native;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace SymbolExplorerLib
             public IMAGE_RELOCATION[] Relocations;
         }
 
-        public IMAGE_FILE_HEADER objHeader { get; set; }
+        public IMAGE_FILE_HEADER Header { get; set; }
 
         public byte[] OptionalHeader { get; set; }
 
@@ -27,50 +28,78 @@ namespace SymbolExplorerLib
 
         public IMAGE_SYMBOL[] Symbols { get; set; }
 
+        public Dictionary<long, string> StringTable { get; set; }
+
 
         public void FromStream(Stream stream)
         {
             long fileStart = stream.Position;
-            objHeader = Utils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
+            Header = Utils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
 
-            OptionalHeader = new byte[objHeader.SizeOfOptionalHeader];
-            Sections = new ImageSection[objHeader.NumberOfSections];
-            Symbols = new IMAGE_SYMBOL[objHeader.NumberOfSymbols];
+            OptionalHeader = new byte[Header.SizeOfOptionalHeader];
+            Sections = new ImageSection[Header.NumberOfSections];
+            Symbols = new IMAGE_SYMBOL[Header.NumberOfSymbols];
+            StringTable = new Dictionary<long, string>();
 
             // Optional header
-            if (objHeader.SizeOfOptionalHeader != 0)
+            if (Header.SizeOfOptionalHeader != 0)
             {
-                stream.Read(OptionalHeader, 0, objHeader.SizeOfOptionalHeader);
+                stream.Read(OptionalHeader, 0, Header.SizeOfOptionalHeader);
             }
 
             // Section table
-            for (int i = 0; i < objHeader.NumberOfSections; ++i)
+            for (int i = 0; i < Header.NumberOfSections; ++i)
             {
                 IMAGE_SECTION_HEADER sectionHeader = Utils.StreamToStructure<IMAGE_SECTION_HEADER>(stream);
                 Sections[i].Header = sectionHeader;
             }
 
             // Section data
-            for (int i = 0; i < objHeader.NumberOfSections; ++i)
+            for (int i = 0; i < Header.NumberOfSections; ++i)
             {
                 Sections[i].RawOffset = stream.Position;
                 uint size = Sections[i].Header.SizeOfRawData;
                 Sections[i].RawData = new byte[size];
                 stream.Read(Sections[i].RawData, 0, (int)size);
             }
-            
+
             // Symbol table
-            if (objHeader.NumberOfSymbols != 0)
+            if (Header.NumberOfSymbols != 0)
             {
-                long offset = fileStart + objHeader.PointerToSymbolTable;
+                long offset = fileStart + Header.PointerToSymbolTable;
                 stream.Seek(offset, SeekOrigin.Begin);
 
-                long count = objHeader.NumberOfSymbols;
+                long count = Header.NumberOfSymbols;
                 for (int i = 0; i < count; ++i)
                 {
                     Symbols[i] = Utils.StreamToStructure<IMAGE_SYMBOL>(stream);
                 }
             }
+
+            {
+                BinaryReader reader = new BinaryReader(stream, Encoding.ASCII);
+
+                long start = stream.Position;
+                uint stringTableSize = reader.ReadUInt32();
+
+                long end = start + stringTableSize;
+
+                StringBuilder sb = new StringBuilder(1024);
+
+                while (stream.Position < end)
+                {
+                    long offset = stream.Position - start;
+                    char c;
+                    while ((stream.Position < end) && ((c = reader.ReadChar()) != 0))
+                    {
+                        sb.Append(c);
+                    }
+
+                    StringTable.Add(offset, sb.ToString());
+                    sb.Clear();
+                }
+            }
+
 
             foreach (var section in Sections)
             {
@@ -80,24 +109,21 @@ namespace SymbolExplorerLib
 
         public static void LoadRelocations(ImageSection section)
         {
+            section.Relocations = new IMAGE_RELOCATION[section.Header.NumberOfRelocations];
+
             if (section.Header.PointerToRelocations != 0)
             {
                 MemoryStream stream = new MemoryStream(section.RawData);
 
+                //Debug.Assert(section.Header.PointerToRelocations > section.RawOffset);
+                //Debug.Assert(section.Header.PointerToRelocations < section.RawData.Length);
+
                 stream.Seek(section.Header.PointerToRelocations - Constants.IMAGE_SIZEOF_SECTION_HEADER, SeekOrigin.Begin);
 
-                int count = section.Header.NumberOfRelocations;
-
-                section.Relocations = new IMAGE_RELOCATION[count];
-
-                for (int i = 0; i < count; ++i)
+                for (int i = 0; i < section.Header.NumberOfRelocations; ++i)
                 {
                     section.Relocations[i] = Utils.StreamToStructure<IMAGE_RELOCATION>(stream);
                 }
-            }
-            else
-            {
-                section.Relocations = new IMAGE_RELOCATION[0];
             }
         }
     }

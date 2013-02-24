@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SymbolExplorerLib.Native
 {
     [Flags]
-    public enum SectionCharacteristics : uint
+    public enum IMAGE_SCN : uint
     {
         // IMAGE_SCN_TYPE_REG = 0x00000000  // Reserved.
         // IMAGE_SCN_TYPE_DSECT = 0x00000001  // Reserved.
@@ -78,6 +78,6 @@ namespace SymbolExplorerLib.Native
         public uint PointerToLinenumbers;
         public ushort NumberOfRelocations;
         public ushort NumberOfLinenumbers;
-        public SectionCharacteristics Characteristics;
+        public IMAGE_SCN Characteristics;
     }
 }

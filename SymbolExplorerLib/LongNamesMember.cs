@@ -10,7 +10,7 @@ namespace SymbolExplorerLib
 {
     public class LongNamesMember : ArchiveMember
     {
-        Dictionary<long,string> _names { get; set; }
+        Dictionary<long, string> _names { get; set; }
 
         public string GetNameForOffset(int offset)
         {
@@ -24,9 +24,9 @@ namespace SymbolExplorerLib
             long begin = stream.Position;
             long end = begin + Header.Size;
 
-            BinaryReader reader = new BinaryReader(stream);
+            BinaryReader reader = new BinaryReader(stream, Encoding.ASCII);
 
-            var names = new Dictionary<long,string>();
+            var names = new Dictionary<long, string>();
 
             StringBuilder sb = new StringBuilder(1024);
 

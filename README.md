@@ -1,4 +1,23 @@
-SymbolExplorer
-==============
+## SymbolExplorer
+SymbolExplorer is a program for inspecting the content of .lib files. It is currently a heavy work in progress but hopefully it wont take long for it to become a lot more useful.
+![SymbolExplorer](http://redwyre.github.com/SymbolExplorer/images/symbolexplorer.png)
 
-SymbolExplorer is a program to allow you to look at the contents of .lib files in an understandable way.
+## Current Release
+http://symbolexplorer.s3.amazonaws.com/webinstall/setup.exe
+
+### Past releases
+http://symbolexplorer.s3.amazonaws.com/SymbolExplorer_0.1.0.0.zip
+
+## Road Map
+* 1.0
+  * All available data in the .lib file visualised in basic form
+  * Name demangling for C++ (visual studio)
+* 1.1
+  * Search
+  * Customisable visualisations (eg toggle name demangling)
+  * Generate easy to read reports
+  * Load object (.obj) files directly
+* Future
+  * Load .pdb files.
+  * Load .exe and .dll files.
+  * Adding the ability to modify and save files.

@@ -37,8 +37,6 @@ namespace SymbolExplorerLib
             Header = Utils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
 
             OptionalHeader = new byte[Header.SizeOfOptionalHeader];
-            Sections = new ImageSection[Header.NumberOfSections];
-            Symbols = new IMAGE_SYMBOL[Header.NumberOfSymbols];
             StringTable = new Dictionary<long, string>();
 
             // Optional header
@@ -46,6 +44,16 @@ namespace SymbolExplorerLib
             {
                 stream.Read(OptionalHeader, 0, Header.SizeOfOptionalHeader);
             }
+
+            if (Header.NumberOfSections > Constants.IMAGE_SYM_SECTION_MAX)
+            {
+                Sections = new ImageSection[0];
+                Symbols = new IMAGE_SYMBOL[0];
+                return;
+            }
+
+            Sections = new ImageSection[Header.NumberOfSections];
+            Symbols = new IMAGE_SYMBOL[Header.NumberOfSymbols];
 
             // Section table
             for (int i = 0; i < Header.NumberOfSections; ++i)

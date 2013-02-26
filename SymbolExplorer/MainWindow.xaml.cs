@@ -51,7 +51,7 @@ namespace SymbolExplorer
 
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("SymbolExplorer (c) 2013 Simon Stevenon", "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("SymbolExplorer (c) 2013 Simon Stevenson", "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public void LoadFile(string filePath)

@@ -29,27 +29,30 @@ namespace SymbolExplorerLib
         public static ArchiveMemberHeader From(IMAGE_ARCHIVE_MEMBER_HEADER old)
         {
             string name = Encoding.ASCII.GetString(old.Name).TrimEnd(' ');
-            string date = Encoding.ASCII.GetString(old.Date).TrimEnd(' ');
-            string user = Encoding.ASCII.GetString(old.UserID).TrimEnd(' ');
-            string group = Encoding.ASCII.GetString(old.GroupID).TrimEnd(' ');
-            string mode = Encoding.ASCII.GetString(old.Mode).TrimEnd(' ');
-            string size = Encoding.ASCII.GetString(old.Size).TrimEnd(' ');
+            string date = Encoding.ASCII.GetString(old.Date).Trim(' ');
+            string user = Encoding.ASCII.GetString(old.UserID).Trim(' ');
+            string group = Encoding.ASCII.GetString(old.GroupID).Trim(' ');
+            string mode = Encoding.ASCII.GetString(old.Mode).Trim(' ');
+            string size = Encoding.ASCII.GetString(old.Size).Trim(' ');
             string endHeader = Encoding.ASCII.GetString(old.EndHeader);
 
-            int dateSeconds = int.Parse(date);
-            DateTime dateTime = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(dateSeconds);
-            int? UserID = string.IsNullOrEmpty(user) ? null : (int?)int.Parse(user);
-            int? GroupID = string.IsNullOrEmpty(group) ? null : (int?)int.Parse(group);
-
-            return new ArchiveMemberHeader
+            if (endHeader != Constants.IMAGE_ARCHIVE_END)
             {
-                Name = name,
-                Date = dateTime,
-                UserID = UserID,
-                GroupID = GroupID,
-                Mode = (ST_MODE)Convert.ToInt32(mode, 8),
-                Size = string.IsNullOrEmpty(size) ? 0 : int.Parse(size)
-            };
+                throw new InvalidDataException();
+            }
+
+            ArchiveMemberHeader header = new ArchiveMemberHeader();
+
+            int dateSeconds = int.Parse(date);
+
+            header.Name = name;
+            header.Date = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(dateSeconds);
+            header.UserID = string.IsNullOrEmpty(user) ? null : (int?)int.Parse(user);
+            header.GroupID = string.IsNullOrEmpty(group) ? null : (int?)int.Parse(group);
+            header.Mode = (ST_MODE)Convert.ToInt32(mode, 8);
+            header.Size = string.IsNullOrEmpty(size) ? 0 : int.Parse(size);
+
+            return header;
         }
     }
 }

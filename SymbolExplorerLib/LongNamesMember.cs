@@ -21,6 +21,8 @@ namespace SymbolExplorerLib
         {
             base.FromStream(stream);
 
+            long endOffset = (stream.Position + Header.Size + 1) & ~0x1;
+
             long begin = stream.Position;
             long end = begin + Header.Size;
 
@@ -48,6 +50,8 @@ namespace SymbolExplorerLib
             _names = names;
 
             Debug.Assert(stream.Position == end);
+
+            stream.Seek(endOffset, SeekOrigin.Begin);
         }
     }
 }

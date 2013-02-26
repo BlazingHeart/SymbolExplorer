@@ -25,6 +25,8 @@ namespace SymbolExplorerLib
         {
             base.FromStream(stream);
 
+            long endOffset = (stream.Position + Header.Size + 1) & ~0x1;
+
             BinaryReader reader = new BinaryReader(stream);
 
             uint memberCount = reader.ReadUInt32();
@@ -57,6 +59,8 @@ namespace SymbolExplorerLib
                 SymbolIndices[i].Name = sb.ToString();
                 sb.Clear();
             }
+
+            stream.Seek(endOffset, SeekOrigin.Begin);
         }
     }
 }

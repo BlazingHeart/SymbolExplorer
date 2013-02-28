@@ -1,4 +1,5 @@
-﻿using SymbolExplorerLib.Native;
+﻿using SymbolExplorerLib;
+using SymbolExplorerLib.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace SymbolExplorer.ViewModels
     public class SymbolViewModel
     {
         string _name;
+        string _nameDemangled;
         IMAGE_SYMBOL _symbol;
         IMAGE_SYMBOL[] _auxSymbols;
 
         public string Name { get { return _name; } set { _name = value; } }
+        public string Demangled { get { return _nameDemangled; } set { _nameDemangled = value; } }
 
         public string Value { get { return string.Format("0x{0:X8}", _symbol.Value); } }
         public string Section
@@ -31,7 +34,7 @@ namespace SymbolExplorer.ViewModels
         public string BasicType { get { return FriendlyEnums.FriendlyName(_symbol.BasicType); } }
         public string DataType { get { return FriendlyEnums.FriendlyName(_symbol.DataType); } }
         public string StorageClass { get { return FriendlyEnums.FriendlyName(_symbol.StorageClass); } }
-        public byte NumberOfAuxSymbols { get { return _symbol.NumberOfAuxSymbols; } }
+        public byte AuxSymbols { get { return _symbol.NumberOfAuxSymbols; } }
 
         public SymbolViewModel(IMAGE_SYMBOL symbol, IMAGE_SYMBOL[] auxSymbols = null)
         {
@@ -41,6 +44,7 @@ namespace SymbolExplorer.ViewModels
             {
                 _name = symbol.Name;
             }
+            _nameDemangled = Demangler.Demangle(_name);
         }
     }
 }

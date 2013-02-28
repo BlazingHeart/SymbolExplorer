@@ -48,6 +48,7 @@ namespace SymbolExplorer.ViewModels
                     {
                         model.Name = "Unavailable";
                     }
+                    model.Demangled = Demangler.Demangle(model.Name);
                 }
 
                 _symbols.Add(model);

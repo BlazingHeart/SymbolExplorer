@@ -35,8 +35,8 @@ namespace SymbolExplorerLib.Native
                 int length = 0;
                 for (int i = 0; i < ShortName.Length; ++i)
                 {
-                    if (ShortName[i] == '\0') break;
                     length = i;
+                    if (ShortName[i] == '\0') break;
                 }
                 return Encoding.UTF8.GetString(ShortName, 0, length);
             }

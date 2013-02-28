@@ -4,8 +4,8 @@ SymbolExplorer is a program for inspecting the content of .lib files. It is curr
 ![SymbolExplorer](http://symbolexplorer.s3.amazonaws.com/img/SymbolExplorer_0.1.1.372.png)
 
 ## Current Release
-Installer: http://symbolexplorer.s3.amazonaws.com/webinstall/setup.exe
-Zip: http://symbolexplorer.s3.amazonaws.com/zip/SymbolExplorer_0.1.1.372.zip
+* Online Installer: http://symbolexplorer.s3.amazonaws.com/webinstall/setup.exe
+* Zip: http://symbolexplorer.s3.amazonaws.com/zip/SymbolExplorer_0.1.1.372.zip
 
 ### Past releases
 http://symbolexplorer.s3.amazonaws.com/SymbolExplorer_0.1.0.0.zip

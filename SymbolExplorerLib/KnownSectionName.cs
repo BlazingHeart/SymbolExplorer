@@ -41,5 +41,14 @@ namespace SymbolExplorerLib
             new KnownSectionName { SectionName = ".vsdata", ContentDescription = "GP-relative initialized data (free format and for ARM, SH4, and Thumb architectures only)", Characteristics = IMAGE_SCN.IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN.IMAGE_SCN_MEM_READ | IMAGE_SCN.IMAGE_SCN_MEM_WRITE },
             new KnownSectionName { SectionName = ".xdata", ContentDescription = "Exception information (free format)", Characteristics = IMAGE_SCN.IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN.IMAGE_SCN_MEM_READ },
         };
+
+        KnownSectionName Find(string sectionName)
+        {
+            var q = from section in KnownSectionNames
+                    where section.SectionName == sectionName
+                    select section;
+
+            return q.SingleOrDefault();
+        }
     }
 }

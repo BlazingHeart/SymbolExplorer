@@ -6,6 +6,7 @@ using System.Text;
 
 namespace SymbolExplorerLib.Native
 {
+    [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
     public struct IMAGE_OPTIONAL_HEADER64
     {
         public ushort Magic;

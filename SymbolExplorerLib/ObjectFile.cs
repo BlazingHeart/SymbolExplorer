@@ -20,15 +20,15 @@ namespace SymbolExplorerLib
             public IMAGE_RELOCATION[] Relocations;
         }
 
-        public IMAGE_FILE_HEADER Header { get; set; }
+        public IMAGE_FILE_HEADER Header { get; private set; }
 
-        public byte[] OptionalHeader { get; set; }
+        public OptionalHeader OptionalHeader { get; private set; }
 
-        public ImageSection[] Sections { get; set; }
+        public ImageSection[] Sections { get; private set; }
 
-        public IMAGE_SYMBOL[] Symbols { get; set; }
+        public IMAGE_SYMBOL[] Symbols { get; private set; }
 
-        public Dictionary<long, string> StringTable { get; set; }
+        public Dictionary<long, string> StringTable { get; private set; }
 
 
         public void FromStream(Stream stream)
@@ -36,13 +36,13 @@ namespace SymbolExplorerLib
             long fileStart = stream.Position;
             Header = Utils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
 
-            OptionalHeader = new byte[Header.SizeOfOptionalHeader];
+            OptionalHeader = new OptionalHeader();
             StringTable = new Dictionary<long, string>();
 
             // Optional header
             if (Header.SizeOfOptionalHeader != 0)
             {
-                stream.Read(OptionalHeader, 0, Header.SizeOfOptionalHeader);
+                OptionalHeader.FromStream(stream, Header.SizeOfOptionalHeader);
             }
 
             if (Header.NumberOfSections > Constants.IMAGE_SYM_SECTION_MAX)

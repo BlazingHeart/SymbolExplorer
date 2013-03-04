@@ -66,6 +66,10 @@
     <Compile Include="Native\Utils.cs" />
     <Compile Include="ObjectFile.cs" />
     <Compile Include="ObjectFileMember.cs" />
+    <Compile Include="OptionalHeader.cs" />
+    <Compile Include="OptionalHeaderBase.cs" />
+    <Compile Include="OptionalHeaderPE32.cs" />
+    <Compile Include="OptionalHeaderPE64.cs" />
     <Compile Include="PInvoke.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SecondLinkerMember.cs" />

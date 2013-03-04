@@ -122,5 +122,15 @@ namespace SymbolExplorer
                 contextMenu.Items.Add(item);
             }
         }
+
+        private void toggleLinkerSymbols_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void symbolDataGrid_ToolTipOpening(object sender, ToolTipEventArgs e)
+        {
+
+        }
     }
 }

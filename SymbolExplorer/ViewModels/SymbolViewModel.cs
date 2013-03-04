@@ -43,8 +43,8 @@ namespace SymbolExplorer.ViewModels
             if (!symbol.UsesStringTable)
             {
                 _name = symbol.Name;
+                _nameDemangled = Demangler.Demangle(_name);
             }
-            _nameDemangled = Demangler.Demangle(_name);
         }
     }
 }

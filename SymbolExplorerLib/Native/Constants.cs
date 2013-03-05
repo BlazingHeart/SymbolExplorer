@@ -256,4 +256,41 @@ namespace SymbolExplorerLib.Native
         IMAGE_SYM_CLASS_WEAK_EXTERNAL = 0x69,
         IMAGE_SYM_CLASS_CLR_TOKEN = 0x6B,
     }
+
+    public enum IMAGE_REL_I386 : ushort
+    {
+        IMAGE_REL_I386_ABSOLUTE = 0x0000, // Reference is absolute, no relocation is necessary
+        IMAGE_REL_I386_DIR16 = 0x0001, // Direct 16-bit reference to the symbols virtual address
+        IMAGE_REL_I386_REL16 = 0x0002, // PC-relative 16-bit reference to the symbols virtual address
+        IMAGE_REL_I386_DIR32 = 0x0006, // Direct 32-bit reference to the symbols virtual address
+        IMAGE_REL_I386_DIR32NB = 0x0007, // Direct 32-bit reference to the symbols virtual address, base not included
+        IMAGE_REL_I386_SEG12 = 0x0009, // Direct 16-bit reference to the segment-selector bits of a 32-bit virtual address
+        IMAGE_REL_I386_SECTION = 0x000A,
+        IMAGE_REL_I386_SECREL = 0x000B,
+        IMAGE_REL_I386_TOKEN = 0x000C, // clr token
+        IMAGE_REL_I386_SECREL7 = 0x000D, // 7 bit offset from base of section containing target
+        IMAGE_REL_I386_REL32 = 0x0014, // PC-relative 32-bit reference to the symbols virtual address
+    }
+
+
+    public enum IMAGE_REL_AMD64 : ushort
+    {
+        IMAGE_REL_AMD64_ABSOLUTE = 0x0000, // Reference is absolute, no relocation is necessary
+        IMAGE_REL_AMD64_ADDR64 = 0x0001, // 64-bit address (VA).
+        IMAGE_REL_AMD64_ADDR32 = 0x0002, // 32-bit address (VA).
+        IMAGE_REL_AMD64_ADDR32NB = 0x0003, // 32-bit address w/o image base (RVA).
+        IMAGE_REL_AMD64_REL32 = 0x0004, // 32-bit relative address from byte following reloc
+        IMAGE_REL_AMD64_REL32_1 = 0x0005, // 32-bit relative address from byte distance 1 from reloc
+        IMAGE_REL_AMD64_REL32_2 = 0x0006, // 32-bit relative address from byte distance 2 from reloc
+        IMAGE_REL_AMD64_REL32_3 = 0x0007, // 32-bit relative address from byte distance 3 from reloc
+        IMAGE_REL_AMD64_REL32_4 = 0x0008, // 32-bit relative address from byte distance 4 from reloc
+        IMAGE_REL_AMD64_REL32_5 = 0x0009, // 32-bit relative address from byte distance 5 from reloc
+        IMAGE_REL_AMD64_SECTION = 0x000A, // Section index
+        IMAGE_REL_AMD64_SECREL = 0x000B, // 32 bit offset from base of section containing target
+        IMAGE_REL_AMD64_SECREL7 = 0x000C, // 7 bit unsigned offset from base of section containing target
+        IMAGE_REL_AMD64_TOKEN = 0x000D, // 32 bit metadata token
+        IMAGE_REL_AMD64_SREL32 = 0x000E, // 32 bit signed span-dependent value emitted into object
+        IMAGE_REL_AMD64_PAIR = 0x000F,
+        IMAGE_REL_AMD64_SSPAN32 = 0x0010, // 32 bit signed span-dependent value applied at link time
+    }
 }

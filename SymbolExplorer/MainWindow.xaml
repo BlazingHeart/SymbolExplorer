@@ -5,9 +5,11 @@
         xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
         xmlns:SymbolExplorerLib="clr-namespace:SymbolExplorerLib;assembly=SymbolExplorerLib"
         x:Class="SymbolExplorer.MainWindow"
-        Title="Symbol Exporer" Height="350" Width="525" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
+        Title="Symbol Exporer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
        >
-    <Window.Resources>        
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
         <HierarchicalDataTemplate x:Key="ArchiveMemberViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
             <TextBlock Text="{Binding Name}" />
         </HierarchicalDataTemplate>
@@ -30,7 +32,7 @@
 
                 <StackPanel Grid.Column="1" Margin="4,0,0,0">
                     <TextBlock Text="{Binding ArchiveMember.Header.Name}" />
-                    <TextBlock Text="{Binding ArchiveMember.Header.Date, StringFormat='yyyy-MM-dd'}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.Date, StringFormat=yyyy-MM-dd}" />
                     <TextBlock Text="{Binding ArchiveMember.Header.Size}" />
                 </StackPanel>
 
@@ -45,7 +47,7 @@
                 <StackPanel Grid.Column="4" Margin="4,0,0,0">
                     <TextBlock Text="{Binding ArchiveMember.Header.UserID}" />
                     <TextBlock Text="{Binding ArchiveMember.Header.GroupID}" />
-                    <TextBlock Text="{Binding ArchiveMember.Header.Mode, StringFormat=' {0} (0x{0:X})'}" />
+                    <TextBlock Text="{Binding ArchiveMember.Header.Mode, StringFormat=' \{0\} (0x\{0:X\})'}" />
                 </StackPanel>
             </Grid>
         </DataTemplate>
@@ -74,11 +76,39 @@
             </Expander>
         </DataTemplate>
 
-
         <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">
-            <ListBox ItemsSource="{Binding Symbols}" ItemTemplate="{StaticResource SymbolDataTemplate}"/>
+            <StackPanel>
+                <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
+                <Separator />
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Machine: " />
+                        <TextBlock Text="{Binding Machine}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="NumberOfSections: " />
+                        <TextBlock Text="{Binding NumberOfSections}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="TimeDateStamp: " />
+                        <TextBlock Text="{Binding TimeDateStamp}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="NumberOfSymbols: " />
+                        <TextBlock Text="{Binding NumberOfSymbols}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="SizeOfOptionalHeader: " />
+                        <TextBlock Text="{Binding SizeOfOptionalHeader}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Characteristics: " />
+                        <TextBlock Text="{Binding Characteristics}" />
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
         </DataTemplate>
-
+        
         <ControlTemplate x:Key="ArchiveMemberHeaderControlTemplate">
             <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
         </ControlTemplate>
@@ -86,7 +116,7 @@
         <ControlTemplate x:Key="ObjectFileControlTemplate">
             <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ObjectFileDataTemplate}" />
         </ControlTemplate>
-        
+
         <ControlTemplate x:Key="SymbolControlTemplate">
             <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
         </ControlTemplate>
@@ -96,9 +126,9 @@
                 <Expander.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Section "/>
-                        <TextBlock Text="{Binding Path=Name}" />
+                        <TextBlock Text="{Binding Name}" />
                         <TextBlock Text=" ( "/>
-                        <TextBlock Text="{Binding Path=ItemCount}"/>
+                        <TextBlock Text="{Binding ItemCount}"/>
                         <TextBlock Text=" Items)"/>
                     </StackPanel>
                 </Expander.Header>
@@ -106,7 +136,7 @@
             </Expander>
         </ControlTemplate>
     </Window.Resources>
-    
+
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" Height="18">
             <MenuItem x:Name="MenuItemFile" Header="File">
@@ -118,7 +148,7 @@
             <ToolBar Band="1" BandIndex="1" x:Name="toolbar" >
                 <ToolBarPanel>
                     <ToggleButton x:Name="toggleLinkerSymbols" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked">
-                        <Image Source="Images/toggle_linker_symbols_32.png"></Image>
+                        <Image Source="Images/toggle_linker_symbols_32.png" />
                     </ToggleButton>
                 </ToolBarPanel>
             </ToolBar>
@@ -135,21 +165,27 @@
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 
-            <DockPanel Grid.Column="2" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" VerticalAlignment="Stretch">
-                <ContentControl Margin="4" DockPanel.Dock="Top" Template="{StaticResource ArchiveMemberHeaderControlTemplate}" />
-                <ContentControl Margin="4" DockPanel.Dock="Bottom"  DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
+            <TabControl Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+                <TabItem Header="Object File">
+                    <DockPanel DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+                        <ContentControl Margin="4" Template="{StaticResource ObjectFileControlTemplate}" />
+                    </DockPanel>
+                </TabItem>
+                <TabItem Header="Symbols">
+                    <DockPanel DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+                        <ContentControl Margin="4" DockPanel.Dock="Bottom"  DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
 
-                <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding GroupedSymbols}" AutoGeneratingColumn="symbolDataGrid_AutoGeneratingColumn" AutoGeneratedColumns="symbolDataGrid_AutoGeneratedColumns" ToolTipOpening="symbolDataGrid_ToolTipOpening">
-                    <DataGrid.Resources>
-                        <MenuItem Header="Show/Hide Columns" x:Key="columnsMenuItem">
-                        </MenuItem>
-                        <ContextMenu x:Key="headerContextMenu">
-                        </ContextMenu>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
-                        </Style>
-                    </DataGrid.Resources>
-                    <!--<DataGrid.GroupStyle>
+                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding GroupedSymbols}" AutoGeneratingColumn="symbolDataGrid_AutoGeneratingColumn" AutoGeneratedColumns="symbolDataGrid_AutoGeneratedColumns" ToolTipOpening="symbolDataGrid_ToolTipOpening">
+                            <DataGrid.Resources>
+                                <MenuItem Header="Show/Hide Columns" x:Key="columnsMenuItem">
+                                </MenuItem>
+                                <ContextMenu x:Key="headerContextMenu">
+                                </ContextMenu>
+                                <Style TargetType="{x:Type DataGridColumnHeader}">
+                                    <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
+                                </Style>
+                            </DataGrid.Resources>
+                            <!--<DataGrid.GroupStyle>
                         <GroupStyle>
                             <GroupStyle.HeaderTemplate>
                                 <DataTemplate>
@@ -165,8 +201,10 @@
                             </GroupStyle.ContainerStyle>
                         </GroupStyle>
                     </DataGrid.GroupStyle>-->
-                </DataGrid>
-            </DockPanel>
+                        </DataGrid>
+                    </DockPanel>
+                </TabItem>
+            </TabControl>
         </Grid>
     </DockPanel>
 </Window>

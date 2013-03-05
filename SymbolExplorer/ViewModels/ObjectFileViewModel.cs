@@ -14,6 +14,13 @@ namespace SymbolExplorer.ViewModels
         ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();
         ListCollectionView _groupedSymbols;
 
+        public IMAGE_FILE_MACHINE Machine { get { return ObjectFileMember.ObjectFile.Header.Machine; } }
+        public ushort NumberOfSections { get { return ObjectFileMember.ObjectFile.Header.NumberOfSections; } }
+        public uint TimeDateStamp { get { return ObjectFileMember.ObjectFile.Header.TimeDateStamp; } }
+        public uint NumberOfSymbols { get { return ObjectFileMember.ObjectFile.Header.NumberOfSymbols; } }
+        public ushort SizeOfOptionalHeader { get { return ObjectFileMember.ObjectFile.Header.SizeOfOptionalHeader; } }
+        public IMAGE_FILE_CHARACTARISTICS Characteristics { get { return ObjectFileMember.ObjectFile.Header.Characteristics; } }
+
         public ObjectFileMember ObjectFileMember { get { return base.ArchiveMember as ObjectFileMember; } }
 
         public ObservableCollection<SymbolViewModel> Symbols { get { return _symbols; } }

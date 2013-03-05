@@ -140,7 +140,10 @@ namespace SymbolExplorer
             Filters.SymbolViewModel_NonLinker_Enabled = c;
 
             var source = symbolDataGrid.ItemsSource as ListCollectionView;
-            source.Refresh();
+            if (source != null)
+            {
+                source.Refresh();
+            }
         }
     }
 }

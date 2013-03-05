@@ -65,7 +65,7 @@ namespace SymbolExplorerLib
             // Section data
             for (int i = 0; i < Header.NumberOfSections; ++i)
             {
-                Sections[i].RawOffset = stream.Position;
+                Sections[i].RawOffset = stream.Position - fileStart;
                 uint size = Sections[i].Header.SizeOfRawData;
                 Sections[i].RawData = new byte[size];
                 stream.Read(Sections[i].RawData, 0, (int)size);
@@ -108,29 +108,19 @@ namespace SymbolExplorerLib
                 }
             }
 
-
-            foreach (var section in Sections)
+            for (int i = 0; i < Sections.Length; ++i)
             {
-                //LoadRelocations(section);
-            }
-        }
+                ImageSection section = Sections[i];
+                section.Relocations = new IMAGE_RELOCATION[section.Header.NumberOfRelocations];
 
-        public static void LoadRelocations(ImageSection section)
-        {
-            section.Relocations = new IMAGE_RELOCATION[section.Header.NumberOfRelocations];
-
-            if (section.Header.PointerToRelocations != 0)
-            {
-                MemoryStream stream = new MemoryStream(section.RawData);
-
-                //Debug.Assert(section.Header.PointerToRelocations > section.RawOffset);
-                //Debug.Assert(section.Header.PointerToRelocations < section.RawData.Length);
-
-                stream.Seek(section.Header.PointerToRelocations - Constants.IMAGE_SIZEOF_SECTION_HEADER, SeekOrigin.Begin);
-
-                for (int i = 0; i < section.Header.NumberOfRelocations; ++i)
+                if (section.Header.PointerToRelocations != 0)
                 {
-                    section.Relocations[i] = Utils.StreamToStructure<IMAGE_RELOCATION>(stream);
+                    stream.Seek(fileStart + section.Header.PointerToRelocations, SeekOrigin.Begin);
+
+                    for (int r = 0; r < section.Header.NumberOfRelocations; ++r)
+                    {
+                        section.Relocations[r] = Utils.StreamToStructure<IMAGE_RELOCATION>(stream);
+                    }
                 }
             }
         }

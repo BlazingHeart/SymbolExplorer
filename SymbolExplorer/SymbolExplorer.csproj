@@ -103,6 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Filters.cs" />
     <Compile Include="FriendlyEnums.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
@@ -182,6 +183,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toggle_linker_symbols_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\toggle_linker_symbols_16.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

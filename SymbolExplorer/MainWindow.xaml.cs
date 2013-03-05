@@ -132,5 +132,23 @@ namespace SymbolExplorer
         {
 
         }
+
+        private void toggleLinkerSymbols_ToggleChecked(object sender, RoutedEventArgs e)
+        {
+            bool c = toggleLinkerSymbols.IsChecked ?? false;
+
+            var member = MemberTree.SelectedItem as ObjectFileViewModel;
+            if (member != null)
+            {
+                if (c)
+                {
+                    member.GroupedSymbols.Filter = Filters.SymbolViewModel_NonLinker;
+                }
+                else
+                {
+                    member.GroupedSymbols.Filter = null;
+                }
+            }
+        }
     }
 }

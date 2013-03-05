@@ -27,6 +27,8 @@ namespace SymbolExplorer.ViewModels
 
             _groupedSymbols = new ListCollectionView(_symbols);
             //_groupedSymbols.GroupDescriptions.Add(new PropertyGroupDescription(Utils.GetPropertyName<SymbolViewModel>(a => a.Section)));
+
+            _groupedSymbols.Filter = Filters.SymbolViewModel_NonLinker;
         }
 
         void AddSymbols()

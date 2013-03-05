@@ -130,25 +130,17 @@ namespace SymbolExplorer
 
         private void symbolDataGrid_ToolTipOpening(object sender, ToolTipEventArgs e)
         {
-
+            Console.WriteLine(e.OriginalSource);
         }
 
         private void toggleLinkerSymbols_ToggleChecked(object sender, RoutedEventArgs e)
         {
             bool c = toggleLinkerSymbols.IsChecked ?? false;
 
-            var member = MemberTree.SelectedItem as ObjectFileViewModel;
-            if (member != null)
-            {
-                if (c)
-                {
-                    member.GroupedSymbols.Filter = Filters.SymbolViewModel_NonLinker;
-                }
-                else
-                {
-                    member.GroupedSymbols.Filter = null;
-                }
-            }
+            Filters.SymbolViewModel_NonLinker_Enabled = c;
+
+            var source = symbolDataGrid.ItemsSource as ListCollectionView;
+            source.Refresh();
         }
     }
 }

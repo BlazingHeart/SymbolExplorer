@@ -37,5 +37,17 @@ namespace SymbolExplorerLib.Native
         {
             return (uint)((i << 24) | ((i << 8) & 0x00FF0000) | ((i >> 8) & 0x0000FF00) | (i >> 24));
         }
+
+        public static string GetString(byte[] text)
+        {
+            // need to trim off any nulls
+            int length = 0;
+            for (int i = 0; i < text.Length; ++i)
+            {
+                length = i;
+                if (text[i] == '\0') break;
+            }
+            return Encoding.UTF8.GetString(text, 0, length);
+        }
     }
 }

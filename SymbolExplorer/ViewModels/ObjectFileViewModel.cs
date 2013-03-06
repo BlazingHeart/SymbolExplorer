@@ -11,6 +11,7 @@ namespace SymbolExplorer.ViewModels
 {
     class ObjectFileViewModel : ArchiveMemberViewModel
     {
+        ObservableCollection<SectionViewModel> _sections = new ObservableCollection<SectionViewModel>();
         ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();
         ListCollectionView _groupedSymbols;
 
@@ -23,6 +24,8 @@ namespace SymbolExplorer.ViewModels
 
         public ObjectFileMember ObjectFileMember { get { return base.ArchiveMember as ObjectFileMember; } }
 
+        public ObservableCollection<SectionViewModel> Sections { get { return _sections; } }
+
         public ObservableCollection<SymbolViewModel> Symbols { get { return _symbols; } }
 
         public ListCollectionView GroupedSymbols { get { return _groupedSymbols; } }
@@ -31,6 +34,7 @@ namespace SymbolExplorer.ViewModels
             : base(objectFileMember)
         {
             AddSymbols();
+            AddSections();
 
             _groupedSymbols = new ListCollectionView(_symbols);
             //_groupedSymbols.GroupDescriptions.Add(new PropertyGroupDescription(Utils.GetPropertyName<SymbolViewModel>(a => a.Section)));
@@ -38,7 +42,17 @@ namespace SymbolExplorer.ViewModels
             _groupedSymbols.Filter = Filters.SymbolViewModel_NonLinker;
         }
 
-        void AddSymbols()
+        private void AddSections()
+        {
+            foreach (var section in ObjectFileMember.ObjectFile.Sections)
+            {
+                var model = new SectionViewModel(section);
+                model.ResolveName(ObjectFileMember.ObjectFile);
+                _sections.Add(model);
+            }
+        }
+
+        private void AddSymbols()
         {
             var stringTable = ObjectFileMember.ObjectFile.StringTable;
             var symbols = ObjectFileMember.ObjectFile.Symbols;

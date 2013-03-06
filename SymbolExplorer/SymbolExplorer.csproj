@@ -109,6 +109,7 @@
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
     <Compile Include="ViewModels\ArchiveMemberViewModel.cs" />
     <Compile Include="ViewModels\ObjectFileViewModel.cs" />
+    <Compile Include="ViewModels\SectionViewModel.cs" />
     <Compile Include="ViewModels\SymbolViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -31,14 +31,7 @@ namespace SymbolExplorerLib.Native
             get
             {
                 if (UsesStringTable) throw new InvalidOperationException();
-                // need to trim off any nulls
-                int length = 0;
-                for (int i = 0; i < ShortName.Length; ++i)
-                {
-                    length = i;
-                    if (ShortName[i] == '\0') break;
-                }
-                return Encoding.UTF8.GetString(ShortName, 0, length);
+                return Utils.GetString(ShortName);
             }
         }
     }

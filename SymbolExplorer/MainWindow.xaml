@@ -77,10 +77,10 @@
         </DataTemplate>
 
         <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">
-            <StackPanel>
-                <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
-                <Separator />
-                <StackPanel>
+            <DockPanel >
+                <ContentPresenter DockPanel.Dock="Top" Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
+                <Separator DockPanel.Dock="Top" />
+                <StackPanel DockPanel.Dock="Top">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Machine: " />
                         <TextBlock Text="{Binding Machine}" />
@@ -106,9 +106,36 @@
                         <TextBlock Text="{Binding Characteristics}" />
                     </StackPanel>
                 </StackPanel>
-            </StackPanel>
+                <Separator DockPanel.Dock="Top" />
+                <ListBox DockPanel.Dock="Top" ItemsSource="{Binding Sections}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Name: " />
+                                        <TextBlock Text="{Binding Name}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="VirtualAddress: " />
+                                        <TextBlock Text="{Binding VirtualAddress}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="SizeOfRawData: " />
+                                        <TextBlock Text="{Binding SizeOfRawData}" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="Characteristics: " />
+                                        <TextBlock Text="{Binding Characteristics}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
         </DataTemplate>
-        
+
         <ControlTemplate x:Key="ArchiveMemberHeaderControlTemplate">
             <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
         </ControlTemplate>
@@ -185,22 +212,24 @@
                                     <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
                                 </Style>
                             </DataGrid.Resources>
-                            <!--<DataGrid.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.HeaderTemplate>
-                                <DataTemplate>
-                                    <StackPanel>
-                                        <TextBlock Text="{Binding Path=Name}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </GroupStyle.HeaderTemplate>
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template" Value="{StaticResource SymbolGroupControlTemplate}" />
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-                        </GroupStyle>
-                    </DataGrid.GroupStyle>-->
+                            <!--
+                            <DataGrid.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding Path=Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+                                    <GroupStyle.ContainerStyle>
+                                        <Style TargetType="{x:Type GroupItem}">
+                                            <Setter Property="Template" Value="{StaticResource SymbolGroupControlTemplate}" />
+                                        </Style>
+                                    </GroupStyle.ContainerStyle>
+                                </GroupStyle>
+                            </DataGrid.GroupStyle>
+                            -->
                         </DataGrid>
                     </DockPanel>
                 </TabItem>

@@ -111,5 +111,10 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        
+        <Style x:Key="Hexview" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
     </Application.Resources>
 </Application>

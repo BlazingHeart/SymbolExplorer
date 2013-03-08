@@ -18,7 +18,7 @@ namespace SymbolExplorer.ViewModels
 
         public byte[] Data { get { return _data; } set { SetProperty(ref _data, value, "Data"); ClearText(); } }
 
-        public long StartingAddress { get { return _startingAddress; } set { SetProperty(ref _startingAddress, value, "StartingAddress"); ClearText(); } }
+        public long StartingAddress { get { return _startingAddress; } set { SetProperty(ref _startingAddress, value, "StartingAddress"); if (_showAddress) { ClearText(); } } }
 
         public bool ShowAddress { get { return _showAddress; } set { SetProperty(ref _showAddress, value, "ShowAddress"); ClearText(); } }
 
@@ -31,6 +31,7 @@ namespace SymbolExplorer.ViewModels
         public ByteDataViewModel()
         {
             ColumnCount = 16;
+            ShowAddress = true;
         }
 
         private void ClearText()
@@ -61,7 +62,10 @@ namespace SymbolExplorer.ViewModels
                     int pad = _columnCount - lineBytes;
                     int lineIndex = byteIndex;
 
-                    sb.AppendFormat("0x{0:X8}  ", byteIndex);
+                    if (_showAddress)
+                    {
+                        sb.AppendFormat("0x{0:X8}  ", _startingAddress + byteIndex);
+                    }
 
                     for (int y = 0; y < lineBytes; ++y)
                     {
@@ -73,7 +77,7 @@ namespace SymbolExplorer.ViewModels
                         sb.Append("   ");
                     }
 
-                    sb.Append(" ");
+                    sb.Append(' ');
 
                     lineIndex = byteIndex;
                     for (int y = 0; y < lineBytes; ++y)

@@ -5,7 +5,7 @@
         xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
         xmlns:SymbolExplorerLib="clr-namespace:SymbolExplorerLib;assembly=SymbolExplorerLib"
         x:Class="SymbolExplorer.MainWindow"
-        Title="Symbol Exporer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
+        Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
        >
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>

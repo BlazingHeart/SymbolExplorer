@@ -32,6 +32,7 @@ namespace SymbolExplorer.ViewModels
             _imageSection = imageSection;
             _name = SymbolExplorerLib.Native.Utils.GetString(_imageSection.Header.Name);
             _byteData.Data = _imageSection.RawData;
+            _byteData.StartingAddress = _imageSection.RawOffset;
         }
 
         public void ResolveName(ObjectFile file)

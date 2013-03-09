@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SymbolExplorerLib
 {
-    public class PInvoke
+    public class NativeMethods
     {
         [Flags]
         public enum UnDecorateFlags
@@ -31,7 +31,7 @@ namespace SymbolExplorerLib
             UNDNAME_NO_SPECIAL_SYMS = (0x4000),  // Don't undecorate special names (v-table, vcall, vector xxx, metatype, etc)
         }
 
-        [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true)]
-        public static extern int UnDecorateSymbolName([In, MarshalAs(UnmanagedType.LPStr)] string decoratedName, [Out] StringBuilder unDecoratedName, [In, MarshalAs(UnmanagedType.U4)] int undecoratedLength, [In, MarshalAs(UnmanagedType.U4)] UnDecorateFlags flags);
+        [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true, CharSet = CharSet.Unicode)]
+        internal static extern int UnDecorateSymbolName([In] string decoratedName, [Out] StringBuilder unDecoratedName, [In, MarshalAs(UnmanagedType.U4)] int undecoratedLength, [In, MarshalAs(UnmanagedType.U4)] UnDecorateFlags flags);
     }
 }

@@ -103,6 +103,32 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Code\ArchiveFile.cs" />
+    <Compile Include="Code\ArchiveFileA.cs" />
+    <Compile Include="Code\ArchiveMember.cs" />
+    <Compile Include="Code\ArchiveMemberHeader.cs" />
+    <Compile Include="Code\Demangler.cs" />
+    <Compile Include="Code\FirstLinkerMember.cs" />
+    <Compile Include="Code\KnownSectionName.cs" />
+    <Compile Include="Code\LongNamesMember.cs" />
+    <Compile Include="Code\Native\Constants.cs" />
+    <Compile Include="Code\Native\IMAGE_ARCHIVE_MEMBER_HEADER.cs" />
+    <Compile Include="Code\Native\IMAGE_DATA_DIRECTORY.cs" />
+    <Compile Include="Code\Native\IMAGE_FILE_HEADER.cs" />
+    <Compile Include="Code\Native\IMAGE_OPTIONAL_HEADER32.cs" />
+    <Compile Include="Code\Native\IMAGE_OPTIONAL_HEADER64.cs" />
+    <Compile Include="Code\Native\IMAGE_RELOCATION.cs" />
+    <Compile Include="Code\Native\IMAGE_SECTION_HEADER.cs" />
+    <Compile Include="Code\Native\IMAGE_SYMBOL.cs" />
+    <Compile Include="Code\Native\Utils.cs" />
+    <Compile Include="Code\ObjectFile.cs" />
+    <Compile Include="Code\ObjectFileMember.cs" />
+    <Compile Include="Code\OptionalHeader.cs" />
+    <Compile Include="Code\OptionalHeaderBase.cs" />
+    <Compile Include="Code\OptionalHeaderPE32.cs" />
+    <Compile Include="Code\OptionalHeaderPE64.cs" />
+    <Compile Include="Code\NativeMethods.cs" />
+    <Compile Include="Code\SecondLinkerMember.cs" />
     <Compile Include="Filters.cs" />
     <Compile Include="FriendlyEnums.cs" />
     <Compile Include="Utils.cs" />
@@ -156,14 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SymbolExplorerLib\SymbolExplorerLib.csproj">
-      <Project>{69efe1d2-b695-40cb-81b7-a4aea1a86275}</Project>
-      <Name>SymbolExplorerLib</Name>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>True</Private>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client,KB2468871">

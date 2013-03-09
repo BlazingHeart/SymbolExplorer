@@ -55,9 +55,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SymbolExplorerLib\SymbolExplorerLib.csproj">
-      <Project>{69efe1d2-b695-40cb-81b7-a4aea1a86275}</Project>
-      <Name>SymbolExplorerLib</Name>
+    <ProjectReference Include="..\SymbolExplorer\SymbolExplorer.csproj">
+      <Project>{f693d375-33ca-401c-9634-dbcdbf3d5709}</Project>
+      <Name>SymbolExplorer</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

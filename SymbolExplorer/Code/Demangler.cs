@@ -33,7 +33,7 @@ namespace SymbolExplorerLib
                 language = Language.CPP;
 
             StringBuilder sb = new StringBuilder(4096);
-            int result = PInvoke.UnDecorateSymbolName(symbolName, sb, sb.Capacity, PInvoke.UnDecorateFlags.UNDNAME_COMPLETE);
+            int result = NativeMethods.UnDecorateSymbolName(symbolName, sb, sb.Capacity, NativeMethods.UnDecorateFlags.UNDNAME_COMPLETE);
             if ((result == 0) || (sb.ToString() == symbolName))
             {
                 return symbolName;

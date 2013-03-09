@@ -60,14 +60,26 @@ namespace SymbolExplorer
 
         public void LoadFile(string filePath)
         {
-            FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            var file = ArchiveFile.FromStream(s);
-            Archive.File = file;
-            Archive.Name = System.IO.Path.GetFileName(filePath);
+            try
+            {
+                FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var file = ArchiveFile.FromStream(s);
+                Archive.File = file;
+                Archive.Name = System.IO.Path.GetFileName(filePath);
 
-            this.DataContext = Archive;
+                this.DataContext = Archive;
 
-            MemberTree.ItemsSource = Archive.Members;
+                MemberTree.ItemsSource = Archive.Members;
+
+                if (file.Errors)
+                {
+                    MessageBox.Show(string.Format("There were errors loading '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            catch
+            {
+                MessageBox.Show(string.Format("Error loading file '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)

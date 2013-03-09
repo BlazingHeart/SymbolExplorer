@@ -1,4 +1,4 @@
-﻿using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;

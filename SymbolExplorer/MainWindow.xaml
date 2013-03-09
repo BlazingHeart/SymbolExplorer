@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:SymbolExplorer="clr-namespace:SymbolExplorer;assembly=SymbolExplorer"
         xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
-        xmlns:SymbolExplorerLib="clr-namespace:SymbolExplorerLib;assembly=SymbolExplorerLib"
+        xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code;assembly=SymbolExplorer.Code"
         x:Class="SymbolExplorer.MainWindow"
         Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
        >

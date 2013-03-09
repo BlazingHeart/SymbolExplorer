@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SymbolExplorerLib.Native
+namespace SymbolExplorer.Code.Native
 {
     [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
     public struct IMAGE_SYMBOL
@@ -31,7 +31,7 @@ namespace SymbolExplorerLib.Native
             get
             {
                 if (UsesStringTable) throw new InvalidOperationException();
-                return Utils.GetString(ShortName);
+                return NativeUtils.GetString(ShortName);
             }
         }
     }

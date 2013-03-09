@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib.Native
+namespace SymbolExplorer.Code.Native
 {
     public class Constants
     {

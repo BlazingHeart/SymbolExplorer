@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SymbolExplorerLib.Native
+namespace SymbolExplorer.Code.Native
 {
     [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
     public struct IMAGE_OPTIONAL_HEADER32

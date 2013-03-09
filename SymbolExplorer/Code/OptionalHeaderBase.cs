@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class OptionalHeaderBase
     {

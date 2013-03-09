@@ -1,5 +1,5 @@
-﻿using SymbolExplorerLib;
-using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code;
+using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

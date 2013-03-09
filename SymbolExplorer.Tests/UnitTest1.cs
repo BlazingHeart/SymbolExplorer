@@ -1,13 +1,14 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using SymbolExplorerLib;
+using SymbolExplorer.Code;
+using SymbolExplorer;
 using System.Collections;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace SymbolExplorerLib.Tests
+namespace SymbolExplorer.Tests
 {
     [TestClass]
     public class UnitTest1

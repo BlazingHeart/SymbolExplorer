@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib.Native
+namespace SymbolExplorer.Code.Native
 {
     [StructLayout(LayoutKind.Sequential, Pack=1, CharSet=CharSet.Ansi)]
     public struct IMAGE_ARCHIVE_MEMBER_HEADER

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorer", "SymbolExplorer\SymbolExplorer.csproj", "{F693D375-33CA-401C-9634-DBCDBF3D5709}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorerLib.Tests", "SymbolExplorerLib.Tests\SymbolExplorerLib.Tests.csproj", "{1993F164-0290-4D04-ABCC-0F27A344E395}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorer.Tests", "SymbolExplorer.Tests\SymbolExplorer.Tests.csproj", "{1993F164-0290-4D04-ABCC-0F27A344E395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

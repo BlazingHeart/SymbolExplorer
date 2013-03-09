@@ -1,11 +1,12 @@
-﻿using System;
+﻿using SymbolExplorer.Code.Native;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class FirstLinkerMember : ArchiveMember
     {
@@ -25,7 +26,7 @@ namespace SymbolExplorerLib
 
             BinaryReader reader = new BinaryReader(stream);
 
-            uint symbolCount = Native.Utils.SwapEndian(reader.ReadUInt32());
+            uint symbolCount = NativeUtils.SwapEndian(reader.ReadUInt32());
 
             SymbolsOffsets = new SymbolOffset[symbolCount];
 

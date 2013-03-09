@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib.Native
+namespace SymbolExplorer.Code.Native
 {
-    public static class Utils
+    public static class NativeUtils
     {
         public static T ByteArrayToStructure<T>(byte[] bytes) where T : struct
         {

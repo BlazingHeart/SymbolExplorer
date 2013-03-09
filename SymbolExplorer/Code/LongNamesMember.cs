@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class LongNamesMember : ArchiveMember
     {

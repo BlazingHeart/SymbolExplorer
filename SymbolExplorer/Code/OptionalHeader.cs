@@ -1,11 +1,11 @@
-﻿using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class OptionalHeader
     {

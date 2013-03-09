@@ -1,4 +1,4 @@
-﻿using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class ArchiveMemberHeader
     {
@@ -22,7 +22,7 @@ namespace SymbolExplorerLib
 
         public static ArchiveMemberHeader FromStream(Stream stream)
         {
-            IMAGE_ARCHIVE_MEMBER_HEADER header = Utils.StreamToStructure<IMAGE_ARCHIVE_MEMBER_HEADER>(stream);
+            IMAGE_ARCHIVE_MEMBER_HEADER header = NativeUtils.StreamToStructure<IMAGE_ARCHIVE_MEMBER_HEADER>(stream);
             return ArchiveMemberHeader.From(header);
         }
 

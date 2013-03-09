@@ -1,4 +1,4 @@
-﻿using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace SymbolExplorerLib
+namespace SymbolExplorer.Code
 {
     public class ObjectFile
     {
@@ -34,7 +34,7 @@ namespace SymbolExplorerLib
         public void FromStream(Stream stream)
         {
             long fileStart = stream.Position;
-            Header = Utils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
+            Header = NativeUtils.StreamToStructure<IMAGE_FILE_HEADER>(stream);
 
             OptionalHeader = new OptionalHeader();
             StringTable = new Dictionary<long, string>();
@@ -58,7 +58,7 @@ namespace SymbolExplorerLib
             // Section table
             for (int i = 0; i < Header.NumberOfSections; ++i)
             {
-                IMAGE_SECTION_HEADER sectionHeader = Utils.StreamToStructure<IMAGE_SECTION_HEADER>(stream);
+                IMAGE_SECTION_HEADER sectionHeader = NativeUtils.StreamToStructure<IMAGE_SECTION_HEADER>(stream);
                 Sections[i].Header = sectionHeader;
             }
 
@@ -80,7 +80,7 @@ namespace SymbolExplorerLib
                 long count = Header.NumberOfSymbols;
                 for (int i = 0; i < count; ++i)
                 {
-                    Symbols[i] = Utils.StreamToStructure<IMAGE_SYMBOL>(stream);
+                    Symbols[i] = NativeUtils.StreamToStructure<IMAGE_SYMBOL>(stream);
                 }
             }
 
@@ -119,7 +119,7 @@ namespace SymbolExplorerLib
 
                     for (int r = 0; r < section.Header.NumberOfRelocations; ++r)
                     {
-                        section.Relocations[r] = Utils.StreamToStructure<IMAGE_RELOCATION>(stream);
+                        section.Relocations[r] = NativeUtils.StreamToStructure<IMAGE_RELOCATION>(stream);
                     }
                 }
             }

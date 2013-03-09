@@ -1,5 +1,5 @@
-﻿using SymbolExplorerLib;
-using SymbolExplorerLib.Native;
+﻿using SymbolExplorer.Code;
+using SymbolExplorer.Code.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +30,7 @@ namespace SymbolExplorer.ViewModels
         public SectionViewModel(ObjectFile.ImageSection imageSection)
         {
             _imageSection = imageSection;
-            _name = SymbolExplorerLib.Native.Utils.GetString(_imageSection.Header.Name);
+            _name = NativeUtils.GetString(_imageSection.Header.Name);
             _byteData.Data = _imageSection.RawData;
             _byteData.StartingAddress = _imageSection.RawOffset;
         }

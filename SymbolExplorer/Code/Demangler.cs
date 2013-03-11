@@ -39,35 +39,6 @@ namespace SymbolExplorer.Code
                 return symbolName;
             }
 
-            List<string> parts = new List<string>();
-
-            using (var reader = new StringReader(symbolName))
-            {
-                StringBuilder part = new StringBuilder(1024);
-                int c = reader.Read();
-                if (c == '?')
-                {
-                    c = reader.Read();
-                    for (; ; )
-                    {
-                        part.Clear();
-                        while ((c = reader.Read()) != -1)
-                        {
-                            part.Append((char)c);
-                            if (c == '@')
-                            {
-                                if (reader.Peek() == '@') part.Append((char)(c = reader.Read()));
-                                break;
-                            }
-                        }
-
-                        if (c == -1) break;
-
-                        parts.Add(part.ToString());
-                    }
-                }
-            }
-
             // use more compact type names
             //sb.Replace("unsigned short", "uint16_t");
             //sb.Replace("short", "int16_t");

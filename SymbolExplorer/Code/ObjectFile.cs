@@ -49,7 +49,7 @@ namespace SymbolExplorer.Code
             {
                 Sections = new ImageSection[0];
                 Symbols = new IMAGE_SYMBOL[0];
-                return;
+                throw new InvalidDataException("Can't parse object file");
             }
 
             Sections = new ImageSection[Header.NumberOfSections];

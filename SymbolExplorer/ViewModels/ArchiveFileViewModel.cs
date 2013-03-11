@@ -24,9 +24,9 @@ namespace SymbolExplorer.ViewModels
 
                 _file = value;
 
-                Members.Add(new ArchiveMemberViewModel(File.first));
-                Members.Add(new ArchiveMemberViewModel(File.second));
-                Members.Add(new ArchiveMemberViewModel(File.longnames));
+                //Members.Add(new ArchiveMemberViewModel(File.first));
+                //Members.Add(new ArchiveMemberViewModel(File.second));
+                //Members.Add(new ArchiveMemberViewModel(File.longnames));
 
                 foreach (var v in File.objects)
                 {

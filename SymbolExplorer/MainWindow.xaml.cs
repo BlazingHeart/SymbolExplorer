@@ -69,7 +69,13 @@ namespace SymbolExplorer
 
                 this.DataContext = Archive;
 
-                MemberTree.ItemsSource = Archive.Members;
+                TreeViewItem item = new TreeViewItem();
+                item.Header = Archive.Name;
+                item.ItemsSource = Archive.Members;
+                item.ItemTemplate = (DataTemplate)FindResource("ArchiveMemberViewTemplate");
+                item.ExpandSubtree();
+
+                MemberTree.Items.Add(item);
 
                 if (file.Errors)
                 {

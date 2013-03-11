@@ -109,6 +109,7 @@
     <Compile Include="Code\ArchiveMemberHeader.cs" />
     <Compile Include="Code\Demangler.cs" />
     <Compile Include="Code\FirstLinkerMember.cs" />
+    <Compile Include="Code\HeaderGenerator.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
     <Compile Include="Code\Native\Constants.cs" />

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SymbolExplorer.Code.Native
 {
-    [StructLayout(LayoutKind.Sequential, Pack = 1, CharSet = CharSet.Ansi)]
+    [StructLayout(LayoutKind.Sequential, Pack = 2, CharSet = CharSet.Ansi)]
     public struct IMAGE_SYMBOL
     {
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 8)]

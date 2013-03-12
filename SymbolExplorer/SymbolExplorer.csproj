@@ -112,6 +112,9 @@
     <Compile Include="Code\HeaderGenerator.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
+    <Compile Include="Code\Native\ANON_OBJECT_HEADER.cs" />
+    <Compile Include="Code\Native\ANON_OBJECT_HEADER_BIGOBJ.cs" />
+    <Compile Include="Code\Native\ANON_OBJECT_HEADER_V2.cs" />
     <Compile Include="Code\Native\Constants.cs" />
     <Compile Include="Code\Native\IMAGE_ARCHIVE_MEMBER_HEADER.cs" />
     <Compile Include="Code\Native\IMAGE_DATA_DIRECTORY.cs" />

@@ -22,6 +22,11 @@ namespace SymbolExplorer.Code
 
         public IMAGE_FILE_HEADER Header { get; private set; }
 
+        public ANON_OBJECT_HEADER AnonHeader { get; private set; }
+        public ANON_OBJECT_HEADER_V2 AnonHeaderV2 { get; private set; }
+        public ANON_OBJECT_HEADER_BIGOBJ AnonHeaderBigObj { get; private set; }
+        public byte[] SectionData { get; private set; }
+
         public OptionalHeader OptionalHeader { get; private set; }
 
         public ImageSection[] Sections { get; private set; }
@@ -39,6 +44,32 @@ namespace SymbolExplorer.Code
             OptionalHeader = new OptionalHeader();
             StringTable = new Dictionary<long, string>();
 
+            if ((Header.Machine == IMAGE_FILE_MACHINE.IMAGE_FILE_MACHINE_UNKNOWN) && (Header.NumberOfSections == Constants.IMAGE_SYM_SECTION_ANON))
+            {
+                stream.Seek(fileStart, SeekOrigin.Begin);
+                AnonHeader = NativeUtils.StreamToStructure<ANON_OBJECT_HEADER>(stream);
+
+                if (AnonHeader.Version >= 2)
+                {
+                    stream.Seek(fileStart, SeekOrigin.Begin);
+                    AnonHeaderV2 = NativeUtils.StreamToStructure<ANON_OBJECT_HEADER_V2>(stream);
+
+                    if (AnonHeaderV2.ClassID == Constants.ANON_OBJECT_HEADER_BIGOBJ_CLASSID)
+                    {
+                        stream.Seek(fileStart, SeekOrigin.Begin);
+                        AnonHeaderBigObj = NativeUtils.StreamToStructure<ANON_OBJECT_HEADER_BIGOBJ>(stream);
+                    }
+                }
+
+                SectionData = new byte[AnonHeader.SizeOfData];
+                stream.Read(SectionData, 0, SectionData.Length);
+
+                Sections = new ImageSection[0];
+                Symbols = new IMAGE_SYMBOL[0];
+
+                return;
+            }
+
             // Optional header
             if (Header.SizeOfOptionalHeader != 0)
             {
@@ -47,8 +78,6 @@ namespace SymbolExplorer.Code
 
             if (Header.NumberOfSections > Constants.IMAGE_SYM_SECTION_MAX)
             {
-                Sections = new ImageSection[0];
-                Symbols = new IMAGE_SYMBOL[0];
                 throw new InvalidDataException("Can't parse object file");
             }
 

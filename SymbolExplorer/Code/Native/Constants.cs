@@ -42,6 +42,8 @@ namespace SymbolExplorer.Code.Native
         public const int IMAGE_SYM_SECTION_MAX = 0xFEFF;        // Values 0xFF00-0xFFFF are special
         public const int IMAGE_SYM_SECTION_MAX_EX = 0x7FFFFFFF;
 
+        public const int IMAGE_SYM_SECTION_ANON = 0xFFFF;
+
 
         public const int N_BTMASK = 0x000F;
         public const int N_TMASK = 0x0030;
@@ -49,6 +51,9 @@ namespace SymbolExplorer.Code.Native
         public const int N_TMASK2 = 0x00F0;
         public const int N_BTSHFT = 4;
         public const int N_TSHIFT = 2;
+
+        public static readonly Guid ANON_OBJECT_HEADER_LTCG_CLASSID = new Guid("{0CB3FE38-D9A5-4DAB-AC9B-D6B6222653C2}");
+        public static readonly Guid ANON_OBJECT_HEADER_BIGOBJ_CLASSID = new Guid("{D1BAA1C7-BAEE-4BA9-AF20-FAF66AA4DCB8}");
     }
 
     public enum IMAGE_FILE_MACHINE : ushort

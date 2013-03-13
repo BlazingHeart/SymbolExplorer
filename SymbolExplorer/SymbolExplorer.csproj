@@ -112,6 +112,43 @@
     <Compile Include="Code\HeaderGenerator.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
+    <Compile Include="Code\Unix\Constants.cs" />
+    <Compile Include="Code\Unix\Elf32_auxv_t.cs" />
+    <Compile Include="Code\Unix\Elf32_Dyn.cs" />
+    <Compile Include="Code\Unix\Elf32_Ehdr.cs" />
+    <Compile Include="Code\Unix\Elf32_gptab.cs" />
+    <Compile Include="Code\Unix\Elf32_Lib.cs" />
+    <Compile Include="Code\Unix\Elf32_Move.cs" />
+    <Compile Include="Code\Unix\Elf32_Nhdr.cs" />
+    <Compile Include="Code\Unix\Elf32_Phdr.cs" />
+    <Compile Include="Code\Unix\Elf32_RegInfo.cs" />
+    <Compile Include="Code\Unix\Elf32_Rel.cs" />
+    <Compile Include="Code\Unix\Elf32_Rela.cs" />
+    <Compile Include="Code\Unix\Elf32_Shdr.cs" />
+    <Compile Include="Code\Unix\Elf32_Sym.cs" />
+    <Compile Include="Code\Unix\Elf32_Syminfo.cs" />
+    <Compile Include="Code\Unix\Elf32_Verdaux.cs" />
+    <Compile Include="Code\Unix\Elf32_Verdef.cs" />
+    <Compile Include="Code\Unix\Elf32_Vernaux.cs" />
+    <Compile Include="Code\Unix\Elf32_Verneed.cs" />
+    <Compile Include="Code\Unix\Elf64_auxv_t.cs" />
+    <Compile Include="Code\Unix\Elf64_Dyn.cs" />
+    <Compile Include="Code\Unix\Elf64_Ehdr.cs" />
+    <Compile Include="Code\Unix\Elf64_Lib.cs" />
+    <Compile Include="Code\Unix\Elf64_Move.cs" />
+    <Compile Include="Code\Unix\Elf64_Nhdr.cs" />
+    <Compile Include="Code\Unix\Elf64_Phdr.cs" />
+    <Compile Include="Code\Unix\Elf64_Rel.cs" />
+    <Compile Include="Code\Unix\Elf64_Rela.cs" />
+    <Compile Include="Code\Unix\Elf64_Shdr.cs" />
+    <Compile Include="Code\Unix\Elf64_Sym.cs" />
+    <Compile Include="Code\Unix\Elf64_Syminfo.cs" />
+    <Compile Include="Code\Unix\Elf64_Verdaux.cs" />
+    <Compile Include="Code\Unix\Elf64_Verdef.cs" />
+    <Compile Include="Code\Unix\Elf64_Vernaux.cs" />
+    <Compile Include="Code\Unix\Elf64_Verneed.cs" />
+    <Compile Include="Code\Unix\Elf_Options.cs" />
+    <Compile Include="Code\Unix\Elf_Options_Hw.cs" />
     <Compile Include="Code\Windows\ANON_OBJECT_HEADER.cs" />
     <Compile Include="Code\Windows\ANON_OBJECT_HEADER_BIGOBJ.cs" />
     <Compile Include="Code\Windows\ANON_OBJECT_HEADER_V2.cs" />
@@ -218,6 +255,7 @@
   <ItemGroup>
     <Resource Include="Images\toggle_linker_symbols_off_32.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

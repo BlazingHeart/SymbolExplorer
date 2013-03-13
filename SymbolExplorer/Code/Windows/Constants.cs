@@ -197,7 +197,7 @@ namespace SymbolExplorer.Code.Windows
         S_4 = 0x0008,
         S_5 = 0x0010,
         S_6 = 0x0020,
-    };
+    }
 
     [Flags]
     public enum IMAGE_SYM_TYPE : ushort

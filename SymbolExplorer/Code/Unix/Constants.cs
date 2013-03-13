@@ -9,172 +9,184 @@ namespace SymbolExplorer.Code.Unix
     {
         public const int EI_NIDENT = 16;
 
+        // Fields in the e_ident array.  The EI_* macros are indices into the array.
 
-        // Fields in the e_ident array.  The EI_* macros are indices into the
-        // array.  The macros under each EI_* macro are the values the byte
-        // may have. 
+        public enum EIDENT
+        {
+            EI_MAG0 = 0,        // File identification byte 0 index
+            EI_MAG1 = 1,        // File identification byte 1 index
+            EI_MAG2 = 2,        // File identification byte 2 index
+            EI_MAG3 = 3,        // File identification byte 3 index
+            EI_CLASS = 4,       // File class byte index
+            EI_DATA = 5,        // Data encoding byte index
+            EI_VERSION = 6,     // File version byte index (Value must be EV_CURRENT)
+            EI_OSABI = 7,       // OS ABI identification
+            EI_ABIVERSION = 8,  // ABI version
+            EI_PAD = 9,         // Byte index of padding bytes
+        }
 
-        public const int EI_MAG0 = 0;       // File identification byte 0 index
         public const int ELFMAG0 = 0x7f;    // Magic number byte 0
-
-        public const int EI_MAG1 = 1;       // File identification byte 1 index
         public const int ELFMAG1 = 'E';     // Magic number byte 1
-
-        public const int EI_MAG2 = 2;       // File identification byte 2 index
         public const int ELFMAG2 = 'L';     // Magic number byte 2
-
-        public const int EI_MAG3 = 3;       // File identification byte 3 index
         public const int ELFMAG3 = 'F';     // Magic number byte 3
 
         // Conglomeration of the identification bytes, for easy testing as a word. 
         public const string ELFMAG = "\x7FELF";
         public const int SELFMAG = 4;
 
-        public const int EI_CLASS = 4;      // File class byte index
-        public const int ELFCLASSNONE = 0;  // Invalid class
-        public const int ELFCLASS32 = 1;    // 32-bit objects
-        public const int ELFCLASS64 = 2;    // 64-bit objects
-        public const int ELFCLASSNUM = 3;
+        // for EI_CLASS
+        public enum ELFCLASS : byte
+        {
+            ELFCLASSNONE = 0,  // Invalid class
+            ELFCLASS32 = 1,    // 32-bit objects
+            ELFCLASS64 = 2,    // 64-bit objects
+            ELFCLASSNUM = 3,
+        }
 
-        public const int EI_DATA = 5;       // Data encoding byte index
-        public const int ELFDATANONE = 0;   // Invalid data encoding
-        public const int ELFDATA2LSB = 1;   // 2's complement, little endian
-        public const int ELFDATA2MSB = 2;   // 2's complement, big endian
-        public const int ELFDATANUM = 3;
-
-        public const int EI_VERSION = 6;    // File version byte index
-        // Value must be EV_CURRENT
-
-        public const int EI_OSABI = 7;                  // OS ABI identification
-        public const int ELFOSABI_NONE = 0;             // UNIX System V ABI
-        public const int ELFOSABI_SYSV = 0;             // Alias. 
-        public const int ELFOSABI_HPUX = 1;             // HP-UX
-        public const int ELFOSABI_NETBSD = 2;           // NetBSD. 
-        public const int ELFOSABI_GNU = 3;              // Object uses GNU ELF extensions. 
-        public const int ELFOSABI_LINUX = ELFOSABI_GNU; // Compatibility alias. 
-        public const int ELFOSABI_SOLARIS = 6;          // Sun Solaris. 
-        public const int ELFOSABI_AIX = 7;              // IBM AIX. 
-        public const int ELFOSABI_IRIX = 8;             // SGI Irix. 
-        public const int ELFOSABI_FREEBSD = 9;          // FreeBSD. 
-        public const int ELFOSABI_TRU64 = 10;           // Compaq TRU64 UNIX. 
-        public const int ELFOSABI_MODESTO = 11;         // Novell Modesto. 
-        public const int ELFOSABI_OPENBSD = 12;         // OpenBSD. 
-        public const int ELFOSABI_ARM_AEABI = 64;       // ARM EABI
-        public const int ELFOSABI_ARM = 97;             // ARM
-        public const int ELFOSABI_STANDALONE = 255;     // Standalone (embedded) application
-
-        public const int EI_ABIVERSION = 8;     // ABI version
-
-        public const int EI_PAD = 9;            // Byte index of padding bytes
-
-        // Legal values for e_type (object file type). 
-
-        public const int ET_NONE = 0;           // No file type
-        public const int ET_REL = 1;            // Relocatable file
-        public const int ET_EXEC = 2;           // Executable file
-        public const int ET_DYN = 3;            // Shared object file
-        public const int ET_CORE = 4;           // Core file
-        public const int ET_NUM = 5;            // Number of defined types
-        public const int ET_LOOS = 0xfe00;      // OS-specific range start
-        public const int ET_HIOS = 0xfeff;      // OS-specific range end
-        public const int ET_LOPROC = 0xff00;    // Processor-specific range start
-        public const int ET_HIPROC = 0xffff;    // Processor-specific range end
-
-        // Legal values for e_machine (architecture). 
-
-        public const int EM_NONE = 0;           // No machine
-        public const int EM_M32 = 1;            // AT&T WE 32100
-        public const int EM_SPARC = 2;          // SUN SPARC
-        public const int EM_386 = 3;            // Intel 80386
-        public const int EM_68K = 4;            // Motorola m68k family
-        public const int EM_88K = 5;            // Motorola m88k family
-        public const int EM_860 = 7;            // Intel 80860
-        public const int EM_MIPS = 8;           // MIPS R3000 big-endian
-        public const int EM_S370 = 9;           // IBM System/370
-        public const int EM_MIPS_RS3_LE = 10;   // MIPS R3000 little-endian
-
-        public const int EM_PARISC = 15;        // HPPA
-        public const int EM_VPP500 = 17;        // Fujitsu VPP500
-        public const int EM_SPARC32PLUS = 18;   // Sun's "v8plus"
-        public const int EM_960 = 19;           // Intel 80960
-        public const int EM_PPC = 20;           // PowerPC
-        public const int EM_PPC64 = 21;         // PowerPC 64-bit
-        public const int EM_S390 = 22;          // IBM S390
-
-        public const int EM_V800 = 36;          // NEC V800 series
-        public const int EM_FR20 = 37;          // Fujitsu FR20
-        public const int EM_RH32 = 38;          // TRW RH-32
-        public const int EM_RCE = 39;           // Motorola RCE
-        public const int EM_ARM = 40;           // ARM
-        public const int EM_FAKE_ALPHA = 41;    // Digital Alpha
-        public const int EM_SH = 42;            // Hitachi SH
-        public const int EM_SPARCV9 = 43;       // SPARC v9 64-bit
-        public const int EM_TRICORE = 44;       // Siemens Tricore
-        public const int EM_ARC = 45;           // Argonaut RISC Core
-        public const int EM_H8_300 = 46;        // Hitachi H8/300
-        public const int EM_H8_300H = 47;       // Hitachi H8/300H
-        public const int EM_H8S = 48;           // Hitachi H8S
-        public const int EM_H8_500 = 49;        // Hitachi H8/500
-        public const int EM_IA_64 = 50;         // Intel Merced
-        public const int EM_MIPS_X = 51;        // Stanford MIPS-X
-        public const int EM_COLDFIRE = 52;      // Motorola Coldfire
-        public const int EM_68HC12 = 53;        // Motorola M68HC12
-        public const int EM_MMA = 54;           // Fujitsu MMA Multimedia Accelerator*/
-        public const int EM_PCP = 55;           // Siemens PCP
-        public const int EM_NCPU = 56;          // Sony nCPU embeeded RISC
-        public const int EM_NDR1 = 57;          // Denso NDR1 microprocessor
-        public const int EM_STARCORE = 58;      // Motorola Start*Core processor
-        public const int EM_ME16 = 59;          // Toyota ME16 processor
-        public const int EM_ST100 = 60;         // STMicroelectronic ST100 processor
-        public const int EM_TINYJ = 61;         // Advanced Logic Corp. Tinyj emb.fam*/
-        public const int EM_X86_64 = 62;        // AMD x86-64 architecture
-        public const int EM_PDSP = 63;          // Sony DSP Processor
-
-        public const int EM_FX66 = 66;          // Siemens FX66 microcontroller
-        public const int EM_ST9PLUS = 67;       // STMicroelectronics ST9+ 8/16 mc
-        public const int EM_ST7 = 68;           // STmicroelectronics ST7 8 bit mc
-        public const int EM_68HC16 = 69;        // Motorola MC68HC16 microcontroller
-        public const int EM_68HC11 = 70;        // Motorola MC68HC11 microcontroller
-        public const int EM_68HC08 = 71;        // Motorola MC68HC08 microcontroller
-        public const int EM_68HC05 = 72;        // Motorola MC68HC05 microcontroller
-        public const int EM_SVX = 73;           // Silicon Graphics SVx
-        public const int EM_ST19 = 74;          // STMicroelectronics ST19 8 bit mc
-        public const int EM_VAX = 75;           // Digital VAX
-        public const int EM_CRIS = 76;          // Axis Communications 32-bit embedded processor
-        public const int EM_JAVELIN = 77;       // Infineon Technologies 32-bit embedded processor
-        public const int EM_FIREPATH = 78;      // Element 14 64-bit DSP Processor
-        public const int EM_ZSP = 79;           // LSI Logic 16-bit DSP Processor
-        public const int EM_MMIX = 80;          // Donald Knuth's educational 64-bit processor
-        public const int EM_HUANY = 81;         // Harvard University machine-independent object files
-        public const int EM_PRISM = 82;         // SiTera Prism
-        public const int EM_AVR = 83;           // Atmel AVR 8-bit microcontroller
-        public const int EM_FR30 = 84;          // Fujitsu FR30
-        public const int EM_D10V = 85;          // Mitsubishi D10V
-        public const int EM_D30V = 86;          // Mitsubishi D30V
-        public const int EM_V850 = 87;          // NEC v850
-        public const int EM_M32R = 88;          // Mitsubishi M32R
-        public const int EM_MN10300 = 89;       // Matsushita MN10300
-        public const int EM_MN10200 = 90;       // Matsushita MN10200
-        public const int EM_PJ = 91;            // picoJava
-        public const int EM_OPENRISC = 92;      // OpenRISC 32-bit embedded processor
-        public const int EM_ARC_A5 = 93;        // ARC Cores Tangent-A5
-        public const int EM_XTENSA = 94;        // Tensilica Xtensa Architecture
-        public const int EM_AARCH64 = 183;      // ARM AARCH64
-        public const int EM_TILEPRO = 188;      // Tilera TILEPro
-        public const int EM_TILEGX = 191;       // Tilera TILE-Gx
-        public const int EM_NUM = 192;
-
-        // If it is necessary to assign new unofficial EM_* values, please
-        // pick large random numbers (0x8523, 0xa7f2, etc.) to minimize the
-        // chances of collision with official or non-GNU unofficial values. 
-
-        public const int EM_ALPHA = 0x9026;
+        // for EI_DATA
+        public enum ELFDATA : byte
+        {
+            ELFDATANONE = 0,   // Invalid data encoding
+            ELFDATA2LSB = 1,   // 2's complement, little endian
+            ELFDATA2MSB = 2,   // 2's complement, big endian
+            ELFDATANUM = 3,
+        }
 
         // Legal values for e_version (version). 
+        // also for EI_VERSION
+        public enum EVERSION : byte
+        {
+            EV_NONE = 0,        // Invalid ELF version
+            EV_CURRENT = 1,     // Current version
+            EV_NUM = 2,
+        }
 
-        public const int EV_NONE = 0;       // Invalid ELF version
-        public const int EV_CURRENT = 1;    // Current version
-        public const int EV_NUM = 2;
+        // for EI_OSABI
+        public enum ELFOSABI : byte
+        {
+            ELFOSABI_NONE = 0,             // UNIX System V ABI
+            ELFOSABI_SYSV = 0,             // Alias. 
+            ELFOSABI_HPUX = 1,             // HP-UX
+            ELFOSABI_NETBSD = 2,           // NetBSD. 
+            ELFOSABI_GNU = 3,              // Object uses GNU ELF extensions. 
+            ELFOSABI_LINUX = ELFOSABI_GNU, // Compatibility alias. 
+            ELFOSABI_SOLARIS = 6,          // Sun Solaris. 
+            ELFOSABI_AIX = 7,              // IBM AIX. 
+            ELFOSABI_IRIX = 8,             // SGI Irix. 
+            ELFOSABI_FREEBSD = 9,          // FreeBSD. 
+            ELFOSABI_TRU64 = 10,           // Compaq TRU64 UNIX. 
+            ELFOSABI_MODESTO = 11,         // Novell Modesto. 
+            ELFOSABI_OPENBSD = 12,         // OpenBSD. 
+            ELFOSABI_ARM_AEABI = 64,       // ARM EABI
+            ELFOSABI_ARM = 97,             // ARM
+            ELFOSABI_STANDALONE = 255,     // Standalone (embedded) application
+        }
 
+        // Legal values for e_type (object file type). 
+        public enum ETYPE : ushort
+        {
+            ET_NONE = 0,           // No file type
+            ET_REL = 1,            // Relocatable file
+            ET_EXEC = 2,           // Executable file
+            ET_DYN = 3,            // Shared object file
+            ET_CORE = 4,           // Core file
+            ET_NUM = 5,            // Number of defined types
+            ET_LOOS = 0xfe00,      // OS-specific range start
+            ET_HIOS = 0xfeff,      // OS-specific range end
+            ET_LOPROC = 0xff00,    // Processor-specific range start
+            ET_HIPROC = 0xffff,    // Processor-specific range end
+        }
+        
+        // Legal values for e_machine (architecture). 
+        public enum EMACHINE : ushort
+        {
+            EM_NONE = 0,           // No machine
+            EM_M32 = 1,            // AT&T WE 32100
+            EM_SPARC = 2,          // SUN SPARC
+            EM_386 = 3,            // Intel 80386
+            EM_68K = 4,            // Motorola m68k family
+            EM_88K = 5,            // Motorola m88k family
+            EM_860 = 7,            // Intel 80860
+            EM_MIPS = 8,           // MIPS R3000 big-endian
+            EM_S370 = 9,           // IBM System/370
+            EM_MIPS_RS3_LE = 10,   // MIPS R3000 little-endian
+
+            EM_PARISC = 15,        // HPPA
+            EM_VPP500 = 17,        // Fujitsu VPP500
+            EM_SPARC32PLUS = 18,   // Sun's "v8plus"
+            EM_960 = 19,           // Intel 80960
+            EM_PPC = 20,           // PowerPC
+            EM_PPC64 = 21,         // PowerPC 64-bit
+            EM_S390 = 22,          // IBM S390
+
+            EM_V800 = 36,          // NEC V800 series
+            EM_FR20 = 37,          // Fujitsu FR20
+            EM_RH32 = 38,          // TRW RH-32
+            EM_RCE = 39,           // Motorola RCE
+            EM_ARM = 40,           // ARM
+            EM_FAKE_ALPHA = 41,    // Digital Alpha
+            EM_SH = 42,            // Hitachi SH
+            EM_SPARCV9 = 43,       // SPARC v9 64-bit
+            EM_TRICORE = 44,       // Siemens Tricore
+            EM_ARC = 45,           // Argonaut RISC Core
+            EM_H8_300 = 46,        // Hitachi H8/300
+            EM_H8_300H = 47,       // Hitachi H8/300H
+            EM_H8S = 48,           // Hitachi H8S
+            EM_H8_500 = 49,        // Hitachi H8/500
+            EM_IA_64 = 50,         // Intel Merced
+            EM_MIPS_X = 51,        // Stanford MIPS-X
+            EM_COLDFIRE = 52,      // Motorola Coldfire
+            EM_68HC12 = 53,        // Motorola M68HC12
+            EM_MMA = 54,           // Fujitsu MMA Multimedia Accelerator*/
+            EM_PCP = 55,           // Siemens PCP
+            EM_NCPU = 56,          // Sony nCPU embeeded RISC
+            EM_NDR1 = 57,          // Denso NDR1 microprocessor
+            EM_STARCORE = 58,      // Motorola Start*Core processor
+            EM_ME16 = 59,          // Toyota ME16 processor
+            EM_ST100 = 60,         // STMicroelectronic ST100 processor
+            EM_TINYJ = 61,         // Advanced Logic Corp. Tinyj emb.fam*/
+            EM_X86_64 = 62,        // AMD x86-64 architecture
+            EM_PDSP = 63,          // Sony DSP Processor
+
+            EM_FX66 = 66,          // Siemens FX66 microcontroller
+            EM_ST9PLUS = 67,       // STMicroelectronics ST9+ 8/16 mc
+            EM_ST7 = 68,           // STmicroelectronics ST7 8 bit mc
+            EM_68HC16 = 69,        // Motorola MC68HC16 microcontroller
+            EM_68HC11 = 70,        // Motorola MC68HC11 microcontroller
+            EM_68HC08 = 71,        // Motorola MC68HC08 microcontroller
+            EM_68HC05 = 72,        // Motorola MC68HC05 microcontroller
+            EM_SVX = 73,           // Silicon Graphics SVx
+            EM_ST19 = 74,          // STMicroelectronics ST19 8 bit mc
+            EM_VAX = 75,           // Digital VAX
+            EM_CRIS = 76,          // Axis Communications 32-bit embedded processor
+            EM_JAVELIN = 77,       // Infineon Technologies 32-bit embedded processor
+            EM_FIREPATH = 78,      // Element 14 64-bit DSP Processor
+            EM_ZSP = 79,           // LSI Logic 16-bit DSP Processor
+            EM_MMIX = 80,          // Donald Knuth's educational 64-bit processor
+            EM_HUANY = 81,         // Harvard University machine-independent object files
+            EM_PRISM = 82,         // SiTera Prism
+            EM_AVR = 83,           // Atmel AVR 8-bit microcontroller
+            EM_FR30 = 84,          // Fujitsu FR30
+            EM_D10V = 85,          // Mitsubishi D10V
+            EM_D30V = 86,          // Mitsubishi D30V
+            EM_V850 = 87,          // NEC v850
+            EM_M32R = 88,          // Mitsubishi M32R
+            EM_MN10300 = 89,       // Matsushita MN10300
+            EM_MN10200 = 90,       // Matsushita MN10200
+            EM_PJ = 91,            // picoJava
+            EM_OPENRISC = 92,      // OpenRISC 32-bit embedded processor
+            EM_ARC_A5 = 93,        // ARC Cores Tangent-A5
+            EM_XTENSA = 94,        // Tensilica Xtensa Architecture
+            EM_AARCH64 = 183,      // ARM AARCH64
+            EM_TILEPRO = 188,      // Tilera TILEPro
+            EM_TILEGX = 191,       // Tilera TILE-Gx
+            EM_NUM = 192,
+
+            // If it is necessary to assign new unofficial EM_* values, please
+            // pick large random numbers (0x8523, 0xa7f2, etc.) to minimize the
+            // chances of collision with official or non-GNU unofficial values. 
+
+            EM_ALPHA = 0x9026,
+        }
     }
 }

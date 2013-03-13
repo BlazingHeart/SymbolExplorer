@@ -15,7 +15,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SymbolExplorer
 {
@@ -41,7 +40,16 @@ namespace SymbolExplorer
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                LoadFile(dlg.FileName);
+                switch(Path.GetExtension(dlg.FileName))
+                {
+                case ".lib":
+                    LoadFile(dlg.FileName);
+                    break;
+
+                case ".a":
+                    LoadFileA(dlg.FileName);
+                    break;
+                }
             }
         }
 
@@ -81,6 +89,36 @@ namespace SymbolExplorer
                 {
                     MessageBox.Show(string.Format("There were errors loading '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
+            }
+            catch
+            {
+                MessageBox.Show(string.Format("Error loading file '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        public void LoadFileA(string filePath)
+        {
+            try
+            {
+                FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                var file = ArchiveFileAr.FromStream(s);
+                //Archive.File = file;
+                //Archive.Name = System.IO.Path.GetFileName(filePath);
+
+                //this.DataContext = Archive;
+
+                //TreeViewItem item = new TreeViewItem();
+                //item.Header = Archive.Name;
+                //item.ItemsSource = Archive.Members;
+                //item.ItemTemplate = (DataTemplate)FindResource("ArchiveMemberViewTemplate");
+                //item.ExpandSubtree();
+
+                //MemberTree.Items.Add(item);
+
+                //if (file.Errors)
+                //{
+                //    MessageBox.Show(string.Format("There were errors loading '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
             }
             catch
             {

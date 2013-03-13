@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorer.Code.Windows
+namespace SymbolExplorer.Code
 {
     public static class NativeUtils
     {
@@ -36,6 +36,11 @@ namespace SymbolExplorer.Code.Windows
         public static uint SwapEndian(uint i)
         {
             return (uint)((i << 24) | ((i << 8) & 0x00FF0000) | ((i >> 8) & 0x0000FF00) | (i >> 24));
+        }
+
+        public static ushort SwapEndian(ushort i)
+        {
+            return (ushort)((i << 8) | (i >> 8));
         }
 
         public static string GetString(byte[] text)

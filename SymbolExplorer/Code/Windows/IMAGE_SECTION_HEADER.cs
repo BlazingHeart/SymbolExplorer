@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SymbolExplorer.Code.Native
+namespace SymbolExplorer.Code.Windows
 {
     [StructLayout(LayoutKind.Sequential)]
     public struct IMAGE_SECTION_HEADER

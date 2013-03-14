@@ -25,6 +25,8 @@ namespace SymbolExplorer
     {
         public ArchiveFileViewModel Archive = new ArchiveFileViewModel();
 
+        public ToolbarViewModel toolbarModel = new ToolbarViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -128,6 +130,8 @@ namespace SymbolExplorer
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            toolbar.DataContext = toolbarModel;
+
             App app = App.Current as App;
             if (!string.IsNullOrEmpty(app.FileToOpen))
             {
@@ -179,11 +183,6 @@ namespace SymbolExplorer
             }
         }
 
-        private void toggleLinkerSymbols_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void symbolDataGrid_ToolTipOpening(object sender, ToolTipEventArgs e)
         {
             Console.WriteLine(e.OriginalSource);
@@ -191,9 +190,7 @@ namespace SymbolExplorer
 
         private void toggleLinkerSymbols_ToggleChecked(object sender, RoutedEventArgs e)
         {
-            bool c = toggleLinkerSymbols.IsChecked ?? false;
-
-            Filters.SymbolViewModel_NonLinker_Enabled = c;
+            Filters.SymbolViewModel_NonLinker_Enabled = toolbarModel.HideLinkerMembers;
 
             var source = symbolDataGrid.ItemsSource as ListCollectionView;
             if (source != null)

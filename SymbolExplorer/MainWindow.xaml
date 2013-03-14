@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:SymbolExplorer="clr-namespace:SymbolExplorer;assembly=SymbolExplorer"
         xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
-        xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code;assembly=SymbolExplorer.Code"
+        xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code;assembly=SymbolExplorer"
         x:Class="SymbolExplorer.MainWindow"
         Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
        >
@@ -177,7 +177,7 @@
         <ToolBarTray DockPanel.Dock="Top">
             <ToolBar Band="1" BandIndex="1" x:Name="toolbar" >
                 <ToolBarPanel>
-                    <ToggleButton x:Name="toggleLinkerSymbols" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked">
+                    <ToggleButton IsChecked="{Binding HideLinkerMembers}" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked">
                         <Image Source="Images/toggle_linker_symbols_32.png" />
                     </ToggleButton>
                 </ToolBarPanel>

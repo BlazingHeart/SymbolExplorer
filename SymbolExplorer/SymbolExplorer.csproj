@@ -108,7 +108,7 @@
     <Compile Include="Code\ArchiveMember.cs" />
     <Compile Include="Code\ArchiveMemberHeader.cs" />
     <Compile Include="Code\Demangler.cs" />
-    <Compile Include="Code\ElfLinkerMember.cs" />
+    <Compile Include="Code\ElfMember.cs" />
     <Compile Include="Code\FirstLinkerMember.cs" />
     <Compile Include="Code\HeaderGenerator.cs" />
     <Compile Include="Code\KnownSectionName.cs" />

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SymbolExplorer.Code
 {
-    public class ElfLinkerMember : ArchiveMember
+    public class ElfMember : ArchiveMember
     {
         Elf32_Ehdr ElfHeader = new Elf32_Ehdr();
 
@@ -15,7 +15,7 @@ namespace SymbolExplorer.Code
         {
             base.FromStream(stream);
 
-            //long endOffset = (stream.Position + Header.Size + 1) & ~0x1;
+            long endOffset = (stream.Position + Header.Size + 1) & ~0x1;
 
             ElfHeader = NativeUtils.StreamToStructure<Elf32_Ehdr>(stream);
 
@@ -41,22 +41,10 @@ namespace SymbolExplorer.Code
             // is big endian
             if (dataClass == ELFDATA.ELFDATA2MSB)
             {
-                ElfHeader.e_type = (ETYPE)NativeUtils.SwapEndian((ushort)ElfHeader.e_type);
-                ElfHeader.e_machine = (EMACHINE)NativeUtils.SwapEndian((ushort)ElfHeader.e_machine);
-                ElfHeader.e_version = (EVERSION)NativeUtils.SwapEndian((uint)ElfHeader.e_version);
-                ElfHeader.e_entry = NativeUtils.SwapEndian(ElfHeader.e_entry);
-                ElfHeader.e_phoff = NativeUtils.SwapEndian(ElfHeader.e_phoff);
-                ElfHeader.e_shoff = NativeUtils.SwapEndian(ElfHeader.e_shoff);
-                ElfHeader.e_flags = NativeUtils.SwapEndian(ElfHeader.e_flags);
-                ElfHeader.e_ehsize = NativeUtils.SwapEndian(ElfHeader.e_ehsize);
-                ElfHeader.e_phentsize = NativeUtils.SwapEndian(ElfHeader.e_phentsize);
-                ElfHeader.e_phnum = NativeUtils.SwapEndian(ElfHeader.e_phnum);
-                ElfHeader.e_shentsize = NativeUtils.SwapEndian(ElfHeader.e_shentsize);
-                ElfHeader.e_shnum = NativeUtils.SwapEndian(ElfHeader.e_shnum);
-                ElfHeader.e_shstrndx = NativeUtils.SwapEndian(ElfHeader.e_shstrndx);
+                ElfHeader.SwapEndian();
             }
             
-            //stream.Seek(endOffset, SeekOrigin.Begin);
+            stream.Seek(endOffset, SeekOrigin.Begin);
         }
     }
 }

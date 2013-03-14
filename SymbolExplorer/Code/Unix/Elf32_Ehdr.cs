@@ -24,5 +24,22 @@ namespace SymbolExplorer.Code.Unix
         public ushort e_shentsize;	    // Section header table entry size
         public ushort e_shnum;		    // Section header table entry count
         public ushort e_shstrndx;		// Section header string table index
+
+        public void SwapEndian()
+        {
+            e_type = (ETYPE)NativeUtils.SwapEndian((ushort)e_type);
+            e_machine = (EMACHINE)NativeUtils.SwapEndian((ushort)e_machine);
+            e_version = (EVERSION)NativeUtils.SwapEndian((uint)e_version);
+            e_entry = NativeUtils.SwapEndian(e_entry);
+            e_phoff = NativeUtils.SwapEndian(e_phoff);
+            e_shoff = NativeUtils.SwapEndian(e_shoff);
+            e_flags = NativeUtils.SwapEndian(e_flags);
+            e_ehsize = NativeUtils.SwapEndian(e_ehsize);
+            e_phentsize = NativeUtils.SwapEndian(e_phentsize);
+            e_phnum = NativeUtils.SwapEndian(e_phnum);
+            e_shentsize = NativeUtils.SwapEndian(e_shentsize);
+            e_shnum = NativeUtils.SwapEndian(e_shnum);
+            e_shstrndx = NativeUtils.SwapEndian(e_shstrndx);
+        }
     }
 }

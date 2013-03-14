@@ -12,7 +12,7 @@ namespace SymbolExplorer.Code
     public class ArchiveFileAr
     {
         public FirstLinkerMember first = new FirstLinkerMember();
-        public ElfLinkerMember second = new ElfLinkerMember();
+        public ElfMember second = new ElfMember();
 
         public static ArchiveFileAr FromStream(Stream stream)
         {

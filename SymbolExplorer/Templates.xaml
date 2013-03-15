@@ -1,0 +1,159 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <HierarchicalDataTemplate x:Key="ArchiveMemberViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
+        <TextBlock Text="{Binding Name}" />
+    </HierarchicalDataTemplate>
+
+    <DataTemplate x:Key="ArchiveMemberHeaderDataTemplate" DataType="ArchiveMemberHeaderViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" MinWidth="40" />
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" MinWidth="40" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Name:" />
+                <TextBlock Text="Date:" />
+                <TextBlock Text="Size:" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                <TextBlock Text="{Binding ArchiveMember.Header.Name}" />
+                <TextBlock Text="{Binding ArchiveMember.Header.Date, StringFormat=yyyy-MM-dd}" />
+                <TextBlock Text="{Binding ArchiveMember.Header.Size}" />
+            </StackPanel>
+
+            <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
+
+            <StackPanel Grid.Column="3">
+                <TextBlock Text="User:" />
+                <TextBlock Text="Group:" />
+                <TextBlock Text="Mode:" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="4" Margin="4,0,0,0">
+                <TextBlock Text="{Binding ArchiveMember.Header.UserID}" />
+                <TextBlock Text="{Binding ArchiveMember.Header.GroupID}" />
+                <TextBlock Text="{Binding ArchiveMember.Header.Mode, StringFormat=' \{0\} (0x\{0:X\})'}" />
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="SymbolDataTemplate" DataType="SymbolViewModel">
+        <Expander Header="Symbol Details" ExpandDirection="Up" IsExpanded="False" VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Name:" />
+                    <TextBlock Text="Demangled:" />
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text="{Binding Demangled}" />
+                </StackPanel>
+
+                <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
+            </Grid>
+        </Expander>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">
+        <DockPanel >
+            <ContentPresenter DockPanel.Dock="Top" Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
+            <Separator DockPanel.Dock="Top" />
+            <StackPanel DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Machine: " />
+                    <TextBlock Text="{Binding Machine}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="NumberOfSections: " />
+                    <TextBlock Text="{Binding NumberOfSections}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="TimeDateStamp: " />
+                    <TextBlock Text="{Binding TimeDateStamp}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="NumberOfSymbols: " />
+                    <TextBlock Text="{Binding NumberOfSymbols}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="SizeOfOptionalHeader: " />
+                    <TextBlock Text="{Binding SizeOfOptionalHeader}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Characteristics: " />
+                    <TextBlock Text="{Binding Characteristics}" />
+                </StackPanel>
+            </StackPanel>
+            <Separator DockPanel.Dock="Top" />
+            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding Sections}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Name: " />
+                                    <TextBlock Text="{Binding Name}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="VirtualAddress: " />
+                                    <TextBlock Text="{Binding VirtualAddress}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="SizeOfRawData: " />
+                                    <TextBlock Text="{Binding SizeOfRawData}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="Characteristics: " />
+                                    <TextBlock Text="{Binding Characteristics}" />
+                                </StackPanel>
+                                <Expander>
+                                    <TextBlock Text="{Binding RawData.Text}" Style="{StaticResource Hexview}"/>
+                                </Expander>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </DockPanel>
+    </DataTemplate>
+
+    <ControlTemplate x:Key="ArchiveMemberHeaderControlTemplate">
+        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ObjectFileControlTemplate">
+        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ObjectFileDataTemplate}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SymbolControlTemplate">
+        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="SymbolGroupControlTemplate" TargetType="{x:Type GroupItem}">
+        <Expander>
+            <Expander.Header>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Section "/>
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock Text=" ( "/>
+                    <TextBlock Text="{Binding ItemCount}"/>
+                    <TextBlock Text=" Items)"/>
+                </StackPanel>
+            </Expander.Header>
+            <ItemsPresenter />
+        </Expander>
+    </ControlTemplate>
+</ResourceDictionary>

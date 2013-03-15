@@ -55,17 +55,17 @@ namespace SymbolExplorer
             }
         }
 
-        private void MemberTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
-        {
-
-        }
-
         private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
         {
             var assembly = Assembly.GetEntryAssembly();
             Version version = assembly.GetName().Version;
-            string message = string.Format("SymbolExplorer {0}\n(c) 2013 Simon Stevenson", version.ToString());
-            MessageBox.Show(message, "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
+            //string message = string.Format("SymbolExplorer {0}\n(c) 2013 Simon Stevenson", version.ToString());
+            //MessageBox.Show(message, "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            AboutWindow s = new AboutWindow();
+            s.Owner = this;
+            s.Version = version;
+            s.ShowDialog();
         }
 
         public void LoadFile(string filePath)
@@ -181,11 +181,6 @@ namespace SymbolExplorer
                     };
                 contextMenu.Items.Add(item);
             }
-        }
-
-        private void symbolDataGrid_ToolTipOpening(object sender, ToolTipEventArgs e)
-        {
-            Console.WriteLine(e.OriginalSource);
         }
 
         private void toggleLinkerSymbols_ToggleChecked(object sender, RoutedEventArgs e)

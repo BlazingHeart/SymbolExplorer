@@ -1,15 +1,18 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:SymbolExplorer="clr-namespace:SymbolExplorer;assembly=SymbolExplorer"
-        xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels;assembly=SymbolExplorer"
-        xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code;assembly=SymbolExplorer"
+        xmlns:SymbolExplorer="clr-namespace:SymbolExplorer"
+        xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels"
+        xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code"
         x:Class="SymbolExplorer.MainWindow"
         Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
        >
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Window.Resources>
+    <Window.DataContext>
+        <ViewModels:MainWindowViewModel x:Name="Model"/>
+    </Window.DataContext>
 
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" Height="18">
@@ -18,7 +21,7 @@
             </MenuItem>
             <MenuItem x:Name="MenuItemAbout" Header="About" Command="{Binding ShowAboutDialog}"/>
         </Menu>
-        <ToolBarTray DockPanel.Dock="Top" SnapsToDevicePixels="True">
+        <ToolBarTray DockPanel.Dock="Top" SnapsToDevicePixels="True" DataContext="{Binding Toolbar}">
             <ToolBar Band="1" BandIndex="1" x:Name="toolbar" >
                 <ToolBarPanel Orientation="Horizontal" >
                     <Button>

@@ -8,6 +8,7 @@ namespace SymbolExplorer.ViewModels
     public class ToolbarViewModel : ViewModelBase
     {
         bool _hideLinkerMembers = false;
+
         public bool HideLinkerMembers
         {
             get

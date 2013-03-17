@@ -24,34 +24,6 @@ namespace SymbolExplorer
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ArchiveFileViewModel Archive = new ArchiveFileViewModel();
-
-        public ToolbarViewModel toolbarModel = new ToolbarViewModel();
-
-        bool showingAboutDialog = false;
-
-        public ICommand ShowAboutDialog { get { return new RelayCommand(ShowAboutDialogExecute, CanShowAboutDialogExecute); } }
-
-        private bool CanShowAboutDialogExecute()
-        {
-            return showingAboutDialog == false;
-        }
-
-        private void ShowAboutDialogExecute()
-        {
-            showingAboutDialog = true;
-
-            var assembly = Assembly.GetEntryAssembly();
-            Version version = assembly.GetName().Version;
-
-            AboutWindow s = new AboutWindow();
-            s.Owner = this;
-            s.Version = version;
-            s.ShowDialog();
-
-            showingAboutDialog = false;
-        }
-
         public MainWindow()
         {
             InitializeComponent();
@@ -70,97 +42,30 @@ namespace SymbolExplorer
                 switch(Path.GetExtension(dlg.FileName))
                 {
                 case ".lib":
-                    LoadFile(dlg.FileName);
+                    Model.LoadFile(dlg.FileName);
                     break;
 
                 case ".a":
-                    LoadFileA(dlg.FileName);
+                    Model.LoadFileA(dlg.FileName);
                     break;
                 }
-            }
-        }
-
-        private void MenuItemAbout_Click(object sender, RoutedEventArgs e)
-        {
-            var assembly = Assembly.GetEntryAssembly();
-            Version version = assembly.GetName().Version;
-            //string message = string.Format("SymbolExplorer {0}\n(c) 2013 Simon Stevenson", version.ToString());
-            //MessageBox.Show(message, "SymbolExplorer", MessageBoxButton.OK, MessageBoxImage.Information);
-
-            AboutWindow s = new AboutWindow();
-            s.Owner = this;
-            s.Version = version;
-            s.ShowDialog();
-        }
-
-        public void LoadFile(string filePath)
-        {
-            try
-            {
-                FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var file = ArchiveFile.FromStream(s);
-                Archive.File = file;
-                Archive.Name = System.IO.Path.GetFileName(filePath);
-
-                this.DataContext = Archive;
 
                 TreeViewItem item = new TreeViewItem();
-                item.Header = Archive.Name;
-                item.ItemsSource = Archive.Members;
+                item.Header = Model.ArchiveFile.Name;
+                item.ItemsSource = Model.ArchiveFile.Members;
                 item.ItemTemplate = (DataTemplate)FindResource("ArchiveMemberViewTemplate");
                 item.ExpandSubtree();
 
                 MemberTree.Items.Add(item);
-
-                if (file.Errors)
-                {
-                    MessageBox.Show(string.Format("There were errors loading '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            catch
-            {
-                MessageBox.Show(string.Format("Error loading file '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        public void LoadFileA(string filePath)
-        {
-            try
-            {
-                FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var file = ArchiveFileAr.FromStream(s);
-                //Archive.File = file;
-                //Archive.Name = System.IO.Path.GetFileName(filePath);
-
-                //this.DataContext = Archive;
-
-                //TreeViewItem item = new TreeViewItem();
-                //item.Header = Archive.Name;
-                //item.ItemsSource = Archive.Members;
-                //item.ItemTemplate = (DataTemplate)FindResource("ArchiveMemberViewTemplate");
-                //item.ExpandSubtree();
-
-                //MemberTree.Items.Add(item);
-
-                //if (file.Errors)
-                //{
-                //    MessageBox.Show(string.Format("There were errors loading '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
-                //}
-            }
-            catch
-            {
-                MessageBox.Show(string.Format("Error loading file '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            toolbar.DataContext = toolbarModel;
-
             App app = App.Current as App;
             if (!string.IsNullOrEmpty(app.FileToOpen))
             {
-                LoadFile(app.FileToOpen);
+                Model.LoadFile(app.FileToOpen);
             }
         }
 

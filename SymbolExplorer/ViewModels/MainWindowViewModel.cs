@@ -32,6 +32,9 @@ namespace SymbolExplorer.ViewModels
 
         public ICommand ShowAboutDialog { get { return new RelayCommand(ShowAboutDialogExecute, CanShowAboutDialogExecute); } }
 
+        public ICommand RefreshDataGrid { get { return new RelayCommand(RefreshDataGridExecute, CanRefreshDataGridExecute); } }
+
+
         #endregion
 
         #region Commands
@@ -51,16 +54,7 @@ namespace SymbolExplorer.ViewModels
             Nullable<bool> result = dlg.ShowDialog();
             if (result == true)
             {
-                switch (Path.GetExtension(dlg.FileName))
-                {
-                case ".lib":
-                    LoadFile(dlg.FileName);
-                    break;
-
-                case ".a":
-                    LoadFileA(dlg.FileName);
-                    break;
-                }
+                LoadFile(dlg.FileName);
             }
         }
 
@@ -84,14 +78,47 @@ namespace SymbolExplorer.ViewModels
             _showingAboutDialog = false;
         }
 
+        private bool CanRefreshDataGridExecute()
+        {
+            return true;
+        }
+
+        private void RefreshDataGridExecute()
+        {
+            
+        }
+
         #endregion
 
+        public MainWindowViewModel()
+        {
+            App app = App.Current as App;
+            if (!string.IsNullOrEmpty(app.FileToOpen))
+            {
+                LoadFile(app.FileToOpen);
+            }
+        }
+
         public void LoadFile(string filePath)
+        {
+            switch (Path.GetExtension(filePath))
+            {
+            case ".lib":
+                LoadFileLib(filePath);
+                break;
+
+            case ".a":
+                LoadFileA(filePath);
+                break;
+            }
+        }
+
+        public void LoadFileLib(string filePath)
         {
             try
             {
                 FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var file = ArchiveFile.FromStream(s);
+                var file = ArchiveFileLib.FromStream(s);
                 ArchiveFileViewModel model = new ArchiveFileViewModel();
                 model.File = file;
                 model.Name = System.IO.Path.GetFileName(filePath);

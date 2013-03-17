@@ -11,11 +11,11 @@ namespace SymbolExplorer.ViewModels
 {
     public class ArchiveFileViewModel
     {
-        ArchiveFile _file;
+        ArchiveFileLib _file;
         ObservableCollection<ArchiveMemberViewModel> _members = new ObservableCollection<ArchiveMemberViewModel>();
 
         public string Name { get; set; }
-        public ArchiveFile File
+        public ArchiveFileLib File
         {
             get { return _file; }
             set

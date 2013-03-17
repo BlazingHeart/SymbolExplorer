@@ -106,7 +106,7 @@
     <Compile Include="AboutWindow.xaml.cs">
       <DependentUpon>AboutWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Code\ArchiveFile.cs" />
+    <Compile Include="Code\ArchiveFileLib.cs" />
     <Compile Include="Code\ArchiveFileAr.cs" />
     <Compile Include="Code\ArchiveMember.cs" />
     <Compile Include="Code\ArchiveMemberHeader.cs" />

@@ -13,7 +13,7 @@ namespace SymbolExplorer.ViewModels
     {
         ObservableCollection<SectionViewModel> _sections = new ObservableCollection<SectionViewModel>();
         ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();
-        ListCollectionView _groupedSymbols;
+        ListCollectionView _filteredSymbols;
 
         public IMAGE_FILE_MACHINE Machine { get { return ObjectFileMember.ObjectFile.Header.Machine; } }
         public ushort NumberOfSections { get { return ObjectFileMember.ObjectFile.Header.NumberOfSections; } }
@@ -28,7 +28,7 @@ namespace SymbolExplorer.ViewModels
 
         public ObservableCollection<SymbolViewModel> Symbols { get { return _symbols; } }
 
-        public ListCollectionView GroupedSymbols { get { return _groupedSymbols; } }
+        public ListCollectionView FilteredSymbols { get { return _filteredSymbols; } }
 
         public ObjectFileViewModel(ObjectFileMember objectFileMember)
             : base(objectFileMember)
@@ -36,10 +36,10 @@ namespace SymbolExplorer.ViewModels
             AddSymbols();
             AddSections();
 
-            _groupedSymbols = new ListCollectionView(_symbols);
+            _filteredSymbols = new ListCollectionView(_symbols);
             //_groupedSymbols.GroupDescriptions.Add(new PropertyGroupDescription(Utils.GetPropertyName<SymbolViewModel>(a => a.Section)));
 
-            _groupedSymbols.Filter = Filters.SymbolViewModel_NonLinker;
+            _filteredSymbols.Filter = Filters.SymbolViewModel_NonLinker;
         }
 
         private void AddSections()

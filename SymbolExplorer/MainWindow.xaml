@@ -5,7 +5,7 @@
         xmlns:ViewModels="clr-namespace:SymbolExplorer.ViewModels"
         xmlns:SymbolExplorer.Code="clr-namespace:SymbolExplorer.Code"
         x:Class="SymbolExplorer.MainWindow"
-        Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded"
+        Title="Symbol Explorer" Height="514" Width="752" WindowStartupLocation="CenterScreen"
        >
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -45,17 +45,17 @@
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 
-            <TabControl Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" >
+            <TabControl Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
                 <TabItem Header="Object File">
-                    <DockPanel DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+                    <DockPanel>
                         <ContentControl Margin="4" Template="{StaticResource ObjectFileControlTemplate}" />
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Symbols">
-                    <DockPanel DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+                    <DockPanel>
                         <ContentControl Margin="4" DockPanel.Dock="Bottom"  DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
 
-                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding GroupedSymbols}" AutoGenerateColumns="False">
+                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding FilteredSymbols}" AutoGenerateColumns="False">
                             <DataGrid.Resources>
                                 <MenuItem Header="Show/Hide Columns" x:Key="columnsMenuItem">
                                 </MenuItem>

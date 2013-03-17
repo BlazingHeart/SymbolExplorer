@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SymbolExplorer.Code
 {
-    public class ArchiveFile
+    public class ArchiveFileLib
     {
         public FirstLinkerMember first = new FirstLinkerMember();
         public SecondLinkerMember second = new SecondLinkerMember();
@@ -17,9 +17,9 @@ namespace SymbolExplorer.Code
 
         public bool Errors;
 
-        public static ArchiveFile FromStream(Stream stream)
+        public static ArchiveFileLib FromStream(Stream stream)
         {
-            ArchiveFile file = new ArchiveFile();
+            ArchiveFileLib file = new ArchiveFileLib();
 
             byte[] buffer = new byte[Windows.Constants.IMAGE_ARCHIVE_START_SIZE];
             stream.Read(buffer, 0, Windows.Constants.IMAGE_ARCHIVE_START_SIZE);

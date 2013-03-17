@@ -18,7 +18,7 @@ namespace SymbolExplorer.Tests
         {
             using (Stream fileStream = new FileStream(@"..\..\..\..\freeimaged.lib", FileMode.Open))
             {
-                ArchiveFile file = ArchiveFile.FromStream(fileStream);
+                ArchiveFileLib file = ArchiveFileLib.FromStream(fileStream);
                 Assert.AreEqual(ArchiveMemberHeader.LinkerMemberName, file.first.Header.Name);
                 Assert.AreEqual(ArchiveMemberHeader.LinkerMemberName, file.second.Header.Name);
                 Assert.AreEqual(ArchiveMemberHeader.LongNamesMemberName, file.longnames.Header.Name);

@@ -175,6 +175,7 @@
     <Compile Include="Code\NativeMethods.cs" />
     <Compile Include="Code\SecondLinkerMember.cs" />
     <Compile Include="Filters.cs" />
+    <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="FriendlyEnums.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
@@ -186,6 +187,10 @@
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Images.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

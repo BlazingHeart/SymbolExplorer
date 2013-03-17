@@ -18,15 +18,16 @@ namespace SymbolExplorer.ViewModels
         public string Demangled { get { return _nameDemangled; } set { _nameDemangled = value; } }
 
         public string Value { get { return string.Format("0x{0:X8}", _symbol.Value); } }
-        public string Section
+        public short Section { get { return _symbol.SectionNumber; } }
+        public string SectionName
         {
             get
             {
                 switch (_symbol.SectionNumber)
                 {
-                    case Constants.IMAGE_SYM_UNDEFINED: return "Common";
-                    case Constants.IMAGE_SYM_ABSOLUTE: return "Absolute";
-                    case Constants.IMAGE_SYM_DEBUG: return "Debug";
+                case Constants.IMAGE_SYM_UNDEFINED: return "Common";
+                case Constants.IMAGE_SYM_ABSOLUTE: return "Absolute";
+                case Constants.IMAGE_SYM_DEBUG: return "Debug";
                 }
                 return _symbol.SectionNumber.ToString();
             }

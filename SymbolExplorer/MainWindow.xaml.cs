@@ -29,37 +29,6 @@ namespace SymbolExplorer
             InitializeComponent();
         }
 
-        private void MenuItemOpen_Click(object sender, RoutedEventArgs e)
-        {
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-            dlg.FileName = "";
-            dlg.DefaultExt = ".lib";
-            dlg.Filter = "Library Archives (.lib)|*.lib";
-
-            Nullable<bool> result = dlg.ShowDialog();
-            if (result == true)
-            {
-                switch(Path.GetExtension(dlg.FileName))
-                {
-                case ".lib":
-                    Model.LoadFile(dlg.FileName);
-                    break;
-
-                case ".a":
-                    Model.LoadFileA(dlg.FileName);
-                    break;
-                }
-
-                TreeViewItem item = new TreeViewItem();
-                item.Header = Model.ArchiveFile.Name;
-                item.ItemsSource = Model.ArchiveFile.Members;
-                item.ItemTemplate = (DataTemplate)FindResource("ArchiveMemberViewTemplate");
-                item.ExpandSubtree();
-
-                MemberTree.Items.Add(item);
-            }
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             App app = App.Current as App;

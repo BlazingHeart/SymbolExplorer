@@ -17,17 +17,17 @@
     <DockPanel>
         <Menu x:Name="menu" DockPanel.Dock="Top" Height="18">
             <MenuItem x:Name="MenuItemFile" Header="File">
-                <MenuItem  x:Name="MenuItemOpen" Header="Open..." Click="MenuItemOpen_Click"/>
+                <MenuItem  x:Name="MenuItemOpen" Header="Open..." Command="{Binding OpenFile}"/>
             </MenuItem>
             <MenuItem x:Name="MenuItemAbout" Header="About" Command="{Binding ShowAboutDialog}"/>
         </Menu>
-        <ToolBarTray DockPanel.Dock="Top" SnapsToDevicePixels="True" DataContext="{Binding Toolbar}">
+        <ToolBarTray DockPanel.Dock="Top" SnapsToDevicePixels="True">
             <ToolBar Band="1" BandIndex="1" x:Name="toolbar" >
                 <ToolBarPanel Orientation="Horizontal" >
-                    <Button>
+                    <Button Command="{Binding OpenFile}">
                         Open
                     </Button>
-                    <ToggleButton IsChecked="{Binding HideLinkerMembers}" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked" Style="{DynamicResource ResourceKey={x:Static ToolBar.ToggleButtonStyleKey}}">
+                    <ToggleButton IsChecked="{Binding Toolbar.HideLinkerMembers}" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked" Style="{DynamicResource ResourceKey={x:Static ToolBar.ToggleButtonStyleKey}}">
                         <Image Source="{StaticResource LinkerSymbols}" />
                     </ToggleButton>
                 </ToolBarPanel>
@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="370*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveMemberViewTemplate}" />
+            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveFileTreeViewTemplate}" ItemsSource="{Binding ArchiveFiles}" />
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 

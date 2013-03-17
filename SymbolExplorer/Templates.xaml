@@ -1,7 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <HierarchicalDataTemplate x:Key="ArchiveMemberViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
+    <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
+        <TextBlock Text="{Binding Name}" />
+    </HierarchicalDataTemplate>
+
+    <HierarchicalDataTemplate x:Key="ArchiveFileTreeViewTemplate" DataType="ViewModels:ArchiveFileViewModel" ItemTemplate="{StaticResource ArchiveMemberTreeViewTemplate}" ItemsSource="{Binding Members}">
         <TextBlock Text="{Binding Name}" />
     </HierarchicalDataTemplate>
 

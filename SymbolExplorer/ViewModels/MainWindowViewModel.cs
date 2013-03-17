@@ -1,6 +1,8 @@
-﻿using SymbolExplorer.Framework;
+﻿using SymbolExplorer.Code;
+using SymbolExplorer.Framework;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -14,17 +16,17 @@ namespace SymbolExplorer.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         bool _showingAboutDialog = false;
+        bool _openingFile = false;
 
         ToolbarViewModel _toolbarViewModel = new ToolbarViewModel();
 
-
-        ArchiveFileViewModel _archiveFile = new ArchiveFileViewModel();
+        ObservableCollection<ArchiveFileViewModel> _archiveFiles = new ObservableCollection<ArchiveFileViewModel>();
 
         #region Properties
 
         public ToolbarViewModel Toolbar { get { return _toolbarViewModel; } }
 
-        public ArchiveFileViewModel ArchiveFile { get { return _archiveFile; } set { SetProperty(ref _archiveFile, value, "ArchiveFile"); } }
+        public ObservableCollection<ArchiveFileViewModel> ArchiveFiles { get { return _archiveFiles; } }
 
         public ICommand OpenFile { get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); } }
 
@@ -36,12 +38,30 @@ namespace SymbolExplorer.ViewModels
 
         private bool CanOpenFileExecute()
         {
-            throw new NotImplementedException();
+            return _openingFile == false;
         }
 
         private void OpenFileExecute()
         {
-            throw new NotImplementedException();
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.FileName = "";
+            dlg.DefaultExt = ".lib";
+            dlg.Filter = "Library Archives (.lib)|*.lib";
+
+            Nullable<bool> result = dlg.ShowDialog();
+            if (result == true)
+            {
+                switch (Path.GetExtension(dlg.FileName))
+                {
+                case ".lib":
+                    LoadFile(dlg.FileName);
+                    break;
+
+                case ".a":
+                    LoadFileA(dlg.FileName);
+                    break;
+                }
+            }
         }
 
         private bool CanShowAboutDialogExecute()
@@ -71,9 +91,11 @@ namespace SymbolExplorer.ViewModels
             try
             {
                 FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-                var file = Code.ArchiveFile.FromStream(s);
-                ArchiveFile.File = file;
-                ArchiveFile.Name = System.IO.Path.GetFileName(filePath);
+                var file = ArchiveFile.FromStream(s);
+                ArchiveFileViewModel model = new ArchiveFileViewModel();
+                model.File = file;
+                model.Name = System.IO.Path.GetFileName(filePath);
+                ArchiveFiles.Add(model);
 
                 if (file.Errors)
                 {

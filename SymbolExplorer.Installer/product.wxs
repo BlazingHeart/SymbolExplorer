@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Product Id="*" UpgradeCode="{8100023D-B376-4E2A-AB0D-4296FDB9A795}" Version="0.1.2.0" Language="1033" Name="Symbol Explorer" Manufacturer="redwyre">
+        <Package InstallerVersion="300" Compressed="yes"/>
+        <Media Id="1" Cabinet="SymbolExplorer.cab" EmbedCab="yes" />
+
+        <Directory Id="TARGETDIR" Name="SourceDir">
+            <Directory Id="ProgramFilesFolder">
+                <Directory Id="APPLICATIONROOTDIRECTORY" Name="SymbolExplorer" />
+            </Directory>
+        </Directory>
+
+        <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+            <Component Id="C.SymbolExplorer.exe" Guid="{DCBEA45C-5C7E-4D87-B7B2-DD01C22092F9}">
+                <File Id="F.SymbolExplorer.exe" Source="../SymbolExplorer/bin/Release/SymbolExplorer.exe" KeyPath="yes" Checksum="yes" />
+            </Component>
+        </DirectoryRef>
+
+        <Feature Id="Feat.SymbolExplorer" Title="Symbol Explorer" Level="1">
+            <ComponentRef Id="C.SymbolExplorer.exe" />
+        </Feature>
+    </Product>
+</Wix>

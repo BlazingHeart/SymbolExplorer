@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace SymbolExplorer.ViewModels
 {
-    class ObjectFileViewModel : ArchiveMemberViewModel
+    public class ObjectFileViewModel : ArchiveMemberViewModel
     {
         ObservableCollection<SectionViewModel> _sections = new ObservableCollection<SectionViewModel>();
         ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();

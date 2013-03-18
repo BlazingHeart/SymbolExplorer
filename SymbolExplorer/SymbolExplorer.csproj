@@ -184,6 +184,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ObjectFileViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
+    <Compile Include="ViewModels\SymbolSearchViewModel.cs" />
     <Compile Include="ViewModels\SymbolViewModel.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />

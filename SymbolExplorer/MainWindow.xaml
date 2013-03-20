@@ -45,21 +45,21 @@
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 
-            <TabControl Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}">
+            <TabControl Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <TabItem Header="Object File">
                     <DockPanel>
-                        <ContentControl Margin="4" Template="{StaticResource ObjectFileControlTemplate}" />
+                        <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Template="{StaticResource ObjectFileControlTemplate}" />
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="Symbols">
                     <DockPanel>
                         <ContentControl Margin="4" DockPanel.Dock="Bottom"  DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
 
-                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding FilteredSymbols}" AutoGenerateColumns="False">
+                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding ElementName=MemberTree, Path=SelectedItem.FilteredSymbols}" AutoGenerateColumns="False">
                             <DataGrid.Resources>
-                                <MenuItem Header="Show/Hide Columns" x:Key="columnsMenuItem">
-                                </MenuItem>
-                                <ContextMenu x:Key="headerContextMenu">
+                                <ContextMenu x:Key="headerContextMenu" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}">
+                                    <MenuItem Header="Hide Column" Command="{Binding HideColumn, Mode=OneWay}" CommandParameter="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}" Click="MenuItem_Click_HideColumn"/>
+                                    <MenuItem Header="Select Columns" Command="{Binding SelectColumns, Mode=OneWay}" CommandParameter="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}" Click="MenuItem_Click_SelectColumns"/>
                                 </ContextMenu>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />

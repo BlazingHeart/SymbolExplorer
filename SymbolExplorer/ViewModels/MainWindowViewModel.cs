@@ -9,7 +9,9 @@ using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace SymbolExplorer.ViewModels
 {
@@ -34,6 +36,9 @@ namespace SymbolExplorer.ViewModels
 
         public ICommand RefreshDataGrid { get { return new RelayCommand(RefreshDataGridExecute, CanRefreshDataGridExecute); } }
 
+        public ICommand HideColumn { get { return new RelayCommand<object>(HideColumnExecute, null); } }
+
+        public ICommand SelectColumns { get { return new RelayCommand<object>(SelectColumnsExecute, null); } }
 
         #endregion
 
@@ -86,6 +91,26 @@ namespace SymbolExplorer.ViewModels
         private void RefreshDataGridExecute()
         {
             
+        }
+
+        private void HideColumnExecute(object parameter)
+        {
+            var dataGridColumnHeader = parameter as DataGridColumnHeader;
+            var dataGridColumn = dataGridColumnHeader.Column;
+            if (dataGridColumn != null)
+            {
+                dataGridColumn.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void SelectColumnsExecute(object parameter)
+        {
+            var dataGridColumnHeader = parameter as DataGridColumnHeader;
+            var dataGrid = VisualTreeHelpers.FindAncestor<DataGrid>(dataGridColumnHeader);
+            SelectColumnsWindow dialog = new SelectColumnsWindow();
+            dialog.Owner = Application.Current.MainWindow;
+            dialog.Model.DataGrid = dataGrid;
+            dialog.ShowDialog();
         }
 
         #endregion

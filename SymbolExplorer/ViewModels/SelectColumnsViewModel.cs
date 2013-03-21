@@ -50,11 +50,6 @@ namespace SymbolExplorer.ViewModels
         
         public SelectColumnsViewModel()
         {
-            _dataGrid = new DataGrid();
-
-            _dataGrid.Columns.Add(new DataGridTextColumn() { Header = "Text" });
-            _dataGrid.Columns.Add(new DataGridCheckBoxColumn() { Header = "Checkbox" });
-            _dataGrid.Columns.Add(new DataGridComboBoxColumn() { Header = "ComboBox" });
         }
 
         void BuildColumnList()

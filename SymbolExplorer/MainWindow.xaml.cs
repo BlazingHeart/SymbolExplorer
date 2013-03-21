@@ -37,18 +37,5 @@ namespace SymbolExplorer
                 source.Refresh();
             }
         }
-
-        private void MenuItem_Click_HideColumn(object sender, RoutedEventArgs e)
-        {
-            MenuItem menuItem = (MenuItem)sender;
-            Model.HideColumn.Execute(menuItem.CommandParameter);
-        }
-
-        private void MenuItem_Click_SelectColumns(object sender, RoutedEventArgs e)
-        {
-            MenuItem menuItem = (MenuItem)sender;
-            var source = e.Source;
-            Model.SelectColumns.Execute(menuItem.CommandParameter);
-        }
     }
 }

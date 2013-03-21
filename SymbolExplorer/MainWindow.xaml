@@ -57,12 +57,13 @@
 
                         <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding ElementName=MemberTree, Path=SelectedItem.FilteredSymbols}" AutoGenerateColumns="False">
                             <DataGrid.Resources>
-                                <ContextMenu x:Key="headerContextMenu" DataContext="{Binding RelativeSource={RelativeSource Mode=Self}, Path=PlacementTarget.DataContext}">
-                                    <MenuItem Header="Hide Column" Command="{Binding HideColumn, Mode=OneWay}" CommandParameter="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}" Click="MenuItem_Click_HideColumn"/>
-                                    <MenuItem Header="Select Columns" Command="{Binding SelectColumns, Mode=OneWay}" CommandParameter="{Binding PlacementTarget, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}}" Click="MenuItem_Click_SelectColumns"/>
+                                <ContextMenu x:Key="headerContextMenu" DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
+                                    <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}"/>
+                                    <MenuItem Header="Select Columns" Command="{Binding Tag.SelectColumns, Mode=OneWay}" CommandParameter="{Binding}"/>
                                 </ContextMenu>
                                 <Style TargetType="{x:Type DataGridColumnHeader}">
                                     <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
+                                    <Setter Property="Tag" Value="{Binding ElementName=Model}" />
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>

@@ -48,27 +48,52 @@
     </DataTemplate>
 
     <DataTemplate x:Key="SymbolDataTemplate" DataType="SymbolViewModel">
-        <Expander Header="Symbol Details" ExpandDirection="Up" IsExpanded="False" VerticalAlignment="Stretch">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+        <DockPanel>
+            <Expander DockPanel.Dock="Bottom" Header="Symbol Details" ExpandDirection="Up" IsExpanded="False" VerticalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <StackPanel Grid.Column="0">
-                    <TextBlock Text="Name:" />
-                    <TextBlock Text="Demangled:" />
-                </StackPanel>
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="Name:" />
+                        <TextBlock Text="Demangled:" />
+                    </StackPanel>
 
-                <StackPanel Grid.Column="1" Margin="4,0,0,0">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text="{Binding Demangled}" />
-                </StackPanel>
+                    <StackPanel Grid.Column="1" Margin="4,0,0,0">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text="{Binding Demangled}" />
+                    </StackPanel>
 
-                <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
-            </Grid>
-        </Expander>
+                    <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
+                </Grid>
+            </Expander>
+
+            <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding}" AutoGenerateColumns="False">
+                <DataGrid.Resources>
+                    <ContextMenu x:Key="headerContextMenu" DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
+                        <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Select Columns" Command="{Binding Tag.SelectColumns, Mode=OneWay}" CommandParameter="{Binding}"/>
+                    </ContextMenu>
+                    <Style TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
+                        <Setter Property="Tag" Value="{Binding ElementName=Model}" />
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed"/>
+                    <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}"/>
+                    <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
+                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section"/>
+                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicType}"/>
+                    <DataGridTextColumn Header="DataType" Binding="{Binding DataType}"/>
+                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClass}"/>
+                    <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </DockPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">

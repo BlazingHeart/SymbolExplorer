@@ -1,53 +1,48 @@
 ﻿using SymbolExplorer.Code;
 using SymbolExplorer.Framework;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace SymbolExplorer.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        bool _showingAboutDialog = false;
-        bool _openingFile = false;
-
         ToolbarViewModel _toolbarViewModel = new ToolbarViewModel();
 
         ObservableCollection<ArchiveFileViewModel> _archiveFiles = new ObservableCollection<ArchiveFileViewModel>();
+
+        bool _hideLinkerMembers;
 
         #region Properties
 
         public ToolbarViewModel Toolbar { get { return _toolbarViewModel; } }
 
+        public bool HideLinkerMembers { get { return _hideLinkerMembers; } set { SetProperty(ref _hideLinkerMembers, value, "HideLinkerMembers"); } }
+
         public ObservableCollection<ArchiveFileViewModel> ArchiveFiles { get { return _archiveFiles; } }
 
-        public ICommand OpenFile { get { return new RelayCommand(OpenFileExecute, CanOpenFileExecute); } }
+        public ICommand OpenFile { get { return new RelayCommand(OpenFileExecute); } }
 
-        public ICommand ShowAboutDialog { get { return new RelayCommand(ShowAboutDialogExecute, CanShowAboutDialogExecute); } }
+        public ICommand ShowAboutDialog { get { return new RelayCommand(ShowAboutDialogExecute); } }
 
-        public ICommand RefreshDataGrid { get { return new RelayCommand(RefreshDataGridExecute, CanRefreshDataGridExecute); } }
+        public ICommand RefreshDataGrid { get { return new RelayCommand(RefreshDataGridExecute); } }
 
         public ICommand HideColumn { get { return new RelayCommand<object>(HideColumnExecute, null); } }
 
         public ICommand SelectColumns { get { return new RelayCommand<object>(SelectColumnsExecute, null); } }
 
+        public ICommand ToggleLinkerMembers { get { return new RelayCommand<object>(ToggleLinkerMembersExecute, null); } }
+        
         #endregion
 
         #region Commands
-
-        private bool CanOpenFileExecute()
-        {
-            return _openingFile == false;
-        }
 
         private void OpenFileExecute()
         {
@@ -63,15 +58,8 @@ namespace SymbolExplorer.ViewModels
             }
         }
 
-        private bool CanShowAboutDialogExecute()
-        {
-            return _showingAboutDialog == false;
-        }
-
         private void ShowAboutDialogExecute()
         {
-            _showingAboutDialog = true;
-
             var assembly = Assembly.GetEntryAssembly();
             Version version = assembly.GetName().Version;
 
@@ -79,18 +67,21 @@ namespace SymbolExplorer.ViewModels
             s.Owner = Application.Current.MainWindow;
             s.Version = version;
             s.ShowDialog();
-
-            _showingAboutDialog = false;
-        }
-
-        private bool CanRefreshDataGridExecute()
-        {
-            return true;
         }
 
         private void RefreshDataGridExecute()
         {
-            
+            foreach (var file in _archiveFiles)
+            {
+                foreach (var member in file.Members)
+                {
+                    var view = CollectionViewSource.GetDefaultView(member.FilteredSymbols);
+                    if (view != null)
+                    {
+                        view.Refresh();
+                    }
+                }
+            }
         }
 
         private void HideColumnExecute(object parameter)
@@ -111,6 +102,13 @@ namespace SymbolExplorer.ViewModels
             dialog.Owner = Application.Current.MainWindow;
             dialog.Model.DataGrid = dataGrid;
             dialog.ShowDialog();
+        }
+
+        private void ToggleLinkerMembersExecute(object obj)
+        {
+            Filters.SymbolViewModel_NonLinker_Enabled = _hideLinkerMembers;
+
+            RefreshDataGridExecute();
         }
 
         #endregion
@@ -147,7 +145,7 @@ namespace SymbolExplorer.ViewModels
                 ArchiveFileViewModel model = new ArchiveFileViewModel();
                 model.File = file;
                 model.Name = System.IO.Path.GetFileName(filePath);
-                ArchiveFiles.Add(model);
+                _archiveFiles.Add(model);
 
                 if (file.Errors)
                 {

@@ -28,14 +28,5 @@ namespace SymbolExplorer
         {
             InitializeComponent();
         }
-
-        private void toggleLinkerSymbols_ToggleChecked(object sender, RoutedEventArgs e)
-        {
-            var source = symbolDataGrid.ItemsSource as ListCollectionView;
-            if (source != null)
-            {
-                source.Refresh();
-            }
-        }
     }
 }

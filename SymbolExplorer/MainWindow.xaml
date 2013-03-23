@@ -27,8 +27,8 @@
                     <Button Command="{Binding OpenFile}">
                         Open
                     </Button>
-                    <ToggleButton IsChecked="{Binding Toolbar.HideLinkerMembers}" Checked="toggleLinkerSymbols_ToggleChecked" Unchecked="toggleLinkerSymbols_ToggleChecked" Style="{DynamicResource ResourceKey={x:Static ToolBar.ToggleButtonStyleKey}}">
-                        <Image Source="{StaticResource LinkerSymbols}" />
+                    <ToggleButton IsChecked="{Binding HideLinkerMembers}" Command="{Binding ToggleLinkerMembers}" Style="{DynamicResource ResourceKey={x:Static ToolBar.ToggleButtonStyleKey}}">
+                        Toggle Linker Symbols
                     </ToggleButton>
                 </ToolBarPanel>
             </ToolBar>
@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="370*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveFileTreeViewTemplate}" ItemsSource="{Binding ArchiveFiles}" />
+            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveFileTreeViewTemplate}" ItemsSource="{Binding ArchiveFiles}" SelectedItemChanged="MemberTree_SelectedItemChanged_1"/>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 
@@ -53,30 +53,7 @@
                 </TabItem>
                 <TabItem Header="Symbols">
                     <DockPanel>
-                        <ContentControl Margin="4" DockPanel.Dock="Bottom"  DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
-
-                        <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding ElementName=MemberTree, Path=SelectedItem.FilteredSymbols}" AutoGenerateColumns="False">
-                            <DataGrid.Resources>
-                                <ContextMenu x:Key="headerContextMenu" DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
-                                    <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}"/>
-                                    <MenuItem Header="Select Columns" Command="{Binding Tag.SelectColumns, Mode=OneWay}" CommandParameter="{Binding}"/>
-                                </ContextMenu>
-                                <Style TargetType="{x:Type DataGridColumnHeader}">
-                                    <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
-                                    <Setter Property="Tag" Value="{Binding ElementName=Model}" />
-                                </Style>
-                            </DataGrid.Resources>
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed"/>
-                                <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}"/>
-                                <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
-                                <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section"/>
-                                <DataGridTextColumn Header="BasicType" Binding="{Binding BasicType}"/>
-                                <DataGridTextColumn Header="DataType" Binding="{Binding DataType}"/>
-                                <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClass}"/>
-                                <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem.FilteredSymbols}" Template="{StaticResource SymbolControlTemplate}" />
                     </DockPanel>
                 </TabItem>
             </TabControl>

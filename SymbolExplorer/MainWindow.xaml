@@ -41,7 +41,7 @@
                 <ColumnDefinition Width="370*"/>
             </Grid.ColumnDefinitions>
 
-            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveFileTreeViewTemplate}" ItemsSource="{Binding ArchiveFiles}" SelectedItemChanged="MemberTree_SelectedItemChanged_1"/>
+            <TreeView x:Name="MemberTree" ItemTemplate="{StaticResource ArchiveFileTreeViewTemplate}" ItemsSource="{Binding ArchiveFiles}"/>
 
             <GridSplitter Grid.Column="1" HorizontalAlignment="Stretch" Width="8" Cursor="SizeWE"/>
 

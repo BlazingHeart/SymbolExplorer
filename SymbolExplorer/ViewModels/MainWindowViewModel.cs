@@ -17,14 +17,12 @@ namespace SymbolExplorer.ViewModels
         ToolbarViewModel _toolbarViewModel = new ToolbarViewModel();
 
         ObservableCollection<ArchiveFileViewModel> _archiveFiles = new ObservableCollection<ArchiveFileViewModel>();
-
-        bool _hideLinkerMembers;
-
+        
         #region Properties
 
         public ToolbarViewModel Toolbar { get { return _toolbarViewModel; } }
 
-        public bool HideLinkerMembers { get { return _hideLinkerMembers; } set { SetProperty(ref _hideLinkerMembers, value, "HideLinkerMembers"); } }
+        public bool HideLinkerMembers { get { return Filters.SymbolViewModel_HideLinkerSymbols_Enabled; } set { SetProperty(ref Filters.SymbolViewModel_HideLinkerSymbols_Enabled, value, "HideLinkerMembers"); } }
 
         public ObservableCollection<ArchiveFileViewModel> ArchiveFiles { get { return _archiveFiles; } }
 
@@ -106,8 +104,6 @@ namespace SymbolExplorer.ViewModels
 
         private void ToggleLinkerMembersExecute(object obj)
         {
-            Filters.SymbolViewModel_NonLinker_Enabled = _hideLinkerMembers;
-
             RefreshDataGridExecute();
         }
 

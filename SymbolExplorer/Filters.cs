@@ -9,16 +9,16 @@ namespace SymbolExplorer
 {
     class Filters
     {
-        public static bool SymbolViewModel_NonLinker_Enabled = false;
+        public static bool SymbolViewModel_HideLinkerSymbols_Enabled = true;
 
-        public static void SymbolViewModel_NonLinker(object sender, FilterEventArgs e)
+        public static void SymbolViewModel_HideLinkerSymbols(object sender, FilterEventArgs e)
         {
-            e.Accepted = SymbolViewModel_NonLinker(e.Item);
+            e.Accepted = SymbolViewModel_HideLinkerSymbols(e.Item);
         }
 
-        public static bool SymbolViewModel_NonLinker(object o)
+        public static bool SymbolViewModel_HideLinkerSymbols(object o)
         {
-            if (SymbolViewModel_NonLinker_Enabled)
+            if (SymbolViewModel_HideLinkerSymbols_Enabled)
             {
                 SymbolViewModel symbol = o as SymbolViewModel;
                 if (symbol != null)

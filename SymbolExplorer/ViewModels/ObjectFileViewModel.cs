@@ -39,7 +39,7 @@ namespace SymbolExplorer.ViewModels
             _filteredSymbols = new ListCollectionView(_symbols);
             //_groupedSymbols.GroupDescriptions.Add(new PropertyGroupDescription(Utils.GetPropertyName<SymbolViewModel>(a => a.Section)));
 
-            _filteredSymbols.Filter = Filters.SymbolViewModel_NonLinker;
+            _filteredSymbols.Filter = Filters.SymbolViewModel_HideLinkerSymbols;
         }
 
         private void AddSections()

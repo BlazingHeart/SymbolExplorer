@@ -61,8 +61,7 @@ namespace SymbolExplorer.Code
                     }
                 }
 
-                SectionData = new byte[AnonHeader.SizeOfData];
-                stream.Read(SectionData, 0, SectionData.Length);
+                SectionData = new byte[0];
 
                 Sections = new ImageSection[0];
                 Symbols = new IMAGE_SYMBOL[0];

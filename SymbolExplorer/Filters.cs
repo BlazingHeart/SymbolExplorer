@@ -9,7 +9,21 @@ namespace SymbolExplorer
 {
     class Filters
     {
-        public static bool SymbolViewModel_HideLinkerSymbols_Enabled = true;
+        static bool _symbolViewModel_HideLinkerSymbols_Enabled = true;
+        
+        public static bool SymbolViewModel_HideLinkerSymbols_Enabled { get { return _symbolViewModel_HideLinkerSymbols_Enabled; } set { _symbolViewModel_HideLinkerSymbols_Enabled = value; OnFilterChanged(); } }
+        
+
+        public static EventHandler FilterUpdated { get; set; }
+
+
+        public static void OnFilterChanged()
+        {
+            if (FilterUpdated != null)
+            {
+                FilterUpdated(null, EventArgs.Empty);
+            }
+        }
 
         public static void SymbolViewModel_HideLinkerSymbols(object sender, FilterEventArgs e)
         {
@@ -18,12 +32,13 @@ namespace SymbolExplorer
 
         public static bool SymbolViewModel_HideLinkerSymbols(object o)
         {
+            SymbolViewModel symbol = o as SymbolViewModel;
+
             if (SymbolViewModel_HideLinkerSymbols_Enabled)
             {
-                SymbolViewModel symbol = o as SymbolViewModel;
                 if (symbol != null)
                 {
-                    if (symbol.Name.StartsWith(".") || symbol.Name.StartsWith("@"))
+                    if (symbol.Demangled.StartsWith(".") || symbol.Demangled.StartsWith("@"))
                     {
                         return false;
                     }

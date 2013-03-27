@@ -53,7 +53,7 @@
                 </TabItem>
                 <TabItem Header="Symbols">
                     <DockPanel>
-                        <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem.FilteredSymbols}" Template="{StaticResource SymbolControlTemplate}" />
+                        <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
                     </DockPanel>
                 </TabItem>
             </TabControl>

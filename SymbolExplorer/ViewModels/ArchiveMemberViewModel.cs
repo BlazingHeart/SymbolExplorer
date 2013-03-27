@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SymbolExplorer.ViewModels
 {
-    public class ArchiveMemberViewModel
+    public class ArchiveMemberViewModel : ViewModelBase
     {
         ArchiveMember _member;
         string _name;

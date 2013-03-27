@@ -22,7 +22,7 @@ namespace SymbolExplorer.ViewModels
 
         public ToolbarViewModel Toolbar { get { return _toolbarViewModel; } }
 
-        public bool HideLinkerMembers { get { return Filters.SymbolViewModel_HideLinkerSymbols_Enabled; } set { SetProperty(ref Filters.SymbolViewModel_HideLinkerSymbols_Enabled, value, "HideLinkerMembers"); } }
+        public bool HideLinkerMembers { get { return Filters.SymbolViewModel_HideLinkerSymbols_Enabled; } set { Filters.SymbolViewModel_HideLinkerSymbols_Enabled = value; OnPropertyChanged("HideLinkerMembers"); } }
 
         public ObservableCollection<ArchiveFileViewModel> ArchiveFiles { get { return _archiveFiles; } }
 
@@ -166,5 +166,7 @@ namespace SymbolExplorer.ViewModels
                 MessageBox.Show(string.Format("Error loading file '{0}'", filePath), "Symbol Explorer", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+
     }
 }

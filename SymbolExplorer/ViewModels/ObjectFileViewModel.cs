@@ -1,11 +1,15 @@
 ﻿using SymbolExplorer.Code;
 using SymbolExplorer.Code.Windows;
+using SymbolExplorer.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows.Data;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace SymbolExplorer.ViewModels
 {
@@ -13,7 +17,10 @@ namespace SymbolExplorer.ViewModels
     {
         ObservableCollection<SectionViewModel> _sections = new ObservableCollection<SectionViewModel>();
         ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();
-        ListCollectionView _filteredSymbols;
+        CollectionViewSource _filteredSymbols = new CollectionViewSource();
+
+        string _symbolSearchText = String.Empty;
+        bool _symbolSearchTextAdded = false;
 
         public IMAGE_FILE_MACHINE Machine { get { return ObjectFileMember.ObjectFile.Header.Machine; } }
         public ushort NumberOfSections { get { return ObjectFileMember.ObjectFile.Header.NumberOfSections; } }
@@ -28,7 +35,39 @@ namespace SymbolExplorer.ViewModels
 
         public ObservableCollection<SymbolViewModel> Symbols { get { return _symbols; } }
 
-        public ListCollectionView FilteredSymbols { get { return _filteredSymbols; } }
+        public ICollectionView FilteredSymbols { get { return _filteredSymbols.View; } }
+
+        public ICommand ClearSearch { get { return new RelayCommand(ClearSearchExecute, CanClearSearchExecute); } }
+        
+        public string SymbolSearchText
+        {
+            get
+            {
+                return _symbolSearchText;
+            }
+            set
+            {
+                SetProperty(ref _symbolSearchText, value, "SymbolSearchText");
+
+                if (_symbolSearchTextAdded) { _filteredSymbols.Filter -= new FilterEventHandler(FilterSymbolSearchText); _symbolSearchTextAdded = false; }
+                if (!string.IsNullOrEmpty(_symbolSearchText)) { _filteredSymbols.Filter += new FilterEventHandler(FilterSymbolSearchText); _symbolSearchTextAdded = true; }
+
+                _filteredSymbols.View.Refresh();
+            }
+        }
+
+
+        private bool CanClearSearchExecute()
+        {
+            return !string.IsNullOrEmpty(_symbolSearchText);
+        }
+
+        private void ClearSearchExecute()
+        {
+            SymbolSearchText = string.Empty;
+        }
+
+
 
         public ObjectFileViewModel(ObjectFileMember objectFileMember)
             : base(objectFileMember)
@@ -36,10 +75,18 @@ namespace SymbolExplorer.ViewModels
             AddSymbols();
             AddSections();
 
-            _filteredSymbols = new ListCollectionView(_symbols);
-            //_groupedSymbols.GroupDescriptions.Add(new PropertyGroupDescription(Utils.GetPropertyName<SymbolViewModel>(a => a.Section)));
+            _filteredSymbols.Source = _symbols;
+            _filteredSymbols.Filter += new FilterEventHandler(Filters.SymbolViewModel_HideLinkerSymbols);
+            Filters.FilterUpdated += new EventHandler(RefreshView);
+        }
 
-            _filteredSymbols.Filter = Filters.SymbolViewModel_HideLinkerSymbols;
+        ~ObjectFileViewModel()
+        {
+            Dispatcher.CurrentDispatcher.BeginInvoke(() =>
+            {
+                _filteredSymbols.Filter -= new FilterEventHandler(Filters.SymbolViewModel_HideLinkerSymbols);
+                Filters.FilterUpdated -= new EventHandler(RefreshView);
+            });
         }
 
         private void AddSections()
@@ -90,6 +137,24 @@ namespace SymbolExplorer.ViewModels
 
                 i += symbol.NumberOfAuxSymbols;
             }
+        }
+
+        public void FilterSymbolSearchText(object sender, FilterEventArgs e)
+        {
+            SymbolViewModel symbol = e.Item as SymbolViewModel;
+
+            if (!string.IsNullOrEmpty(_symbolSearchText))
+            {
+                if (!symbol.Demangled.Contains(_symbolSearchText))
+                {
+                    e.Accepted = false;
+                }
+            }
+        }
+
+        private void RefreshView(object o, EventArgs e)
+        {
+            _filteredSymbols.View.Refresh();
         }
     }
 }

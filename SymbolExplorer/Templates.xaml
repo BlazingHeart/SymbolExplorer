@@ -47,10 +47,18 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="SymbolDataTemplate" DataType="SymbolViewModel">
+    <DataTemplate x:Key="SymbolDataTemplate" DataType="ObjectFileViewModel">
         <DockPanel>
+            <!-- Search Box-->
+            <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
+                <TextBlock DockPanel.Dock="Right" FontFamily="Segoe UI Symbol" VerticalAlignment="Center">&#xE11A;</TextBlock>
+                <Button DockPanel.Dock="Right" FontFamily="Segoe UI Symbol" Command="{Binding ClearSearch}">&#xE106;</Button>
+                <TextBox x:Name="searchBox" Text="{Binding SymbolSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </DockPanel>
+
+            <!-- Current symbol info, down the bottom -->
             <Expander DockPanel.Dock="Bottom" Header="Symbol Details" ExpandDirection="Up" IsExpanded="False" VerticalAlignment="Stretch">
-                <Grid>
+                <Grid DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
@@ -70,8 +78,9 @@
                     <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
                 </Grid>
             </Expander>
-
-            <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding}" AutoGenerateColumns="False">
+            
+            <!-- Symbol data grid-->
+            <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding FilteredSymbols}" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <ContextMenu x:Key="headerContextMenu" DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
                         <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}"/>

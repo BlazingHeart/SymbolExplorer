@@ -56,6 +56,11 @@
                         <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Template="{StaticResource SymbolControlTemplate}" />
                     </DockPanel>
                 </TabItem>
+                <TabItem Header="Header View">
+                    <DockPanel>
+                        <ContentControl Margin="4" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Template="{StaticResource HeaderViewControlTemplate}" />
+                    </DockPanel>
+                </TabItem>
             </TabControl>
         </Grid>
     </DockPanel>

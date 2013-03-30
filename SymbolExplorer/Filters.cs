@@ -1,4 +1,5 @@
-﻿using SymbolExplorer.ViewModels;
+﻿using SymbolExplorer.Models;
+using SymbolExplorer.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,7 @@ namespace SymbolExplorer
 
         public static bool SymbolViewModel_HideLinkerSymbols(object o)
         {
-            SymbolViewModel symbol = o as SymbolViewModel;
+            Symbol symbol = o as Symbol;
 
             if (SymbolViewModel_HideLinkerSymbols_Enabled)
             {

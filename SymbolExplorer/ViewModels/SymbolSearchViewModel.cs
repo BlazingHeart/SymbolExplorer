@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SymbolExplorer.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,11 @@ namespace SymbolExplorer.ViewModels
 
         public string SearchTerm { get { return _searchTerm; } set { SetProperty(ref _searchTerm, value, "SearchTerm"); OnPropertyChanged("Symbols"); } }
 
-        public IEnumerable<SymbolViewModel> Symbols { get { return FindSymbol(SearchTerm); } }
+        public IEnumerable<Symbol> Symbols { get { return FindSymbol(SearchTerm); } }
 
         #endregion
 
-        public IEnumerable<SymbolViewModel> FindSymbol(string nameText)
+        public IEnumerable<Symbol> FindSymbol(string nameText)
         {
             string[] words = nameText.Split(new char[] { ' ' });
 

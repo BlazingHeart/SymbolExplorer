@@ -1,6 +1,7 @@
 ﻿using SymbolExplorer.Code;
 using SymbolExplorer.Code.Windows;
 using SymbolExplorer.Framework;
+using SymbolExplorer.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -16,8 +17,10 @@ namespace SymbolExplorer.ViewModels
     public class ObjectFileViewModel : ArchiveMemberViewModel
     {
         ObservableCollection<SectionViewModel> _sections = new ObservableCollection<SectionViewModel>();
-        ObservableCollection<SymbolViewModel> _symbols = new ObservableCollection<SymbolViewModel>();
+        ObservableCollection<Symbol> _symbols = new ObservableCollection<Symbol>();
         CollectionViewSource _filteredSymbols = new CollectionViewSource();
+
+        HeaderGeneratorViewModel _headerView = new HeaderGeneratorViewModel();
 
         string _symbolSearchText = String.Empty;
         bool _symbolSearchTextAdded = false;
@@ -33,11 +36,13 @@ namespace SymbolExplorer.ViewModels
 
         public ObservableCollection<SectionViewModel> Sections { get { return _sections; } }
 
-        public ObservableCollection<SymbolViewModel> Symbols { get { return _symbols; } }
+        public ObservableCollection<Symbol> Symbols { get { return _symbols; } }
 
         public ICollectionView FilteredSymbols { get { return _filteredSymbols.View; } }
 
         public ICommand ClearSearch { get { return new RelayCommand(ClearSearchExecute, CanClearSearchExecute); } }
+
+        public HeaderGeneratorViewModel HeaderView { get { return _headerView; } }
         
         public string SymbolSearchText
         {
@@ -74,6 +79,8 @@ namespace SymbolExplorer.ViewModels
         {
             AddSymbols();
             AddSections();
+
+            _headerView.ObjectFile = this;
 
             _filteredSymbols.Source = _symbols;
             _filteredSymbols.Filter += new FilterEventHandler(Filters.SymbolViewModel_HideLinkerSymbols);
@@ -118,21 +125,7 @@ namespace SymbolExplorer.ViewModels
                     }
                 }
 
-                var model = new SymbolViewModel(symbol, auxSymbols);
-                if (symbol.UsesStringTable)
-                {
-                    string name;
-                    if (stringTable.TryGetValue(symbol.StringTableOffset, out name))
-                    {
-                        model.Name = name;
-                    }
-                    else
-                    {
-                        model.Name = "Unavailable";
-                    }
-                    model.Demangled = Demangler.Demangle(model.Name);
-                }
-
+                var model = new Symbol(symbol, auxSymbols, stringTable);
                 _symbols.Add(model);
 
                 i += symbol.NumberOfAuxSymbols;
@@ -141,7 +134,7 @@ namespace SymbolExplorer.ViewModels
 
         public void FilterSymbolSearchText(object sender, FilterEventArgs e)
         {
-            SymbolViewModel symbol = e.Item as SymbolViewModel;
+            Symbol symbol = e.Item as Symbol;
 
             if (!string.IsNullOrEmpty(_symbolSearchText))
             {

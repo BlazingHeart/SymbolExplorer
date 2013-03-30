@@ -92,14 +92,14 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
+                    <DataGridTextColumn Header="Value" Binding="{Binding Value, StringFormat={}0x\{0:X8\}}"/>
+                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section"/>
+                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName}" SortMemberPath="BasicType"/>
+                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName}"  SortMemberPath="DataType"/>
+                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName}" SortMemberPath="StorageClass"/>
+                    <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed"/>
                     <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}"/>
-                    <DataGridTextColumn Header="Value" Binding="{Binding Value}"/>
-                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section"/>
-                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicType}"/>
-                    <DataGridTextColumn Header="DataType" Binding="{Binding DataType}"/>
-                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClass}"/>
-                    <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed"/>
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
@@ -168,6 +168,12 @@
         </DockPanel>
     </DataTemplate>
 
+    <DataTemplate x:Key="HeaderViewDataTemplate" DataType="ObjectFileMemberViewModel">
+        <DockPanel>
+            <TextBox Text="{Binding HeaderView.HeaderText, Mode=OneWay}" Style="{StaticResource FixedWidthTextBox}" IsReadOnly="True" UndoLimit="0" VerticalScrollBarVisibility="Auto"/>
+        </DockPanel>
+    </DataTemplate>
+
     <ControlTemplate x:Key="ArchiveMemberHeaderControlTemplate">
         <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
     </ControlTemplate>
@@ -178,6 +184,10 @@
 
     <ControlTemplate x:Key="SymbolControlTemplate">
         <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="HeaderViewControlTemplate">
+        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource HeaderViewDataTemplate}" />
     </ControlTemplate>
 
     <ControlTemplate x:Key="SymbolGroupControlTemplate" TargetType="{x:Type GroupItem}">

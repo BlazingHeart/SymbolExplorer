@@ -114,7 +114,7 @@
     <Compile Include="Code\Demangler.cs" />
     <Compile Include="Code\ElfMember.cs" />
     <Compile Include="Code\FirstLinkerMember.cs" />
-    <Compile Include="Code\HeaderGenerator.cs" />
+    <Compile Include="ViewModels\HeaderGeneratorViewModel.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
     <Compile Include="Code\Unix\Constants.cs" />
@@ -179,10 +179,11 @@
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\VisualTreeHelpers.cs" />
     <Compile Include="FriendlyEnums.cs" />
+    <Compile Include="Models\Symbol.cs" />
     <Compile Include="SelectColumnsWindow.xaml.cs">
       <DependentUpon>SelectColumnsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Utils.cs" />
+    <Compile Include="Framework\Utils.cs" />
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
     <Compile Include="ViewModels\ArchiveMemberViewModel.cs" />
     <Compile Include="ViewModels\ByteDataViewModel.cs" />

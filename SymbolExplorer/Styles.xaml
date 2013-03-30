@@ -114,4 +114,8 @@
     <Style x:Key="Hexview" TargetType="TextBlock">
         <Setter Property="FontFamily" Value="Consolas"/>
     </Style>
+    
+    <Style x:Key="FixedWidthTextBox" TargetType="TextBox">
+        <Setter Property="FontFamily" Value="Consolas"/>
+    </Style>
 </ResourceDictionary>

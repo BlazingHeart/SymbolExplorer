@@ -2,7 +2,7 @@
 * text=auto
 
 # Powershell
-*.ps1 binary
+#*.ps1 binary
 
 # Custom for Visual Studio
 *.cs     diff=csharp

@@ -67,6 +67,7 @@ namespace SymbolExplorer.Code
             foreach (Symbol s in view)
             {
                 //if ((s.Section == Constants.IMAGE_SYM_UNDEFINED) || (s.DataType == IMAGE_SYM_DTYPE.IMAGE_SYM_DTYPE_FUNCTION))
+                if (!IsLanguageSymbol(s))
                 {
                     AddSymbol(s);
                 }
@@ -102,15 +103,15 @@ namespace SymbolExplorer.Code
             sb.AppendLine("//===========================================================================//");
             sb.AppendLine();
             sb.AppendLine();
-            
+
             GenerateNamespace(_rootNamespace, sb);
-                        
+
             SetProperty(ref _headerText, sb.ToString(), "HeaderText");
             return _headerText;
         }
 
         void GenerateNamespace(Namespace n, StringBuilder sb)
-        {                        
+        {
             foreach (Namespace nn in n.Namespaces)
             {
                 GenerateNamespaceRecursive(nn, sb, 0);
@@ -153,13 +154,13 @@ namespace SymbolExplorer.Code
             }
             sb.Append(indent);
             sb.AppendLine("{");
-            
+
             foreach (Namespace nn in n.Namespaces)
             {
                 GenerateNamespaceRecursive(nn, sb, tabLevel + 1);
                 sb.AppendLine();
             }
-            
+
             foreach (Symbol s in n.Symbols)
             {
                 string name = s.Demangled;
@@ -176,6 +177,29 @@ namespace SymbolExplorer.Code
 
             sb.Append(indent);
             sb.AppendLine("}");
+        }
+
+        bool IsLanguageSymbol(Symbol symbol)
+        {
+            string[] languageSymbolParts =
+            {
+                "`RTTI Complete Object Locator'",
+                "`vftable'",
+                "`RTTI Class Hierarchy Descriptor'",
+                "`RTTI Base Class Array'",
+                "`RTTI Base Class Descriptor at",
+                "`RTTI Type Descriptor'",
+                "`scalar deleting destructor'",
+                "`vector deleting destructor'",
+                "`string'",
+            };
+
+            foreach (var s in languageSymbolParts)
+            {
+                if (symbol.Demangled.Contains(s)) return true;
+            }
+
+            return false;
         }
     }
 }

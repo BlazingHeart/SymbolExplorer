@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
 	xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
-	<Bundle UpgradeCode="{960916F9-2923-4851-994C-2719122434A4}" Version="0.1.2.0">
+	<Bundle UpgradeCode="{960916F9-2923-4851-994C-2719122434A4}"
+          Version="0.1.2.0"
+          SplashScreenSourceFile="logo.png"
+          >
 		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
 			<bal:WixStandardBootstrapperApplication
 				LicenseFile="license.rtf"
@@ -9,9 +12,7 @@
 				/>
 		</BootstrapperApplicationRef>
 		<Chain>
-            <MsiPackage
-              SourceFile="SymbolExplorer.msi"
-			  />
+			<MsiPackage SourceFile="output\SymbolExplorer.msi" />
 		</Chain>
 	</Bundle>
 </Wix>

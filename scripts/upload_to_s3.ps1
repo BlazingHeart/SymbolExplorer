@@ -1,4 +1,4 @@
-#xrxequires –Version 3.0
+#requires –Version 2.0
 Param([Parameter(Mandatory=$True)][string]$filePath, [string]$bucketPath = "\")
 $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 

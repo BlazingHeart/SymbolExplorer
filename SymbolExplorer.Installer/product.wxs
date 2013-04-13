@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Product Id="*" UpgradeCode="{8100023D-B376-4E2A-AB0D-4296FDB9A795}"
-	Version="0.1.2.0" Language="1033" Name="Symbol Explorer" Manufacturer="redwyre.github.com">
+	      Version="0.1.2.0" Language="1033" Name="Symbol Explorer" Manufacturer="redwyre.github.com">
         <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine"/>
         <Media Id="1" Cabinet="SymbolExplorer.cab" EmbedCab="yes" />
 

@@ -8,6 +8,15 @@ namespace SymbolExplorer.Code
 {
     public class NativeMethods
     {
+        [StructLayout(LayoutKind.Sequential, Pack=1)]
+        public struct API_VERSION
+        {
+            public ushort MajorVersion;
+            public ushort MinorVersion;
+            public ushort Revision;
+            public ushort Reserved;
+        }
+
         [Flags]
         public enum UnDecorateFlags
         {
@@ -33,5 +42,23 @@ namespace SymbolExplorer.Code
 
         [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true, CharSet = CharSet.Unicode)]
         internal static extern int UnDecorateSymbolName([In] string decoratedName, [Out] StringBuilder unDecoratedName, [In, MarshalAs(UnmanagedType.U4)] int undecoratedLength, [In, MarshalAs(UnmanagedType.U4)] UnDecorateFlags flags);
+
+        [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true, CharSet = CharSet.Unicode, EntryPoint = "ImagehlpApiVersion")]
+        internal static extern IntPtr ImagehlpApiVersion_Internal();
+
+        [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true, CharSet = CharSet.Unicode, EntryPoint = "ImagehlpApiVersionEx")]
+        internal static extern IntPtr ImagehlpApiVersionEx_Internal([MarshalAs(UnmanagedType.LPStruct)] API_VERSION AppVersion);
+
+        internal static API_VERSION ImagehlpApiVersion()
+        {
+            API_VERSION val = (API_VERSION)Marshal.PtrToStructure(ImagehlpApiVersion_Internal(), typeof(API_VERSION));
+            return val;
+        }
+
+        internal static API_VERSION ImagehlpApiVersionEx(API_VERSION AppVersion)
+        {
+            API_VERSION val = (API_VERSION)Marshal.PtrToStructure(ImagehlpApiVersionEx_Internal(AppVersion), typeof(API_VERSION));
+            return val;
+        }
     }
 }

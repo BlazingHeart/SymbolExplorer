@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SymbolExplorer.Models
 {
@@ -14,6 +15,15 @@ namespace SymbolExplorer.Models
         string[] _namespace;
         IMAGE_SYMBOL _symbol;
         IMAGE_SYMBOL[] _auxSymbols;
+
+//(?x)                  # enable comments and ignore spaces
+//\s*::\s*               # match a comma possibly enclosed by spaces
+//(?=                   # start positive look ahead
+//  (?:[^<>]*<[^<>]*>)*   #   match an even number of double quotes with zero or more non-quotes before, or in between
+//  [^<>]*               #   match zero or more non-quotes
+//  $                   #   match the end of the line
+//)
+        static Regex namespaceSplit = new Regex(@"\s*::\s*(?=(?:[^<>]*<[^<>]*>)*[^<>]*$)");
 
         public string Name { get { return _name; } set { _name = value; } }
         public string Demangled { get { return _nameDemangled; } set { _nameDemangled = value; } }
@@ -53,7 +63,8 @@ namespace SymbolExplorer.Models
             string ns = Demangler.GetNamespace(_name);
             if (!string.IsNullOrEmpty(ns))
             {
-                _namespace = ns.Split(new string[] { "::" }, StringSplitOptions.None);
+                _namespace = namespaceSplit.Split(ns);
+                //_namespace = ns.Split(new string[] { "::" }, StringSplitOptions.None);
                 _namespace = _namespace.Take(_namespace.Length - 1).ToArray();
             }
             else

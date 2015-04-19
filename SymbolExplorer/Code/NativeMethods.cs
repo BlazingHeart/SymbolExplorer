@@ -47,7 +47,7 @@ namespace SymbolExplorer.Code
         internal static extern IntPtr ImagehlpApiVersion_Internal();
 
         [DllImport("dbghelp.dll", SetLastError = true, PreserveSig = true, CharSet = CharSet.Unicode, EntryPoint = "ImagehlpApiVersionEx")]
-        internal static extern IntPtr ImagehlpApiVersionEx_Internal([MarshalAs(UnmanagedType.LPStruct)] API_VERSION AppVersion);
+        internal static extern IntPtr ImagehlpApiVersionEx_Internal(ref API_VERSION AppVersion);
 
         internal static API_VERSION ImagehlpApiVersion()
         {
@@ -55,9 +55,9 @@ namespace SymbolExplorer.Code
             return val;
         }
 
-        internal static API_VERSION ImagehlpApiVersionEx(API_VERSION AppVersion)
+        internal static API_VERSION ImagehlpApiVersionEx(ref API_VERSION AppVersion)
         {
-            API_VERSION val = (API_VERSION)Marshal.PtrToStructure(ImagehlpApiVersionEx_Internal(AppVersion), typeof(API_VERSION));
+            API_VERSION val = (API_VERSION)Marshal.PtrToStructure(ImagehlpApiVersionEx_Internal(ref AppVersion), typeof(API_VERSION));
             return val;
         }
     }

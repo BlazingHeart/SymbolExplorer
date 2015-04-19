@@ -21,6 +21,8 @@ namespace SymbolExplorer.Code
         public enum Language
         {
             Unknown,
+            SectionName,
+            Internal,
             C,
             CPP,
         }
@@ -52,13 +54,33 @@ namespace SymbolExplorer.Code
 
         public static string Demangle(string symbolName, out Language language)
         {
-            if (symbolName[0] == '?')
+            switch (symbolName[0])
             {
+            case '_':
+                language = Language.C;
+                break;
+
+            case '?':
                 language = Language.CPP;
                 return DemangleMsvc(symbolName);
+
+            case '.':
+                language = Language.SectionName;
+                break;
+
+            case '$':
+                language = Language.Internal;
+                break;
+
+            case '@':
+                language = Language.Internal;
+                break;
+
+            default:
+                language = Language.Unknown;
+                break;
             }
 
-            language = Language.Unknown;
             return symbolName;
         }
 

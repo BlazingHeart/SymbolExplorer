@@ -133,6 +133,12 @@ namespace SymbolExplorer.Code
                 }
                 name = name.Replace("__thiscall ", "");
                 name = name.Replace("__cdecl ", "");
+
+                if (s.Demangled == s.Name && s.DataType == IMAGE_SYM_DTYPE.IMAGE_SYM_DTYPE_FUNCTION)
+                {
+                    name = name + "()";
+                }
+
                 sb.AppendFormat("{0};\n", name);
             }
         }

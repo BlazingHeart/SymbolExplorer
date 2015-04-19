@@ -121,7 +121,7 @@ namespace SymbolExplorer.ViewModels
                     auxSymbols = new IMAGE_SYMBOL[symbol.NumberOfAuxSymbols];
                     for (int a = 0; a < auxSymbols.Length; ++a)
                     {
-                        auxSymbols[a] = symbols[i + a];
+                        auxSymbols[a] = symbols[i + 1 + a];
                     }
                 }
 

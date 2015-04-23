@@ -114,6 +114,12 @@
     <Compile Include="Code\Demangler.cs" />
     <Compile Include="Code\ElfMember.cs" />
     <Compile Include="Code\FirstLinkerMember.cs" />
+    <Compile Include="Controls\EnumText.xaml.cs">
+      <DependentUpon>EnumText.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Framework\EnumDisplayNameAttribute.cs" />
+    <Compile Include="Framework\EnumExtensions.cs" />
+    <Compile Include="Framework\EnumMaskAttribute.cs" />
     <Compile Include="ViewModels\HeaderGeneratorViewModel.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
@@ -196,6 +202,10 @@
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EnumText.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

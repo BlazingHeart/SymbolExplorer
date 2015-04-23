@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SymbolExplorer.Framework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace SymbolExplorer.Code.Windows
         public const ushort IMAGE_OS2_SIGNATURE_LE = 0x454C;    // LE
         public const ushort IMAGE_VXD_SIGNATURE = 0x454C;       // LE
         public const uint IMAGE_NT_SIGNATURE = 0x00004550;      // PE00
-        
+
         public const int IMAGE_NUMBEROF_DIRECTORY_ENTRIES = 16;
 
         public const ushort IMAGE_NT_OPTIONAL_HDR32_MAGIC = 0x010b;
@@ -113,58 +114,207 @@ namespace SymbolExplorer.Code.Windows
     [Flags]
     public enum IMAGE_SCN : uint
     {
-        // IMAGE_SCN_TYPE_REG = 0x00000000  // Reserved.
-        // IMAGE_SCN_TYPE_DSECT = 0x00000001  // Reserved.
-        // IMAGE_SCN_TYPE_NOLOAD = 0x00000002  // Reserved.
-        // IMAGE_SCN_TYPE_GROUP = 0x00000004  // Reserved.
-        IMAGE_SCN_TYPE_NO_PAD = 0x00000008,  // Reserved.
-        // IMAGE_SCN_TYPE_COPY = 0x00000010  // Reserved.
+        [EnumDisplayName("REG")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_REG = 0x00000000,
 
-        IMAGE_SCN_CNT_CODE = 0x00000020,  // Section contains code.
-        IMAGE_SCN_CNT_INITIALIZED_DATA = 0x00000040,  // Section contains initialized data.
-        IMAGE_SCN_CNT_UNINITIALIZED_DATA = 0x00000080,  // Section contains uninitialized data.
+        [EnumDisplayName("DSECT")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_DSECT = 0x00000001,
 
-        IMAGE_SCN_LNK_OTHER = 0x00000100,  // Reserved.
-        IMAGE_SCN_LNK_INFO = 0x00000200,  // Section contains comments or some other type of information.
-        // IMAGE_SCN_TYPE_OVER =  0x00000400  // Reserved.
-        IMAGE_SCN_LNK_REMOVE = 0x00000800, // Section contents will not become part of image.
-        IMAGE_SCN_LNK_COMDAT = 0x00001000, // Section contents comdat.
+        [EnumDisplayName("No Load")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_NOLOAD = 0x00000002,
+
+        [EnumDisplayName("Group")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_GROUP = 0x00000004,
+
+        [EnumDisplayName("No Padding")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_NO_PAD = 0x00000008,
+
+        [EnumDisplayName("Copy")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_COPY = 0x00000010,
+
+        [EnumDisplayName("Contains Code")]
+        [Description("Section contains code")]
+        IMAGE_SCN_CNT_CODE = 0x00000020,
+
+        [EnumDisplayName("Contains Initialised Data")]
+        [Description("Section contains initialized data")]
+        IMAGE_SCN_CNT_INITIALIZED_DATA = 0x00000040,
+
+        [EnumDisplayName("Contains Uninitialised Data")]
+        [Description("Section contains uninitialized data")]
+        IMAGE_SCN_CNT_UNINITIALIZED_DATA = 0x00000080,
+
+        [EnumDisplayName("Link Other")]
+        [Description("Reserved")]
+        IMAGE_SCN_LNK_OTHER = 0x00000100,
+
+        [EnumDisplayName("Link Info")]
+        [Description("Section contains comments or some other type of information")]
+        IMAGE_SCN_LNK_INFO = 0x00000200,
+
+        [EnumDisplayName("Type Over?")]
+        [Description("Reserved")]
+        IMAGE_SCN_TYPE_OVER = 0x00000400,
+
+        [EnumDisplayName("Link Remove")]
+        [Description("Section contents will not become part of image")]
+        IMAGE_SCN_LNK_REMOVE = 0x00000800,
+
+        [EnumDisplayName("Contains Comdat")]
+        [Description("Section contents comdat")]
+        IMAGE_SCN_LNK_COMDAT = 0x00001000,
+
         // 0x00002000  // Reserved.
-        // IMAGE_SCN_MEM_PROTECTED - Obsolete   0x00004000
-        IMAGE_SCN_NO_DEFER_SPEC_EXC = 0x00004000, // Reset speculative exceptions handling bits in the TLB entries for this section.
-        IMAGE_SCN_GPREL = 0x00008000, // Section content can be accessed relative to GP
+
+        [EnumDisplayName("Memory Protected")]
+        [Description("? (Obsolete)")]
+        IMAGE_SCN_MEM_PROTECTED = 0x00004000,
+
+        [EnumDisplayName("No Defer Speculative exceptions")]
+        [Description("Reset speculative exceptions handling bits in the TLB entries for this section")]
+        IMAGE_SCN_NO_DEFER_SPEC_EXC = 0x00004000, // .
+
+        [EnumDisplayName("GP Relative")]
+        [Description("Section content can be accessed relative to GP")]
+        IMAGE_SCN_GPREL = 0x00008000, // 
+
+        [EnumDisplayName("Far Data")]
+        [Description("Memory Far Data")]
         IMAGE_SCN_MEM_FARDATA = 0x00008000,
-        // IMAGE_SCN_MEM_SYSHEAP  - Obsolete    0x00010000
+
+        [EnumDisplayName("System Heap")]
+        [Description("Memory System Heap (Obsolete)")]
+        IMAGE_SCN_MEM_SYSHEAP = 0x00010000,
+
+        [EnumDisplayName("Memory Purgable")]
+        [Description("Memory Purgable")]
         IMAGE_SCN_MEM_PURGEABLE = 0x00020000,
+
+        [EnumDisplayName("Memory 16bit")]
+        [Description("Memory 16bit")]
         IMAGE_SCN_MEM_16BIT = 0x00020000,
+
+        [EnumDisplayName("Memory Locked")]
+        [Description("Memory Locked")]
         IMAGE_SCN_MEM_LOCKED = 0x00040000,
+
+        [EnumDisplayName("Memory Preload")]
+        [Description("Memory Preload")]
         IMAGE_SCN_MEM_PRELOAD = 0x00080000,
 
+
+        [EnumDisplayName("Align 1 byte")]
+        [Description("Align 1 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_1BYTES = 0x00100000,
+
+        [EnumDisplayName("Align 2 byte")]
+        [Description("Align 2 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_2BYTES = 0x00200000,
+
+        [EnumDisplayName("Align 4 byte")]
+        [Description("Align 4 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_4BYTES = 0x00300000,
+
+        [EnumDisplayName("Align 8 byte")]
+        [Description("Align 8 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_8BYTES = 0x00400000,
-        IMAGE_SCN_ALIGN_16BYTES = 0x00500000, // Default alignment if no others are specified.
+
+        [EnumDisplayName("Align 16 byte")]
+        [Description("Align 16 byte, Default alignment if no others are specified")]
+        [EnumMask(0x00F00000)]
+        IMAGE_SCN_ALIGN_16BYTES = 0x00500000,
+
+        [EnumDisplayName("Align 32 byte")]
+        [Description("Align 32 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_32BYTES = 0x00600000,
+
+        [EnumDisplayName("Align 64 byte")]
+        [Description("Align 64 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_64BYTES = 0x00700000,
+
+        [EnumDisplayName("Align 128 byte")]
+        [Description("Align 128 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_128BYTES = 0x00800000,
+
+        [EnumDisplayName("Align 256 byte")]
+        [Description("Align 256 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_256BYTES = 0x00900000,
+
+        [EnumDisplayName("Align 512 byte")]
+        [Description("Align 512 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_512BYTES = 0x00A00000,
+
+        [EnumDisplayName("Align 1024 byte")]
+        [Description("Align 1024 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_1024BYTES = 0x00B00000,
+
+        [EnumDisplayName("Align 2048 byte")]
+        [Description("Align 2048 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_2048BYTES = 0x00C00000,
+
+        [EnumDisplayName("Align 4096 byte")]
+        [Description("Align 4096 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_4096BYTES = 0x00D00000,
+
+        [EnumDisplayName("Align 8192 byte")]
+        [Description("Align 8192 byte")]
+        [EnumMask(0x00F00000)]
         IMAGE_SCN_ALIGN_8192BYTES = 0x00E00000,
+
         // Unused 0x00F00000
+
+        [EnumMask]
         IMAGE_SCN_ALIGN_MASK = 0x00F00000,
 
-        IMAGE_SCN_LNK_NRELOC_OVFL = 0x01000000, // Section contains extended relocations.
-        IMAGE_SCN_MEM_DISCARDABLE = 0x02000000, // Section can be discarded.
-        IMAGE_SCN_MEM_NOT_CACHED = 0x04000000, // Section is not cachable.
-        IMAGE_SCN_MEM_NOT_PAGED = 0x08000000, // Section is not pageable.
-        IMAGE_SCN_MEM_SHARED = 0x10000000, // Section is shareable.
-        IMAGE_SCN_MEM_EXECUTE = 0x20000000, // Section is executable.
-        IMAGE_SCN_MEM_READ = 0x40000000, // Section is readable.
-        IMAGE_SCN_MEM_WRITE = 0x80000000, // Section is writeable.
+        [EnumDisplayName("Extended Relocations")]
+        [Description("Section contains extended relocations")]
+        IMAGE_SCN_LNK_NRELOC_OVFL = 0x01000000,
+
+        [EnumDisplayName("Memory Discardable")]
+        [Description("Section can be discarded")]
+        IMAGE_SCN_MEM_DISCARDABLE = 0x02000000,
+
+        [EnumDisplayName("Memory Not Cachable")]
+        [Description("Section is not cachable")]
+        IMAGE_SCN_MEM_NOT_CACHED = 0x04000000,
+
+        [EnumDisplayName("Memory Not Pageable")]
+        [Description("Section is not pageable")]
+        IMAGE_SCN_MEM_NOT_PAGED = 0x08000000,
+
+        [EnumDisplayName("Memory Shareable")]
+        [Description("Section is shareable")]
+        IMAGE_SCN_MEM_SHARED = 0x10000000,
+
+        [EnumDisplayName("Memory Executable")]
+        [Description("Section is executable")]
+        IMAGE_SCN_MEM_EXECUTE = 0x20000000,
+
+        [EnumDisplayName("Memory Readable")]
+        [Description("Section is readable")]
+        IMAGE_SCN_MEM_READ = 0x40000000,
+
+        [EnumDisplayName("Memory Writable")]
+        [Description("Section is writeable")]
+        IMAGE_SCN_MEM_WRITE = 0x80000000,
     }
 
     [Flags]
@@ -173,13 +323,34 @@ namespace SymbolExplorer.Code.Windows
         None = 0,
 
         S_IFMT = 0xF000, // File type mask
-        S_IFDIR = 0x4000, // Directory
-        S_IFCHR = 0x2000, // Character special (indicates a device if set)
+
+        [EnumDisplayName("Pipe")]
+        [Description("Pipe")]
         S_IFIFO = 0x1000, // Pipe
+
+        [EnumDisplayName("Character special (indicates a device if set)")]
+        [Description("Character special (indicates a device if set)")]
+        S_IFCHR = 0x2000, // Character special (indicates a device if set)
+        
+        [EnumDisplayName("Directory")]
+        [Description("Directory")]
+        S_IFDIR = 0x4000, // Directory
+        
+        [EnumDisplayName("Regular")]
+        [Description("Regular")]
         S_IFREG = 0x8000, // Regular
+
+        [EnumDisplayName("Read permission, owner")]
+        [Description("Read permission, owner")]
         S_IREAD = 0x0100, // Read permission, owner
-        S_IWRITE = 0x0080, // Write permission, owner
+
+        [EnumDisplayName("Execute/search permission, owner")]
+        [Description("Execute/search permission, owner")]
         S_IEXEC = 0x0040, // Execute/search permission, owner
+
+        [EnumDisplayName("Write permission, owner")]
+        [Description("Write permission, owner")]
+        S_IWRITE = 0x0080, // Write permission, owner
 
         //S_IRUSR = 0x0100,
         //S_IWUSR = 0x0080,
@@ -191,12 +362,12 @@ namespace SymbolExplorer.Code.Windows
         //S_IWOTH = 0x0002,
         //S_IXOTH = 0x0001,
 
-        S_1 = 0x0001,
-        S_2 = 0x0002,
-        S_3 = 0x0004,
-        S_4 = 0x0008,
-        S_5 = 0x0010,
-        S_6 = 0x0020,
+        S_IXOTH = 0x0001,
+        S_IWOTH = 0x0002,
+        S_IROTH = 0x0004,
+        S_IXGRP = 0x0008,
+        S_IWGRP = 0x0010,
+        S_IRGRP = 0x0020,
     }
 
     [Flags]

@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:SymbolExplorer.Controls">
 
     <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
         <TextBlock Text="{Binding Name}" />
@@ -42,7 +43,7 @@
             <StackPanel Grid.Column="4" Margin="4,0,0,0">
                 <TextBlock Text="{Binding ArchiveMember.Header.UserID}" />
                 <TextBlock Text="{Binding ArchiveMember.Header.GroupID}" />
-                <TextBlock Text="{Binding ArchiveMember.Header.Mode, StringFormat=' \{0\} (0x\{0:X\})'}" />
+                <controls:EnumText Value="{Binding ArchiveMember.Header.Mode}" />
             </StackPanel>
         </Grid>
     </DataTemplate>
@@ -155,7 +156,7 @@
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Characteristics: " />
-                                    <TextBlock Text="{Binding Characteristics}" />
+                                    <controls:EnumText Value="{Binding Characteristics}" />
                                 </StackPanel>
                                 <Expander>
                                     <TextBlock Text="{Binding RawData.Text}" Style="{StaticResource Hexview}"/>

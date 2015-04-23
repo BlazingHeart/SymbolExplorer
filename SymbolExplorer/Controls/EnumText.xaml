@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="SymbolExplorer.Controls.EnumText" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="20" d:DesignWidth="300">
+    <UserControl.Resources>
+        <DataTemplate x:Key="EnumValue">
+            <TextBlock Text="{Binding Text}" ToolTip="{Binding ToolTop}" />
+        </DataTemplate>
+        <Style TargetType="TextBlock">
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True" />
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="FontWeight" Value="Bold" />
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsMouseOver" Value="True" />
+                        <Condition Property="ToolTip" Value="{x:Null}" />
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="FontWeight" Value="Normal" />
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel x:Name="Container" Orientation="Horizontal">
+    </StackPanel>
+</UserControl>

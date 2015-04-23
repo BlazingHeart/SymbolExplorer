@@ -1,4 +1,5 @@
-﻿using SymbolExplorer.Code;
+﻿using SymbolExplorer.Framework;
+using SymbolExplorer.Code;
 using SymbolExplorer.Code.Windows;
 using System;
 using System.Collections.Generic;
@@ -73,9 +74,9 @@ namespace SymbolExplorer.Models
             }
         }
 
-        public string BasicTypeName { get { return FriendlyEnums.FriendlyName(_symbol.BasicType); } }
-        public string DataTypeName { get { return FriendlyEnums.FriendlyName(_symbol.DataType); } }
-        public string StorageClassName { get { return FriendlyEnums.FriendlyName(_symbol.StorageClass); } }
+        public string BasicTypeName { get { return _symbol.BasicType.GetDisplayName(); } }
+        public string DataTypeName { get { return _symbol.DataType.GetDisplayName(); } }
+        public string StorageClassName { get { return _symbol.StorageClass.GetDisplayName(); } }
 
         public string SectionName
         {

@@ -44,5 +44,12 @@ namespace SymbolExplorer.Framework
 
             return false;
         }
+
+        public static string GetDisplayName(this Enum enumVal)
+        {
+            var nameAttr = enumVal.GetAttributeOfType<EnumDisplayNameAttribute>();
+
+            return nameAttr != null ? nameAttr.DisplayName : enumVal.ToString();
+        }
     }
 }

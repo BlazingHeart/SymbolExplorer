@@ -373,63 +373,158 @@ namespace SymbolExplorer.Code.Windows
     [Flags]
     public enum IMAGE_SYM_TYPE : ushort
     {
+        [EnumDisplayName("None"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_NULL = 0x0000,  // no type.
+
+        [EnumDisplayName("Void"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_VOID = 0x0001,
-        IMAGE_SYM_TYPE_CHAR = 0x0002,  // type character.
-        IMAGE_SYM_TYPE_SHORT = 0x0003,  // type short integer.
+
+        [EnumDisplayName("Character"), EnumMask(0x000F)]
+        IMAGE_SYM_TYPE_CHAR = 0x0002,
+
+        [EnumDisplayName("Short Integer"), EnumMask(0x000F)]
+        IMAGE_SYM_TYPE_SHORT = 0x0003,
+
+        [EnumDisplayName("Integer"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_INT = 0x0004,
+
+        [EnumDisplayName("Long Integer"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_LONG = 0x0005,
+
+        [EnumDisplayName("Float"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_FLOAT = 0x0006,
+
+        [EnumDisplayName("Double"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_DOUBLE = 0x0007,
+
+        [EnumDisplayName("Structure"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_STRUCT = 0x0008,
+
+        [EnumDisplayName("Union"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_UNION = 0x0009,
-        IMAGE_SYM_TYPE_ENUM = 0x000A,  // enumeration.
-        IMAGE_SYM_TYPE_MOE = 0x000B,  // member of enumeration.
+
+        [EnumDisplayName("Enumeration"), EnumMask(0x000F)]
+        IMAGE_SYM_TYPE_ENUM = 0x000A,
+
+        [EnumDisplayName("Member of Enumeration"), EnumMask(0x000F)]
+        IMAGE_SYM_TYPE_MOE = 0x000B,
+
+        [EnumDisplayName("Byte"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_BYTE = 0x000C,
+
+        [EnumDisplayName("Word"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_WORD = 0x000D,
+
+        [EnumDisplayName("Unsigned Integer"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_UINT = 0x000E,
+
+        [EnumDisplayName("Double Word"), EnumMask(0x000F)]
         IMAGE_SYM_TYPE_DWORD = 0x000F,
+
+        [EnumDisplayName("PCode")]
         IMAGE_SYM_TYPE_PCODE = 0x8000,
     }
 
-    [Flags]
     public enum IMAGE_SYM_DTYPE : ushort
     {
-        IMAGE_SYM_DTYPE_NULL = 0x00, // no derived type.
-        IMAGE_SYM_DTYPE_POINTER = 0x01, // pointer.
-        IMAGE_SYM_DTYPE_FUNCTION = 0x02, // function.
-        IMAGE_SYM_DTYPE_ARRAY = 0x03, // array.
+        [EnumDisplayName("No Derived Type")]
+        IMAGE_SYM_DTYPE_NULL = 0x00,
+
+        [EnumDisplayName("Pointer")]
+        IMAGE_SYM_DTYPE_POINTER = 0x01,
+
+        [EnumDisplayName("Function")]
+        IMAGE_SYM_DTYPE_FUNCTION = 0x02,
+
+        [EnumDisplayName("Array")]
+        IMAGE_SYM_DTYPE_ARRAY = 0x03,
     }
 
     public enum IMAGE_SYM_CLASS : byte
     {
+
+        [EnumDisplayName("End of Function")]
         IMAGE_SYM_CLASS_END_OF_FUNCTION = 0xFF,
+
+        [EnumDisplayName("Null")]
         IMAGE_SYM_CLASS_NULL = 0x00,
+
+        [EnumDisplayName("Automatic")]
         IMAGE_SYM_CLASS_AUTOMATIC = 0x01,
+
+        [EnumDisplayName("External")]
         IMAGE_SYM_CLASS_EXTERNAL = 0x02,
+
+        [EnumDisplayName("Static")]
         IMAGE_SYM_CLASS_STATIC = 0x03,
+
+        [EnumDisplayName("Register")]
         IMAGE_SYM_CLASS_REGISTER = 0x04,
+
+        [EnumDisplayName("External Def")]
         IMAGE_SYM_CLASS_EXTERNAL_DEF = 0x05,
+
+        [EnumDisplayName("Label")]
         IMAGE_SYM_CLASS_LABEL = 0x06,
+
+        [EnumDisplayName("Undefined Label")]
         IMAGE_SYM_CLASS_UNDEFINED_LABEL = 0x07,
+
+        [EnumDisplayName("Member of Struct")]
         IMAGE_SYM_CLASS_MEMBER_OF_STRUCT = 0x08,
+
+        [EnumDisplayName("Argument")]
         IMAGE_SYM_CLASS_ARGUMENT = 0x09,
+
+        [EnumDisplayName("Struct Tag")]
         IMAGE_SYM_CLASS_STRUCT_TAG = 0x0A,
+
+        [EnumDisplayName("Member of Union")]
         IMAGE_SYM_CLASS_MEMBER_OF_UNION = 0x0B,
+
+        [EnumDisplayName("Union Tag")]
         IMAGE_SYM_CLASS_UNION_TAG = 0x0C,
+
+        [EnumDisplayName("Type Definition")]
         IMAGE_SYM_CLASS_TYPE_DEFINITION = 0x0D,
+
+        [EnumDisplayName("Undefined Static")]
         IMAGE_SYM_CLASS_UNDEFINED_STATIC = 0x0E,
+
+        [EnumDisplayName("Enum Tag")]
         IMAGE_SYM_CLASS_ENUM_TAG = 0x0F,
+
+        [EnumDisplayName("Member of Enum")]
         IMAGE_SYM_CLASS_MEMBER_OF_ENUM = 0x10,
+
+        [EnumDisplayName("Register Param")]
         IMAGE_SYM_CLASS_REGISTER_PARAM = 0x11,
+
+        [EnumDisplayName("Bit Field")]
         IMAGE_SYM_CLASS_BIT_FIELD = 0x12,
+
+        [EnumDisplayName("Far External")]
         IMAGE_SYM_CLASS_FAR_EXTERNAL = 0x44,
+
+        [EnumDisplayName("Block")]
         IMAGE_SYM_CLASS_BLOCK = 0x64,
+
+        [EnumDisplayName("Function")]
         IMAGE_SYM_CLASS_FUNCTION = 0x65,
+
+        [EnumDisplayName("End of Struct")]
         IMAGE_SYM_CLASS_END_OF_STRUCT = 0x66,
+
+        [EnumDisplayName("File")]
         IMAGE_SYM_CLASS_FILE = 0x67,
+
+        [EnumDisplayName("Section")]
         IMAGE_SYM_CLASS_SECTION = 0x68,
+
+        [EnumDisplayName("Weak External")]
         IMAGE_SYM_CLASS_WEAK_EXTERNAL = 0x69,
+
+        [EnumDisplayName("CLR Token")]
         IMAGE_SYM_CLASS_CLR_TOKEN = 0x6B,
     }
 

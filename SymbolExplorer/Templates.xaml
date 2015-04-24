@@ -1,4 +1,10 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:SymbolExplorer.Controls">
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:SymbolExplorer.Controls"
+    xmlns:converters="clr-namespace:SymbolExplorer.Framework.Converters">
+    
+    <converters:EnumDisplayNameConverter x:Key="enumDisplayName" />
 
     <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
         <TextBlock Text="{Binding Name}" />
@@ -93,9 +99,9 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Value" Binding="{Binding Value, StringFormat={}0x\{0:X8\}}" />
                     <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section" />
-                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName}" SortMemberPath="BasicType" />
-                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName}" SortMemberPath="DataType" />
-                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName}" SortMemberPath="StorageClass" />
+                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName, Converter={StaticResource enumDisplayName}}" SortMemberPath="BasicType" />
+                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName, Converter={StaticResource enumDisplayName}}" SortMemberPath="DataType" />
+                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName, Converter={StaticResource enumDisplayName}}" SortMemberPath="StorageClass" />
                     <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed" />
                     <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}" />

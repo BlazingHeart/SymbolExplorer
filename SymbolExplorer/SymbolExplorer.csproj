@@ -117,6 +117,7 @@
     <Compile Include="Controls\EnumText.xaml.cs">
       <DependentUpon>EnumText.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Framework\Converters\EnumConverter.cs" />
     <Compile Include="Framework\EnumDisplayNameAttribute.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />
     <Compile Include="Framework\EnumMaskAttribute.cs" />

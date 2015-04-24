@@ -74,9 +74,9 @@ namespace SymbolExplorer.Models
             }
         }
 
-        public string BasicTypeName { get { return _symbol.BasicType.GetDisplayName(); } }
-        public string DataTypeName { get { return _symbol.DataType.GetDisplayName(); } }
-        public string StorageClassName { get { return _symbol.StorageClass.GetDisplayName(); } }
+        public IMAGE_SYM_TYPE BasicTypeName { get { return _symbol.BasicType; } }
+        public IMAGE_SYM_DTYPE DataTypeName { get { return _symbol.DataType; } }
+        public IMAGE_SYM_CLASS StorageClassName { get { return _symbol.StorageClass; } }
 
         public string SectionName
         {

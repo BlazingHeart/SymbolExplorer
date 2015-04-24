@@ -14,6 +14,7 @@ namespace SymbolExplorer.ViewModels
         private bool _showAddress;
         private long _startingAddress;
 
+        private string _hexText;
         private string _text;
 
         public byte[] Data { get { return _data; } set { SetProperty(ref _data, value, "Data"); ClearText(); } }
@@ -26,7 +27,10 @@ namespace SymbolExplorer.ViewModels
 
         public int ColumnCount { get { return _columnCount; } set { SetProperty(ref _columnCount, value, "ColumnCount"); ClearText(); } }
 
+        public string HexText { get { return _hexText ?? GenerateHexText(); } }
+
         public string Text { get { return _text ?? GenerateText(); } }
+
 
         public ByteDataViewModel()
         {
@@ -36,6 +40,9 @@ namespace SymbolExplorer.ViewModels
 
         private void ClearText()
         {
+            _hexText = null;
+            OnPropertyChanged("HexText");
+
             _text = null;
             OnPropertyChanged("Text");
         }
@@ -51,7 +58,7 @@ namespace SymbolExplorer.ViewModels
             return c;
         }
 
-        private string GenerateText()
+        private string GenerateHexText()
         {
             StringBuilder sb = new StringBuilder();
             if (_data != null)
@@ -93,6 +100,23 @@ namespace SymbolExplorer.ViewModels
 
                     sb.AppendLine();
                     byteIndex += lineBytes;
+                }
+            }
+
+            _hexText = sb.ToString();
+            OnPropertyChanged("HexText");
+            return _hexText;
+        }
+
+        private string GenerateText()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (_data != null)
+            {
+                for (int byteIndex = 0; byteIndex < _data.Length; ++byteIndex)
+                {
+                    char c = ToPrintable(_data[byteIndex]);
+                    sb.Append(c);
                 }
             }
 

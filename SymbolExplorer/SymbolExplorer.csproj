@@ -120,6 +120,11 @@
     <Compile Include="Framework\EnumDisplayNameAttribute.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />
     <Compile Include="Framework\EnumMaskAttribute.cs" />
+    <Compile Include="Properties\LocalisedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LocalisedResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\HeaderGeneratorViewModel.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
@@ -251,6 +256,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\LocalisedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LocalisedResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

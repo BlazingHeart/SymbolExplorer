@@ -1,16 +1,14 @@
 ﻿<Window x:Class="SymbolExplorer.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="About Symbol Explorer" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        xmlns:props="clr-namespace:SymbolExplorer.Properties"
+        Title="{x:Static props:LocalisedResources.About_Title}" Height="300" Width="300" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ScrollViewer.VerticalScrollBarVisibility="Disabled">
     <DockPanel Margin="4" LastChildFill="False">
-        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="24">Symbol Explorer</TextBlock>
-        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12" Text="{Binding Version}" />
-        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="16">(c) 2013 Simon Stevenson</TextBlock>
-        <Separator DockPanel.Dock="Top" Margin="20,6,20,6"/>
-        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12">
-                Special thanks to:<LineBreak />
-                Shaun, Derek, Dennis, and James.<LineBreak />
-        </TextBlock>
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="24" Text="{x:Static props:LocalisedResources.App_Name}" />
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Right" FontSize="12" Text="{Binding Version}" />
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="16" Text="{x:Static props:LocalisedResources.App_Copyright}" />
+        <Separator DockPanel.Dock="Top" Margin="20,6,20,6" />
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12" Text="{x:Static props:LocalisedResources.About_Thanks}" />
         <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12">
             For updates, and to contribute, see<LineBreak />
             <Hyperlink NavigateUri="http://redwyre.github.com/SymbolExplorer" RequestNavigate="Hyperlink_RequestNavigate">http://redwyre.github.com/SymbolExplorer</Hyperlink>

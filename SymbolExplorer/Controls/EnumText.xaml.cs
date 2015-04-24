@@ -51,15 +51,13 @@ namespace SymbolExplorer.Controls
 
                 var values = Enum.GetValues(enumType);
 
-                ulong bitfield = Convert.ToUInt64(Value);
-
                 foreach (Enum enumVal in values)
                 {
                     if (enumVal.IsDisplayable() && Value.HasFlagMasked(enumVal))
                     {
                         if (Container.Children.Count > 0)
                         {
-                            Container.Children.Add(new TextBlock() { Text = ", " });
+                            Container.Children.Add(new TextBlock() { Text = Properties.LocalisedResources.EnumText_Separator });
                         }
 
                         var nameAttr = enumVal.GetAttributeOfType<EnumDisplayNameAttribute>();

@@ -9,11 +9,11 @@ using System.Text;
 
 namespace SymbolExplorer.Code
 {
-    class KnownSectionName
+    public class KnownSectionName
     {
-        string SectionName;
-        string ContentDescription;
-        IMAGE_SCN Characteristics;
+        public string SectionName;
+        public string ContentDescription;
+        public IMAGE_SCN Characteristics;
 
         static KnownSectionName[] KnownSectionNames = new KnownSectionName[] {
             new KnownSectionName { SectionName = ".bss", ContentDescription = "Uninitialized data (free format)", Characteristics = IMAGE_SCN.IMAGE_SCN_CNT_UNINITIALIZED_DATA | IMAGE_SCN.IMAGE_SCN_MEM_READ | IMAGE_SCN.IMAGE_SCN_MEM_WRITE },
@@ -42,7 +42,7 @@ namespace SymbolExplorer.Code
             new KnownSectionName { SectionName = ".xdata", ContentDescription = "Exception information (free format)", Characteristics = IMAGE_SCN.IMAGE_SCN_CNT_INITIALIZED_DATA | IMAGE_SCN.IMAGE_SCN_MEM_READ },
         };
 
-        KnownSectionName Find(string sectionName)
+        public static KnownSectionName Find(string sectionName)
         {
             var q = from section in KnownSectionNames
                     where section.SectionName == sectionName

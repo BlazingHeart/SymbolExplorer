@@ -1,6 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="clr-namespace:SymbolExplorer.Controls">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:SymbolExplorer.Controls">
 
     <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
         <TextBlock Text="{Binding Name}" />
@@ -61,7 +59,7 @@
             <Expander DockPanel.Dock="Bottom" Header="Symbol Details" ExpandDirection="Up" IsExpanded="False" VerticalAlignment="Stretch">
                 <Grid DataContext="{Binding ElementName=symbolDataGrid, Path=SelectedItem}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
@@ -79,13 +77,13 @@
                     <Separator Grid.Column="2" Width="1" Style="{DynamicResource VerticalSeparatorStyle}" />
                 </Grid>
             </Expander>
-            
+
             <!-- Symbol data grid-->
             <DataGrid x:Name="symbolDataGrid" IsReadOnly="True" SelectionMode="Single" ItemsSource="{Binding FilteredSymbols}" AutoGenerateColumns="False">
                 <DataGrid.Resources>
                     <ContextMenu x:Key="headerContextMenu" DataContext="{Binding Path=PlacementTarget, RelativeSource={RelativeSource Self}}">
-                        <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}"/>
-                        <MenuItem Header="Select Columns" Command="{Binding Tag.SelectColumns, Mode=OneWay}" CommandParameter="{Binding}"/>
+                        <MenuItem Header="Hide Column" Command="{Binding Tag.HideColumn, Mode=OneWay}" CommandParameter="{Binding}" />
+                        <MenuItem Header="Select Columns" Command="{Binding Tag.SelectColumns, Mode=OneWay}" CommandParameter="{Binding}" />
                     </ContextMenu>
                     <Style TargetType="{x:Type DataGridColumnHeader}">
                         <Setter Property="ContextMenu" Value="{DynamicResource headerContextMenu}" />
@@ -93,21 +91,21 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Value" Binding="{Binding Value, StringFormat={}0x\{0:X8\}}"/>
-                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section"/>
-                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName}" SortMemberPath="BasicType"/>
-                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName}"  SortMemberPath="DataType"/>
-                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName}" SortMemberPath="StorageClass"/>
-                    <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed"/>
-                    <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}"/>
+                    <DataGridTextColumn Header="Value" Binding="{Binding Value, StringFormat={}0x\{0:X8\}}" />
+                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section" />
+                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName}" SortMemberPath="BasicType" />
+                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName}" SortMemberPath="DataType" />
+                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName}" SortMemberPath="StorageClass" />
+                    <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed" />
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed" />
+                    <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}" />
                 </DataGrid.Columns>
             </DataGrid>
         </DockPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">
-        <DockPanel >
+        <DockPanel>
             <ContentPresenter DockPanel.Dock="Top" Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
             <Separator DockPanel.Dock="Top" />
             <StackPanel DockPanel.Dock="Top">
@@ -137,11 +135,11 @@
                 </StackPanel>
             </StackPanel>
             <Separator DockPanel.Dock="Top" />
-            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding Sections}">
+            <ListBox DockPanel.Dock="Top" ItemsSource="{Binding Sections}" HorizontalContentAlignment="Stretch" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}">
-                            <StackPanel>
+                        <Border BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.WindowFrameBrushKey}}" HorizontalAlignment="Stretch">
+                            <StackPanel Margin="4,4,4,4" HorizontalAlignment="Stretch">
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="Name: " />
                                     <TextBlock Text="{Binding Name}" />
@@ -159,7 +157,14 @@
                                     <controls:EnumText Value="{Binding Characteristics}" />
                                 </StackPanel>
                                 <Expander>
-                                    <TextBlock Text="{Binding RawData.Text}" Style="{StaticResource Hexview}"/>
+                                    <TabControl HorizontalAlignment="Stretch">
+                                        <TabItem Header="Hex" HorizontalAlignment="Stretch">
+                                            <TextBlock Text="{Binding RawData.HexText}" Style="{StaticResource Hexview}" HorizontalAlignment="Stretch" Margin="4"/>
+                                        </TabItem>
+                                        <TabItem Header="Text" HorizontalAlignment="Stretch">
+                                            <TextBlock Text="{Binding RawData.Text}" Style="{StaticResource Hexview}" TextWrapping="Wrap" HorizontalAlignment="Stretch" Margin="4" />
+                                        </TabItem>
+                                    </TabControl>
                                 </Expander>
                             </StackPanel>
                         </Border>
@@ -171,7 +176,7 @@
 
     <DataTemplate x:Key="HeaderViewDataTemplate" DataType="ObjectFileMemberViewModel">
         <DockPanel>
-            <TextBox Text="{Binding HeaderView.HeaderText, Mode=OneWay}" Style="{StaticResource FixedWidthTextBox}" IsReadOnly="True" UndoLimit="0" VerticalScrollBarVisibility="Auto"/>
+            <TextBox Text="{Binding HeaderView.HeaderText, Mode=OneWay}" Style="{StaticResource FixedWidthTextBox}" IsReadOnly="True" UndoLimit="0" VerticalScrollBarVisibility="Auto" />
         </DockPanel>
     </DataTemplate>
 
@@ -195,11 +200,11 @@
         <Expander>
             <Expander.Header>
                 <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Section "/>
+                    <TextBlock Text="Section " />
                     <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text=" ( "/>
-                    <TextBlock Text="{Binding ItemCount}"/>
-                    <TextBlock Text=" Items)"/>
+                    <TextBlock Text=" ( " />
+                    <TextBlock Text="{Binding ItemCount}" />
+                    <TextBlock Text=" Items)" />
                 </StackPanel>
             </Expander.Header>
             <ItemsPresenter />

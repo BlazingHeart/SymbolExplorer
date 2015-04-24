@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,6 +26,7 @@ namespace SymbolExplorer
         {
             InitializeComponent();
             this.DataContext = this;
+            Version = Assembly.GetEntryAssembly().GetName().Version;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

@@ -7,7 +7,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Images.xaml"/>
                 <ResourceDictionary Source="Styles.xaml"/>
-                <ResourceDictionary Source="Templates.xaml"/>
+                <ResourceDictionary Source="Templates.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Fluent;Component/Themes/Office2013/Generic.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

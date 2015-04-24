@@ -50,7 +50,7 @@ namespace SymbolExplorer.ViewModels
         private char ToPrintable(byte b)
         {
             char c = Convert.ToChar(b);
-            if (/*(c >= 0x80) ||*/ !(char.IsLetterOrDigit(c) || char.IsPunctuation(c) || char.IsSymbol(c) /*|| (c == ' ')*/))
+            if (/*(c >= 0x80) ||*/ !(char.IsLetterOrDigit(c) || char.IsPunctuation(c) || char.IsSymbol(c) || (c == ' ')))
             {
                 c = '.';
             }

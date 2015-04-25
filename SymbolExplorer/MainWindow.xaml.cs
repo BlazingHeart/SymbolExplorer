@@ -29,5 +29,20 @@ namespace SymbolExplorer
         {
             InitializeComponent();
         }
+
+        private void MemberTree_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (((TabItem)ViewTabs.SelectedItem).Visibility != Visibility.Visible)
+            {
+                foreach (TabItem tab in ViewTabs.Items)
+                {
+                    if (tab.Visibility == Visibility.Visible)
+                    {
+                        ViewTabs.SelectedItem = tab;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

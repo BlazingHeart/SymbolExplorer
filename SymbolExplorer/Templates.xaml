@@ -2,19 +2,23 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:controls="clr-namespace:SymbolExplorer.Controls"
-    xmlns:converters="clr-namespace:SymbolExplorer.Framework.Converters">
+    xmlns:converters="clr-namespace:SymbolExplorer.Framework.Converters"
+    xmlns:code="clr-namespace:SymbolExplorer.Code"
+    xmlns:viewModels="clr-namespace:SymbolExplorer.ViewModels">
     
     <converters:EnumDisplayNameConverter x:Key="enumDisplayName" />
 
-    <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="ViewModels:ArchiveMemberViewModel">
+    <converters:TypeComparisonToVisibilityConverter x:Key="typeComparisonToVisibility" />
+
+    <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="{x:Type viewModels:ArchiveMemberViewModel}">
         <TextBlock Text="{Binding Name}" />
     </HierarchicalDataTemplate>
 
-    <HierarchicalDataTemplate x:Key="ArchiveFileTreeViewTemplate" DataType="ViewModels:ArchiveFileViewModel" ItemTemplate="{StaticResource ArchiveMemberTreeViewTemplate}" ItemsSource="{Binding Members}">
+    <HierarchicalDataTemplate x:Key="ArchiveFileTreeViewTemplate" DataType="{x:Type viewModels:ArchiveFileViewModel}" ItemTemplate="{StaticResource ArchiveMemberTreeViewTemplate}" ItemsSource="{Binding Members}">
         <TextBlock Text="{Binding Name}" />
     </HierarchicalDataTemplate>
 
-    <DataTemplate x:Key="ArchiveMemberHeaderDataTemplate" DataType="ArchiveMemberHeaderViewModel">
+    <DataTemplate x:Key="ArchiveMemberHeaderDataTemplate" DataType="{x:Type code:ArchiveMemberHeader}">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" MinWidth="40" />
@@ -52,7 +56,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="SymbolDataTemplate" DataType="ObjectFileViewModel">
+    <DataTemplate x:Key="SymbolDataTemplate" DataType="{x:Type viewModels:ObjectFileViewModel}">
         <DockPanel>
             <!-- Search Box-->
             <DockPanel DockPanel.Dock="Top" Margin="0,0,0,4">
@@ -110,7 +114,16 @@
         </DockPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="ObjectFileDataTemplate" DataType="ObjectFileMemberViewModel">
+    <DataTemplate x:Key="ArchiveFileDataTemplate" DataType="{x:Type viewModels:ArchiveFileViewModel}">
+        <DockPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Name: " />
+                <TextBlock Text="{Binding Name}" />
+            </StackPanel>
+        </DockPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ObjectFileDataTemplate" DataType="{x:Type viewModels:ObjectFileViewModel}">
         <DockPanel>
             <ContentPresenter DockPanel.Dock="Top" Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
             <Separator DockPanel.Dock="Top" />
@@ -180,40 +193,9 @@
         </DockPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="HeaderViewDataTemplate" DataType="ObjectFileMemberViewModel">
+    <DataTemplate x:Key="HeaderViewDataTemplate" DataType="{x:Type viewModels:ObjectFileViewModel}">
         <DockPanel>
             <TextBox Text="{Binding HeaderView.HeaderText, Mode=OneWay}" Style="{StaticResource FixedWidthTextBox}" IsReadOnly="True" UndoLimit="0" VerticalScrollBarVisibility="Auto" />
         </DockPanel>
     </DataTemplate>
-
-    <ControlTemplate x:Key="ArchiveMemberHeaderControlTemplate">
-        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ArchiveMemberHeaderDataTemplate}" />
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="ObjectFileControlTemplate">
-        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource ObjectFileDataTemplate}" />
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="SymbolControlTemplate">
-        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="HeaderViewControlTemplate">
-        <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource HeaderViewDataTemplate}" />
-    </ControlTemplate>
-
-    <ControlTemplate x:Key="SymbolGroupControlTemplate" TargetType="{x:Type GroupItem}">
-        <Expander>
-            <Expander.Header>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Section " />
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock Text=" ( " />
-                    <TextBlock Text="{Binding ItemCount}" />
-                    <TextBlock Text=" Items)" />
-                </StackPanel>
-            </Expander.Header>
-            <ItemsPresenter />
-        </Expander>
-    </ControlTemplate>
 </ResourceDictionary>

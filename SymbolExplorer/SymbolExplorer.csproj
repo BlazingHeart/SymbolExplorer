@@ -130,6 +130,7 @@
       <DependentUpon>EnumText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\Converters\EnumConverter.cs" />
+    <Compile Include="Framework\Converters\TypeComparisonToVisibilityConverter.cs" />
     <Compile Include="Framework\EnumDisplayNameAttribute.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />
     <Compile Include="Framework\EnumMaskAttribute.cs" />
@@ -327,6 +328,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\help.png" />
+    <Resource Include="Images\open.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

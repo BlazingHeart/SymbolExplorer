@@ -4,7 +4,7 @@ $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 cd $PSScriptRoot
 
 Set-StrictMode -Version 2.0
-$ErrorPreference = "Stop"
+$ErrorActionPreference = "Stop"
 
 $wixBin = Resolve-Path "${Env:WIX}\bin"
 

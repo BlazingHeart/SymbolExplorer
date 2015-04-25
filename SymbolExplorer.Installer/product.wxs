@@ -1,24 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-    <Product Id="*" UpgradeCode="{8100023D-B376-4E2A-AB0D-4296FDB9A795}"
-	      Version="0.1.2.0" Language="1033" Name="Symbol Explorer" Manufacturer="redwyre.github.com">
-        <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine"/>
-        <Media Id="1" Cabinet="SymbolExplorer.cab" EmbedCab="yes" />
+  <Product Id="*" UpgradeCode="{8100023D-B376-4E2A-AB0D-4296FDB9A795}"
+      Version="!(bind.FileVersion.F.SymbolExplorer.exe)" Language="1033" Name="Symbol Explorer" Manufacturer="Blazing Heart">
+    <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine"/>
 
-        <Directory Id="TARGETDIR" Name="SourceDir">
-            <Directory Id="ProgramFilesFolder">
-                <Directory Id="APPLICATIONROOTDIRECTORY" Name="SymbolExplorer" />
-            </Directory>
-        </Directory>
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
 
-        <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
-            <Component Id="C.SymbolExplorer.exe" Guid="{DCBEA45C-5C7E-4D87-B7B2-DD01C22092F9}">
-                <File Id="F.SymbolExplorer.exe" Source="../SymbolExplorer/bin/Release/SymbolExplorer.exe" KeyPath="yes" Checksum="yes" />
-            </Component>
-        </DirectoryRef>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Symbol Explorer" />
+      </Directory>
 
-        <Feature Id="Feat.SymbolExplorer" Title="Symbol Explorer" Level="1">
-            <ComponentRef Id="C.SymbolExplorer.exe" />
-        </Feature>
-    </Product>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Symbol Explorer"/>
+      </Directory>
+    </Directory>
+
+
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="C.SymbolExplorer.exe" Guid="*">
+        <File Id="F.SymbolExplorer.exe" Source="../SymbolExplorer/bin/Release/SymbolExplorer.exe" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="C.dbghelp.dll" Guid="*">
+        <File Id="F.dbghelp.dll" Source="../SymbolExplorer/bin/Release/dbghelp.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="C.Fluent.dll" Guid="*">
+        <File Id="F.Fluent.dll" Source="../SymbolExplorer/bin/Release/Fluent.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="C.Microsoft.Windows.Shell.dll" Guid="*">
+        <File Id="F.Microsoft.Windows.Shell.dll" Source="../SymbolExplorer/bin/Release/Microsoft.Windows.Shell.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+      <Component Id="C.System.Windows.Interactivity.dll" Guid="*">
+        <File Id="F.System.Windows.Interactivity.dll" Source="../SymbolExplorer/bin/Release/System.Windows.Interactivity.dll" KeyPath="yes" Checksum="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="C.ApplicationShortcut" Guid="{042637E6-2EE6-4B86-9BB2-9141C5A82B5B}">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="Symbol Explorer"
+                  Description="A program for viewing library files."
+                  Target="[#F.SymbolExplorer.exe]"
+                  WorkingDirectory="INSTALLFOLDER"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\BlazingHeart\SymbolExplorer" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <Feature Id="Feat.SymbolExplorer" Title="Symbol Explorer" Level="1">
+      <ComponentRef Id="C.SymbolExplorer.exe" />
+      <ComponentRef Id="C.dbghelp.dll" />
+      <ComponentRef Id="C.Fluent.dll" />
+      <ComponentRef Id="C.Microsoft.Windows.Shell.dll" />
+      <ComponentRef Id="C.System.Windows.Interactivity.dll" />
+      <ComponentRef Id="C.ApplicationShortcut" />
+    </Feature>
+  </Product>
 </Wix>

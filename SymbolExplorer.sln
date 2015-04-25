@@ -12,6 +12,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorer.Tests", "Sym
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.vcxproj", "{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}"
 EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SymbolExplorer.Installer", "SymbolExplorer.Installer\SymbolExplorer.Installer.wixproj", "{5CA82F7C-AB47-4810-9113-EE159CD7C131}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F693D375-33CA-401C-9634-DBCDBF3D5709} = {F693D375-33CA-401C-9634-DBCDBF3D5709}
+	EndProjectSection
+EndProject
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SymbolExplorer.Installer.Bundle", "SymbolExplorer.Installer\SymbolExplorer.Installer.Bundle.wixproj", "{C31E3971-BCAB-47C8-B519-7A35D563A67B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131} = {5CA82F7C-AB47-4810-9113-EE159CD7C131}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,6 +40,12 @@ Global
 		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Debug|Any CPU.Build.0 = Debug|Win32
 		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Release|Any CPU.ActiveCfg = Release|Win32
 		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Release|Any CPU.Build.0 = Release|Win32
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Debug|Any CPU.ActiveCfg = Release|x86
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Release|Any CPU.ActiveCfg = Release|x86
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Release|Any CPU.Build.0 = Release|x86
+		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Debug|Any CPU.ActiveCfg = Release|x86
+		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Release|Any CPU.ActiveCfg = Release|x86
+		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Release|Any CPU.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

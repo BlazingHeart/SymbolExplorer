@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
 	xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
 	<Bundle UpgradeCode="{960916F9-2923-4851-994C-2719122434A4}"
-          Version="0.1.2.0"
+          Version="!(bind.packageVersion.P.SymbolExplorer)"
           SplashScreenSourceFile="logo.png"
           >
 		<BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense">
@@ -12,7 +12,7 @@
 				/>
 		</BootstrapperApplicationRef>
 		<Chain>
-			<MsiPackage SourceFile="output\SymbolExplorer.msi" />
+			<MsiPackage Id="P.SymbolExplorer" SourceFile="bin\Release\SymbolExplorer.msi" />
 		</Chain>
 	</Bundle>
 </Wix>

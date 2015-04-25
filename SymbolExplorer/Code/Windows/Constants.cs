@@ -320,8 +320,7 @@ namespace SymbolExplorer.Code.Windows
     [Flags]
     public enum ST_MODE : ushort
     {
-        None = 0,
-
+        [EnumMask]
         S_IFMT = 0xF000, // File type mask
 
         [EnumDisplayName("Pipe")]
@@ -340,16 +339,16 @@ namespace SymbolExplorer.Code.Windows
         [Description("Regular")]
         S_IFREG = 0x8000, // Regular
 
-        [EnumDisplayName("Read permission, owner")]
-        [Description("Read permission, owner")]
+        [EnumDisplayName("Owner Read Permission")]
+        [Description("Owner read permission")]
         S_IREAD = 0x0100, // Read permission, owner
 
-        [EnumDisplayName("Execute/search permission, owner")]
-        [Description("Execute/search permission, owner")]
+        [EnumDisplayName("Owner Execute Permission")]
+        [Description("Owner execute/search permission")]
         S_IEXEC = 0x0040, // Execute/search permission, owner
 
-        [EnumDisplayName("Write permission, owner")]
-        [Description("Write permission, owner")]
+        [EnumDisplayName("Owner Write Permission")]
+        [Description("Owner write permission")]
         S_IWRITE = 0x0080, // Write permission, owner
 
         //S_IRUSR = 0x0100,

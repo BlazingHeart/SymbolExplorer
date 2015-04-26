@@ -12,7 +12,10 @@
 				/>
 		</BootstrapperApplicationRef>
 		<Chain>
-			<MsiPackage Id="P.SymbolExplorer" SourceFile="bin\Release\SymbolExplorer.msi" />
+			<MsiPackage Id="P.SymbolExplorer"
+                  Name="Symbol Explorer"
+                  Visible="yes"
+                  SourceFile="bin\Release\SymbolExplorer.msi"/>
 		</Chain>
 	</Bundle>
 </Wix>

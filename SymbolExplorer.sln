@@ -22,6 +22,15 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SymbolExplorer.Installer.Bu
 		{5CA82F7C-AB47-4810-9113-EE159CD7C131} = {5CA82F7C-AB47-4810-9113-EE159CD7C131}
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{4F5F38C5-C8B9-45C5-8A63-4B0E7C3EEDA1}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE.md = LICENSE.md
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

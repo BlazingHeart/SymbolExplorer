@@ -4,17 +4,13 @@ SymbolExplorer is a program for inspecting the content of .lib files. It is curr
 ![SymbolExplorer](http://symbolexplorer.s3.amazonaws.com/img/SymbolExplorer_0.1.1.372.png)
 
 ## Current Release
-* Online Installer: http://symbolexplorer.s3.amazonaws.com/webinstall/setup.exe
-* Zip: http://symbolexplorer.s3.amazonaws.com/zip/SymbolExplorer_0.1.1.372.zip
-
-### Past releases
-http://symbolexplorer.s3.amazonaws.com/SymbolExplorer_0.1.0.0.zip
+* See: https://github.com/BlazingHeart/SymbolExplorer/releases
 
 ## Road Map
+* 0.2
+  * Current release
 * 1.0
   * All available data in the .lib file visualised in basic form
-  * Name demangling for C++ (visual studio)
-* 1.1
   * Search
   * Customisable visualisations (eg toggle name demangling)
   * Generate easy to read reports

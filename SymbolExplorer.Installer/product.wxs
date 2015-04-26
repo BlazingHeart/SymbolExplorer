@@ -5,7 +5,7 @@
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine"/>
 
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate />
+    <MediaTemplate EmbedCab="yes" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="ProgramFilesFolder">
@@ -56,5 +56,8 @@
       <ComponentRef Id="C.System.Windows.Interactivity.dll" />
       <ComponentRef Id="C.ApplicationShortcut" />
     </Feature>
+    
+    <Property Id="ARPHELPLINK" Value="https://blazingheart.github.io/SymbolExplorer/" />
+    <Property Id="ARPNOMODIFY">1</Property>
   </Product>
 </Wix>

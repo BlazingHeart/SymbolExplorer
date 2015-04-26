@@ -90,7 +90,7 @@ namespace SymbolExplorer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://redwyre.github.com/SymbolExplorer.
+        ///   Looks up a localized string similar to https://blazingheart.github.io/SymbolExplorer/.
         /// </summary>
         public static string About_URL {
             get {

@@ -1,7 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <BitmapImage x:Key="Open" UriSource="Images/toggle_linker_symbols_32.png" />
-    <BitmapImage x:Key="LinkerSymbols" UriSource="Images/toggle_linker_symbols_32.png" />
-    <BitmapImage x:Key="LinkerSymbolsOff" UriSource="Images/toggle_linker_symbols_off_32.png" />
+    <BitmapImage x:Key="Open" UriSource="pack://application:,,,/SymbolExplorer;component/Images/toggle_linker_symbols_32.png" />
+    <BitmapImage x:Key="LinkerSymbols" UriSource="pack://application:,,,/SymbolExplorer;component/Images/toggle_linker_symbols_32.png" />
+    <BitmapImage x:Key="LinkerSymbolsOff" UriSource="pack://application:,,,/SymbolExplorer;component/Images/toggle_linker_symbols_off_32.png" />
+
+    <BitmapImage x:Key="Help16" UriSource="pack://application:,,,/SymbolExplorer;component/Images/help.png" />
+    <BitmapImage x:Key="Open16" UriSource="pack://application:,,,/SymbolExplorer;component/Images/open.png" />
 </ResourceDictionary>

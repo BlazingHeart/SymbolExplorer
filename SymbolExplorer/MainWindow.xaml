@@ -28,14 +28,14 @@
                 <fluent:Backstage></fluent:Backstage>
             </fluent:Ribbon.Menu>-->
             <fluent:Ribbon.ToolBarItems>
-                <fluent:Button Size="Small" Icon="Images/help.png" />
+                <fluent:Button Size="Small" Icon="{StaticResource Help16}" />
             </fluent:Ribbon.ToolBarItems>
             <fluent:RibbonTabItem Header="Home">
                 <fluent:RibbonGroupBox Header="File">
-                    <fluent:Button Header="Open" Icon="Images/open.png" LargeIcon="Images/open.png" Command="{Binding OpenFile}" />
+                    <fluent:Button Header="Open" Icon="{StaticResource Open16}" LargeIcon="{StaticResource Open16}" Command="{Binding OpenFile}" />
                 </fluent:RibbonGroupBox>
                 <fluent:RibbonGroupBox Header="View">
-                    <fluent:ToggleButton Header="Linker Symbols" IsChecked="{Binding HideLinkerMembers}" Command="{Binding ToggleLinkerMembers}" Icon="Images/toggle_linker_symbols_16.png" LargeIcon="Images/toggle_linker_symbols_32.png" />
+                    <fluent:ToggleButton Header="Linker Symbols" IsChecked="{Binding HideLinkerMembers}" Command="{Binding ToggleLinkerMembers}" Icon="{StaticResource LinkerSymbols}" LargeIcon="{StaticResource LinkerSymbols}" />
                 </fluent:RibbonGroupBox>
             </fluent:RibbonTabItem>
         </fluent:Ribbon>

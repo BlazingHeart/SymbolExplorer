@@ -123,24 +123,8 @@ namespace SymbolExplorer.Code
                 sb.AppendLine();
             }
 
-            foreach (Symbol s in n.Symbols)
-            {
-                string name = s.Demangled;
-                if (s.Namespace.Length > 0)
-                {
-                    string namespacetext = string.Join("::", s.Namespace) + "::";
-                    name = name.Replace(namespacetext, "");
-                }
-                name = name.Replace("__thiscall ", "");
-                name = name.Replace("__cdecl ", "");
 
-                if (s.Demangled == s.Name && s.DataType == IMAGE_SYM_DTYPE.IMAGE_SYM_DTYPE_FUNCTION)
-                {
-                    name = name + "()";
-                }
-
-                sb.AppendFormat("{0};\n", name);
-            }
+            GenerateSymbols(n, sb, "");
         }
 
         void GenerateNamespaceRecursive(Namespace n, StringBuilder sb, int tabLevel)
@@ -167,8 +151,18 @@ namespace SymbolExplorer.Code
                 sb.AppendLine();
             }
 
+            GenerateSymbols(n, sb, indent2);
+
+            sb.Append(indent);
+            sb.AppendLine("}");
+        }
+
+        private static void GenerateSymbols(Namespace n, StringBuilder sb, string indent2)
+        {
             foreach (Symbol s in n.Symbols)
             {
+                if (s.Section <= 0) { continue; }
+
                 string name = s.Demangled;
                 if (s.Namespace.Length > 0)
                 {
@@ -177,12 +171,16 @@ namespace SymbolExplorer.Code
                 }
                 name = name.Replace("__thiscall ", "");
                 name = name.Replace("__cdecl ", "");
+
+                // C functions
+                if (s.Demangled == s.Name && s.DataType == IMAGE_SYM_DTYPE.IMAGE_SYM_DTYPE_FUNCTION)
+                {
+                    name = name + "()";
+                }
+
                 sb.Append(indent2);
                 sb.AppendFormat("{0};\n", name);
             }
-
-            sb.Append(indent);
-            sb.AppendLine("}");
         }
 
         bool IsLanguageSymbol(Symbol symbol)

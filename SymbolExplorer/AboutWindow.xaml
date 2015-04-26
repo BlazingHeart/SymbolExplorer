@@ -9,11 +9,10 @@
         <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="16" Text="{x:Static props:LocalisedResources.App_Copyright}" />
         <Separator DockPanel.Dock="Top" Margin="20,6,20,6" />
         <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12" Text="{x:Static props:LocalisedResources.About_Thanks}" />
+        <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12" Text="{x:Static props:LocalisedResources.About_Updates}" />
         <TextBlock DockPanel.Dock="Top" TextAlignment="Center" FontSize="12">
-            For updates, and to contribute, see<LineBreak />
-            <Hyperlink NavigateUri="http://redwyre.github.com/SymbolExplorer" RequestNavigate="Hyperlink_RequestNavigate">http://redwyre.github.com/SymbolExplorer</Hyperlink>
+            <Hyperlink NavigateUri="{x:Static props:LocalisedResources.About_URL}" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="{x:Static props:LocalisedResources.About_URL}" /></Hyperlink>
         </TextBlock>
-        <Button DockPanel.Dock="Bottom" IsDefault="True" Width="100" Height="20" Margin="20" Click="Button_Click">OK</Button>
-
+        <Button DockPanel.Dock="Bottom" IsDefault="True" Width="100" Height="20" Margin="20" Click="Button_Click" Content="{x:Static props:LocalisedResources.App_OK}" />
     </DockPanel>
 </Window>

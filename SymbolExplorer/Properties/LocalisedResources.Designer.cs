@@ -81,6 +81,33 @@ namespace SymbolExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For updates, and to contribute, see.
+        /// </summary>
+        public static string About_Updates {
+            get {
+                return ResourceManager.GetString("About_Updates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://redwyre.github.com/SymbolExplorer.
+        /// </summary>
+        public static string About_URL {
+            get {
+                return ResourceManager.GetString("About_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string App_Cancel {
+            get {
+                return ResourceManager.GetString("App_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (c) 2013-2015 Simon Stevenson.
         /// </summary>
         public static string App_Copyright {
@@ -99,11 +126,110 @@ namespace SymbolExplorer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string App_OK {
+            get {
+                return ResourceManager.GetString("App_OK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to , .
         /// </summary>
         public static string EnumText_Separator {
             get {
                 return ResourceManager.GetString("EnumText_Separator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive File.
+        /// </summary>
+        public static string MainWindow_ArchiveFile {
+            get {
+                return ResourceManager.GetString("MainWindow_ArchiveFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string MainWindow_GroupFile {
+            get {
+                return ResourceManager.GetString("MainWindow_GroupFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string MainWindow_GroupView {
+            get {
+                return ResourceManager.GetString("MainWindow_GroupView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Header View.
+        /// </summary>
+        public static string MainWindow_HeaderView {
+            get {
+                return ResourceManager.GetString("MainWindow_HeaderView", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Linker Symbols.
+        /// </summary>
+        public static string MainWindow_LinkerSymbols {
+            get {
+                return ResourceManager.GetString("MainWindow_LinkerSymbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object File.
+        /// </summary>
+        public static string MainWindow_ObjectFile {
+            get {
+                return ResourceManager.GetString("MainWindow_ObjectFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string MainWindow_Open {
+            get {
+                return ResourceManager.GetString("MainWindow_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready.
+        /// </summary>
+        public static string MainWindow_Ready {
+            get {
+                return ResourceManager.GetString("MainWindow_Ready", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Symbols.
+        /// </summary>
+        public static string MainWindow_Symbols {
+            get {
+                return ResourceManager.GetString("MainWindow_Symbols", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string MainWindow_TabHome {
+            get {
+                return ResourceManager.GetString("MainWindow_TabHome", resourceCulture);
             }
         }
     }

@@ -125,6 +125,12 @@ Shaun, Derek, Dennis, and James.
   <data name="About_Title" xml:space="preserve">
     <value>About Symbol Explorer</value>
   </data>
+  <data name="About_Updates" xml:space="preserve">
+    <value>For updates, and to contribute, see</value>
+  </data>
+  <data name="About_URL" xml:space="preserve">
+    <value>http://redwyre.github.com/SymbolExplorer</value>
+  </data>
   <data name="App_Copyright" xml:space="preserve">
     <value>(c) 2013-2015 Simon Stevenson</value>
   </data>
@@ -133,5 +139,41 @@ Shaun, Derek, Dennis, and James.
   </data>
   <data name="EnumText_Separator" xml:space="preserve">
     <value>, </value>
+  </data>
+  <data name="App_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="App_OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MainWindow_ArchiveFile" xml:space="preserve">
+    <value>Archive File</value>
+  </data>
+  <data name="MainWindow_GroupFile" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="MainWindow_GroupView" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="MainWindow_HeaderView" xml:space="preserve">
+    <value>Header View</value>
+  </data>
+  <data name="MainWindow_LinkerSymbols" xml:space="preserve">
+    <value>Linker Symbols</value>
+  </data>
+  <data name="MainWindow_ObjectFile" xml:space="preserve">
+    <value>Object File</value>
+  </data>
+  <data name="MainWindow_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="MainWindow_Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="MainWindow_Symbols" xml:space="preserve">
+    <value>Symbols</value>
+  </data>
+  <data name="MainWindow_TabHome" xml:space="preserve">
+    <value>Home</value>
   </data>
 </root>

@@ -11,10 +11,10 @@ using System.Text;
 namespace SymbolExplorer.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class ArchiveFileLibTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void TestFromStream()
         {
             string fileName =
 #if DEBUG

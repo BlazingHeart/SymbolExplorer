@@ -4,7 +4,7 @@
       Version="!(bind.FileVersion.F.SymbolExplorer.exe)" Language="1033" Name="Symbol Explorer" Manufacturer="Blazing Heart">
     <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine"/>
 
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed."  AllowSameVersionUpgrades="yes" />
     <MediaTemplate EmbedCab="yes" />
 
     <Directory Id="TARGETDIR" Name="SourceDir">

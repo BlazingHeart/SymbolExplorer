@@ -205,7 +205,7 @@
     <Compile Include="Framework\RelayCommand.cs" />
     <Compile Include="Framework\VisualTreeHelpers.cs" />
     <Compile Include="Models\Symbol.cs" />
-    <Compile Include="SelectColumnsWindow.xaml.cs">
+    <Compile Include="Framework\SelectColumnsWindow.xaml.cs">
       <DependentUpon>SelectColumnsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\Utils.cs" />
@@ -244,7 +244,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SelectColumnsWindow.xaml">
+    <Page Include="Framework\SelectColumnsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

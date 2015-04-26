@@ -139,6 +139,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LocalisedResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SectionToStringConverter.cs" />
     <Compile Include="ViewModels\HeaderGeneratorViewModel.cs" />
     <Compile Include="Code\KnownSectionName.cs" />
     <Compile Include="Code\LongNamesMember.cs" />
@@ -214,11 +215,11 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ObjectFileViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />
-    <Compile Include="ViewModels\SelectColumnsViewModel.cs" />
+    <Compile Include="Framework\SelectColumnsViewModel.cs" />
     <Compile Include="ViewModels\SymbolSearchViewModel.cs" />
     <Compile Include="ViewModels\SymbolViewModel.cs" />
     <Compile Include="ViewModels\ToolbarViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Framework\ViewModelBase.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

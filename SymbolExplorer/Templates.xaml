@@ -4,11 +4,14 @@
     xmlns:controls="clr-namespace:SymbolExplorer.Controls"
     xmlns:converters="clr-namespace:SymbolExplorer.Framework.Converters"
     xmlns:code="clr-namespace:SymbolExplorer.Code"
-    xmlns:viewModels="clr-namespace:SymbolExplorer.ViewModels">
+    xmlns:viewModels="clr-namespace:SymbolExplorer.ViewModels"
+    xmlns:symbolExporer="clr-namespace:SymbolExplorer">
     
     <converters:EnumDisplayNameConverter x:Key="enumDisplayName" />
 
     <converters:TypeComparisonToVisibilityConverter x:Key="typeComparisonToVisibility" />
+
+    <symbolExporer:SectionToStringConverter x:Key="sectionToStringConverter" />
 
     <HierarchicalDataTemplate x:Key="ArchiveMemberTreeViewTemplate" DataType="{x:Type viewModels:ArchiveMemberViewModel}">
         <TextBlock Text="{Binding Name}" />
@@ -102,10 +105,10 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Value" Binding="{Binding Value, StringFormat={}0x\{0:X8\}}" />
-                    <DataGridTextColumn Header="Section" Binding="{Binding SectionName}" SortMemberPath="Section" />
-                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicTypeName, Converter={StaticResource enumDisplayName}}" SortMemberPath="BasicType" />
-                    <DataGridTextColumn Header="DataType" Binding="{Binding DataTypeName, Converter={StaticResource enumDisplayName}}" SortMemberPath="DataType" />
-                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClassName, Converter={StaticResource enumDisplayName}}" SortMemberPath="StorageClass" />
+                    <DataGridTextColumn Header="Section" Binding="{Binding Section, Converter={StaticResource sectionToStringConverter}}" SortMemberPath="Section" />
+                    <DataGridTextColumn Header="BasicType" Binding="{Binding BasicType, Converter={StaticResource enumDisplayName}}" SortMemberPath="BasicType" />
+                    <DataGridTextColumn Header="DataType" Binding="{Binding DataType, Converter={StaticResource enumDisplayName}}" SortMemberPath="DataType" />
+                    <DataGridTextColumn Header="StorageClass" Binding="{Binding StorageClass, Converter={StaticResource enumDisplayName}}" SortMemberPath="StorageClass" />
                     <DataGridTextColumn Header="AuxSymbols" Binding="{Binding AuxSymbols}" Visibility="Collapsed" />
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Visibility="Collapsed" />
                     <DataGridTextColumn Header="Demangled" Binding="{Binding Demangled}" />

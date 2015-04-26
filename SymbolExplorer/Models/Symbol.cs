@@ -73,23 +73,5 @@ namespace SymbolExplorer.Models
                 _namespace = new string[] { };
             }
         }
-
-        public IMAGE_SYM_TYPE BasicTypeName { get { return _symbol.BasicType; } }
-        public IMAGE_SYM_DTYPE DataTypeName { get { return _symbol.DataType; } }
-        public IMAGE_SYM_CLASS StorageClassName { get { return _symbol.StorageClass; } }
-
-        public string SectionName
-        {
-            get
-            {
-                switch (_symbol.SectionNumber)
-                {
-                case Constants.IMAGE_SYM_UNDEFINED: return "Common";
-                case Constants.IMAGE_SYM_ABSOLUTE: return "Absolute";
-                case Constants.IMAGE_SYM_DEBUG: return "Debug";
-                }
-                return _symbol.SectionNumber.ToString();
-            }
-        }
     }
 }

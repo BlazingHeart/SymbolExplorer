@@ -1,4 +1,5 @@
 ﻿using SymbolExplorer.Code;
+using SymbolExplorer.Framework;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

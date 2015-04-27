@@ -10,6 +10,7 @@
     <converters:EnumDisplayNameConverter x:Key="enumDisplayName" />
 
     <converters:TypeComparisonToVisibilityConverter x:Key="typeComparisonToVisibility" />
+    <converters:TypeComparisonToValueOrNullConverter x:Key="typeComparisonToValueOrNull" />
 
     <symbolExporer:SectionToStringConverter x:Key="sectionToStringConverter" />
 

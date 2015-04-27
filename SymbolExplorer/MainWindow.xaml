@@ -55,22 +55,22 @@
             <TabControl x:Name="ViewTabs" Grid.Column="2" VerticalContentAlignment="Stretch" HorizontalContentAlignment="Stretch">
                 <TabItem Header="{x:Static props:LocalisedResources.MainWindow_ArchiveFile}" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Visibility="{Binding Converter={StaticResource typeComparisonToVisibility}, ConverterParameter={x:Type ViewModels:ArchiveFileViewModel}}">
                     <DockPanel>
-                        <ContentControl Margin="4" Content="{Binding}" ContentTemplate="{StaticResource ArchiveFileDataTemplate}" />
+                        <ContentControl Margin="4" Content="{Binding Converter={StaticResource typeComparisonToValueOrNull}, ConverterParameter={x:Type ViewModels:ArchiveFileViewModel}}" ContentTemplate="{StaticResource ArchiveFileDataTemplate}" />
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="{x:Static props:LocalisedResources.MainWindow_ObjectFile}" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Visibility="{Binding Converter={StaticResource typeComparisonToVisibility}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}">
                     <DockPanel>
-                        <ContentControl Margin="4" Content="{Binding}" ContentTemplate="{StaticResource ObjectFileDataTemplate}" />
+                        <ContentControl Margin="4" Content="{Binding Converter={StaticResource typeComparisonToValueOrNull}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}" ContentTemplate="{StaticResource ObjectFileDataTemplate}" />
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="{x:Static props:LocalisedResources.MainWindow_Symbols}" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Visibility="{Binding Converter={StaticResource typeComparisonToVisibility}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}">
                     <DockPanel>
-                        <ContentControl Margin="4" Content="{Binding}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
+                        <ContentControl Margin="4" Content="{Binding Converter={StaticResource typeComparisonToValueOrNull}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}" ContentTemplate="{StaticResource SymbolDataTemplate}" />
                     </DockPanel>
                 </TabItem>
                 <TabItem Header="{x:Static props:LocalisedResources.MainWindow_HeaderView}" DataContext="{Binding ElementName=MemberTree, Path=SelectedItem}" Visibility="{Binding Converter={StaticResource typeComparisonToVisibility}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}">
                     <DockPanel>
-                        <ContentControl Margin="4" Content="{Binding}" ContentTemplate="{StaticResource HeaderViewDataTemplate}" />
+                        <ContentControl Margin="4" Content="{Binding Converter={StaticResource typeComparisonToValueOrNull}, ConverterParameter={x:Type ViewModels:ObjectFileViewModel}}" ContentTemplate="{StaticResource HeaderViewDataTemplate}" />
                     </DockPanel>
                 </TabItem>
             </TabControl>

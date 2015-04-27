@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace SymbolExplorer.ViewModels
+namespace SymbolExplorer.Framework
 {
     public class SelectColumnsViewModel : ViewModelBase
     {

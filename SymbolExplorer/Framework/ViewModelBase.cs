@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 
-namespace SymbolExplorer.ViewModels
+namespace SymbolExplorer.Framework
 {
     public class ViewModelBase : INotifyPropertyChanged
     {

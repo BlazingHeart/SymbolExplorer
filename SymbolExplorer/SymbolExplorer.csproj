@@ -130,6 +130,7 @@
       <DependentUpon>EnumText.xaml</DependentUpon>
     </Compile>
     <Compile Include="Framework\Converters\EnumConverter.cs" />
+    <Compile Include="Framework\Converters\TypeComparisonToValueOrNullConverter.cs" />
     <Compile Include="Framework\Converters\TypeComparisonToVisibilityConverter.cs" />
     <Compile Include="Framework\EnumDisplayNameAttribute.cs" />
     <Compile Include="Framework\EnumExtensions.cs" />

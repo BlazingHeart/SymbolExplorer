@@ -1,4 +1,5 @@
 ﻿using SymbolExplorer.Code.Windows;
+using SymbolExplorer.Framework;
 using SymbolExplorer.Models;
 using SymbolExplorer.ViewModels;
 using System;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 
-namespace SymbolExplorer.Code
+namespace SymbolExplorer.ViewModels
 {
     public class HeaderGeneratorViewModel : ViewModelBase
     {

@@ -2,6 +2,7 @@
 using SymbolExplorer.Code.Windows;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -13,7 +14,7 @@ namespace SymbolExplorer.ViewModels
         ObjectFile.ImageSection _imageSection;
         ByteDataViewModel _byteData = new ByteDataViewModel();
 
-        public string Name { get { return _name; } set { _name = value; } }
+        public string Name { get { return _name; } }
 
         public uint PhysicalAddressOrVirtualSize { get { return _imageSection.Header.PhysicalAddressOrVirtualSize; } }
         public uint VirtualAddress { get { return _imageSection.Header.VirtualAddress; } }
@@ -43,6 +44,11 @@ namespace SymbolExplorer.ViewModels
                 if (long.TryParse(_name.Substring(1), out result))
                 {
                     file.StringTable.TryGetValue(result, out _name);
+                }
+
+                if (_name.StartsWith("/"))
+                {
+                    Debug.Write("Failed to resolve section {0}", _name);
                 }
             }
         }

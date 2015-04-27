@@ -31,6 +31,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{4F5F38C5
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installation", "Installation", "{AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -58,5 +60,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131} = {AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}
+		{C31E3971-BCAB-47C8-B519-7A35D563A67B} = {AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}
 	EndGlobalSection
 EndGlobal

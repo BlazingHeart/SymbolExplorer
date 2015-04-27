@@ -38,7 +38,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="4,0,0,0">
-                <TextBlock Text="{Binding ArchiveMember.Header.Name}" />
+                <TextBlock Text="{Binding Name}" />
                 <TextBlock Text="{Binding ArchiveMember.Header.Date, StringFormat=yyyy-MM-dd}" />
                 <TextBlock Text="{Binding ArchiveMember.Header.Size}" />
             </StackPanel>

@@ -12,8 +12,8 @@ namespace SymbolExplorer.Code
     {
         public struct SymbolOffset
         {
-            public string Name;
-            public uint Offset;
+            public string Name { get; set; }
+            public uint Offset { get; set; }
         }
 
         public SymbolOffset[] SymbolsOffsets { get; set; }

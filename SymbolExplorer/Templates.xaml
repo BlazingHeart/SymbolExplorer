@@ -6,7 +6,7 @@
     xmlns:code="clr-namespace:SymbolExplorer.Code"
     xmlns:viewModels="clr-namespace:SymbolExplorer.ViewModels"
     xmlns:symbolExporer="clr-namespace:SymbolExplorer">
-    
+
     <converters:EnumDisplayNameConverter x:Key="enumDisplayName" />
 
     <converters:TypeComparisonToVisibilityConverter x:Key="typeComparisonToVisibility" />
@@ -118,12 +118,36 @@
     </DataTemplate>
 
     <DataTemplate x:Key="ArchiveFileDataTemplate" DataType="{x:Type viewModels:ArchiveFileViewModel}">
-        <DockPanel>
+        <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Name: " />
                 <TextBlock Text="{Binding Name}" />
             </StackPanel>
-        </DockPanel>
+            <GroupBox Header="First Member" DataContext="{Binding First}">
+                <DataGrid ItemsSource="{Binding SymbolsOffsets}" Height="180" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Offset" Binding="{Binding Offset}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox Header="Second Member" DataContext="{Binding Second}">
+                <DataGrid ItemsSource="{Binding SymbolIndices}" Height="180" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Index" Binding="{Binding Index}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+            <GroupBox Header="Long Names Member" DataContext="{Binding LongNames}">
+                <DataGrid ItemsSource="{Binding LongNames}" Height="180" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Offset" Binding="{Binding Offset}" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="ObjectFileDataTemplate" DataType="{x:Type viewModels:ObjectFileViewModel}">

@@ -212,6 +212,7 @@
     <Compile Include="ViewModels\ArchiveFileViewModel.cs" />
     <Compile Include="ViewModels\ArchiveMemberViewModel.cs" />
     <Compile Include="ViewModels\ByteDataViewModel.cs" />
+    <Compile Include="ViewModels\LongNamesMemberViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\ObjectFileViewModel.cs" />
     <Compile Include="ViewModels\SectionViewModel.cs" />

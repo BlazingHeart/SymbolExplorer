@@ -138,8 +138,7 @@ namespace SymbolExplorer.ViewModels
             {
                 FileStream s = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
                 var file = ArchiveFileLib.FromStream(s);
-                ArchiveFileViewModel model = new ArchiveFileViewModel();
-                model.File = file;
+                ArchiveFileViewModel model = new ArchiveFileViewModel(file);
                 model.Name = System.IO.Path.GetFileName(filePath);
                 _archiveFiles.Add(model);
 

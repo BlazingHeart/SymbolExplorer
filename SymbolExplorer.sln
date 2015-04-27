@@ -7,10 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorer", "SymbolExp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SymbolExplorer.Tests", "SymbolExplorer.Tests\SymbolExplorer.Tests.csproj", "{1993F164-0290-4D04-ABCC-0F27A344E395}"
 	ProjectSection(ProjectDependencies) = postProject
-		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18} = {3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}
+		{C728141D-6B00-4306-8648-4226856AB57E} = {C728141D-6B00-4306-8648-4226856AB57E}
+		{632C4355-6E98-4E88-BE23-8791C9C7F732} = {632C4355-6E98-4E88-BE23-8791C9C7F732}
+		{0B519283-9DA5-49B0-8603-92AADC141BB2} = {0B519283-9DA5-49B0-8603-92AADC141BB2}
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2} = {60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}
 	EndProjectSection
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.vcxproj", "{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "SymbolExplorer.Installer", "SymbolExplorer.Installer\SymbolExplorer.Installer.wixproj", "{5CA82F7C-AB47-4810-9113-EE159CD7C131}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -33,6 +34,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{4F5F38C5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installation", "Installation", "{AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SymbolExplorer.TestLib", "SymbolExplorer.TestLib", "{A079D8B0-D1F9-4281-A50E-1DE1FC79457F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib.x64.vc120", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.x64.vc120\SymbolExplorer.TestLib.x64.vc120.vcxproj", "{C728141D-6B00-4306-8648-4226856AB57E}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib.x64.vc120.WholeProgramOptimisation", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.x64.vc120.WholeProgramOptimisation\SymbolExplorer.TestLib.x64.vc120.WholeProgramOptimisation.vcxproj", "{0B519283-9DA5-49B0-8603-92AADC141BB2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib.x86.vc120", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.x86.vc120\SymbolExplorer.TestLib.x86.vc120.vcxproj", "{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SymbolExplorer.TestLib.x86.vc120.WholeProgramOptimisation", "SymbolExplorer.TestLib\SymbolExplorer.TestLib.x86.vc120.WholeProgramOptimisation\SymbolExplorer.TestLib.x86.vc120.WholeProgramOptimisation.vcxproj", "{632C4355-6E98-4E88-BE23-8791C9C7F732}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,16 +58,30 @@ Global
 		{1993F164-0290-4D04-ABCC-0F27A344E395}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1993F164-0290-4D04-ABCC-0F27A344E395}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1993F164-0290-4D04-ABCC-0F27A344E395}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Debug|Any CPU.Build.0 = Debug|Win32
-		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Release|Any CPU.ActiveCfg = Release|Win32
-		{3E5B8BF2-F64A-4E7E-B748-4C0ADD6E9D18}.Release|Any CPU.Build.0 = Release|Win32
 		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Debug|Any CPU.ActiveCfg = Release|x86
+		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Debug|Any CPU.Build.0 = Release|x86
 		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Release|Any CPU.ActiveCfg = Release|x86
 		{5CA82F7C-AB47-4810-9113-EE159CD7C131}.Release|Any CPU.Build.0 = Release|x86
 		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Debug|Any CPU.ActiveCfg = Release|x86
+		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Debug|Any CPU.Build.0 = Release|x86
 		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Release|Any CPU.ActiveCfg = Release|x86
 		{C31E3971-BCAB-47C8-B519-7A35D563A67B}.Release|Any CPU.Build.0 = Release|x86
+		{C728141D-6B00-4306-8648-4226856AB57E}.Debug|Any CPU.ActiveCfg = Release|x64
+		{C728141D-6B00-4306-8648-4226856AB57E}.Debug|Any CPU.Build.0 = Release|x64
+		{C728141D-6B00-4306-8648-4226856AB57E}.Release|Any CPU.ActiveCfg = Release|x64
+		{C728141D-6B00-4306-8648-4226856AB57E}.Release|Any CPU.Build.0 = Release|x64
+		{0B519283-9DA5-49B0-8603-92AADC141BB2}.Debug|Any CPU.ActiveCfg = Release|x64
+		{0B519283-9DA5-49B0-8603-92AADC141BB2}.Debug|Any CPU.Build.0 = Release|x64
+		{0B519283-9DA5-49B0-8603-92AADC141BB2}.Release|Any CPU.ActiveCfg = Release|x64
+		{0B519283-9DA5-49B0-8603-92AADC141BB2}.Release|Any CPU.Build.0 = Release|x64
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}.Debug|Any CPU.ActiveCfg = Release|Win32
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}.Debug|Any CPU.Build.0 = Release|Win32
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}.Release|Any CPU.ActiveCfg = Release|Win32
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2}.Release|Any CPU.Build.0 = Release|Win32
+		{632C4355-6E98-4E88-BE23-8791C9C7F732}.Debug|Any CPU.ActiveCfg = Release|Win32
+		{632C4355-6E98-4E88-BE23-8791C9C7F732}.Debug|Any CPU.Build.0 = Release|Win32
+		{632C4355-6E98-4E88-BE23-8791C9C7F732}.Release|Any CPU.ActiveCfg = Release|Win32
+		{632C4355-6E98-4E88-BE23-8791C9C7F732}.Release|Any CPU.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,5 +89,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{5CA82F7C-AB47-4810-9113-EE159CD7C131} = {AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}
 		{C31E3971-BCAB-47C8-B519-7A35D563A67B} = {AE4D92ED-2A15-4EE5-9C6D-A525928CB60B}
+		{C728141D-6B00-4306-8648-4226856AB57E} = {A079D8B0-D1F9-4281-A50E-1DE1FC79457F}
+		{0B519283-9DA5-49B0-8603-92AADC141BB2} = {A079D8B0-D1F9-4281-A50E-1DE1FC79457F}
+		{60F01AE6-6AAE-48EE-8B7F-154336CB3DF2} = {A079D8B0-D1F9-4281-A50E-1DE1FC79457F}
+		{632C4355-6E98-4E88-BE23-8791C9C7F732} = {A079D8B0-D1F9-4281-A50E-1DE1FC79457F}
 	EndGlobalSection
 EndGlobal

@@ -10,7 +10,9 @@ namespace SymbolExplorer.Code
 {
     public class LongNamesMember : ArchiveMember
     {
-        Dictionary<long, string> _names { get; set; }
+        Dictionary<long, string> _names = new Dictionary<long, string>();
+
+        public Dictionary<long, string> Names { get { return _names; } }
 
         public string GetNameForOffset(int offset)
         {
@@ -28,7 +30,7 @@ namespace SymbolExplorer.Code
 
             BinaryReader reader = new BinaryReader(stream, Encoding.ASCII);
 
-            var names = new Dictionary<long, string>();
+            _names.Clear();
 
             StringBuilder sb = new StringBuilder(1024);
 
@@ -43,11 +45,10 @@ namespace SymbolExplorer.Code
                     sb.Append(c);
                 }
 
-                names.Add(offset, sb.ToString());
+                _names.Add(offset, sb.ToString());
                 sb.Clear();
             }
 
-            _names = names;
 
             Debug.Assert(stream.Position == end);
 

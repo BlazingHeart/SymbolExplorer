@@ -11,8 +11,8 @@ namespace SymbolExplorer.Code
     {
         public struct SymbolIndex
         {
-            public string Name;
-            public ushort Index;
+            public string Name { get; set; }
+            public ushort Index { get; set; }
         }
 
         public uint[] MemberOffsets { get; set; }

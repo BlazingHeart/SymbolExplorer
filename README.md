@@ -1,6 +1,8 @@
 ## SymbolExplorer
 SymbolExplorer is a program for inspecting the content of .lib files. It is currently a heavy work in progress but hopefully it wont take long for it to become a lot more useful.
 
+[![Build status](https://ci.appveyor.com/api/projects/status/p22d9u448y4gcp9s?svg=true)](https://ci.appveyor.com/project/redwyre/symbolexplorer)
+
 ![SymbolExplorer](http://symbolexplorer.s3.amazonaws.com/img/SymbolExplorer_0.1.1.372.png)
 
 ## Current Release
